@@ -17,12 +17,14 @@ import ContactUs from "./views/examples/ContactUs.vue";
 import Pricing from "./views/examples/Pricing.vue";
 import Shopping from "./views/examples/Shopping.vue";
 import Ecommerce from "./views/examples/Ecommerce.vue";
+import MarketPlace from "./views/examples/MarketPlace.vue";
 import Product from "./views/examples/Product.vue";
 import Signup from "./views/examples/Signup.vue";
 import Error from "./views/examples/Error.vue";
 
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
+import CustomFooter from "./layout/CustomFooter.vue";
 
 Vue.use(Router);
 
@@ -31,7 +33,15 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      components: { default: Ecommerce, header: MainNavbar, footer: MainFooter },
+      components: { default: Ecommerce, header: MainNavbar, footer: CustomFooter },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true }
+      }
+    },
+    {
+      path: "/marketPlace",
+      name: "marketPlace",
+      components: { default: MarketPlace, header: MainNavbar, footer: CustomFooter },
       props: {
         header: { colorOnScroll: 400, navbarTransparent: true }
       }

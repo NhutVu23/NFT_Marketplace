@@ -55,6 +55,26 @@
                   </div>
                 </a>
               </li>
+              <li class="md-list-item">
+                <a
+                  :href="'#/marketPlace'"
+                            @click="
+                              () => {
+                                NavbarStore.showNavbar = false;
+                                toggledClass = false;
+                              }
+                            "
+                  class="md-list-item-router md-list-item-container md-button-clean"
+                >
+                  <div class="md-list-item-content">
+                    <md-button
+                      class="md-button md-button-link md-white md-simple"
+                    >
+                    <!-- <md-icon>shopping_cart</md-icon> -->
+                    MarketPlace</md-button>
+                  </div>
+                </a>
+              </li>
               <li
                 v-if="showDownload"
                 class="md-list-item"

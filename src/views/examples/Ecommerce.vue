@@ -24,10 +24,60 @@
       </div>
     </parallax>
     <div class="main main-raised">
+
       <div class="section">
         <div class="container">
-          <h2 class="section-title">
-            Latest Offers
+
+      <div class="md-layout">
+            <div class="md-layout-item md-size-50 md-small-size-100">
+              <full-bg-card :card-image="cardProject.cardProject1">
+                <template slot="cardContent">
+                  <!-- <h6 class="card-category text-info">
+                    Worlds
+                  </h6> -->
+                  <a href="javascript:void(0)">
+                    <h3 class="card-title">
+                      Async Music Auctions
+                    </h3>
+                  </a>
+                  <p class="card-description">
+                    Unique works from Pak, Mike Shinoda, Richie Hawtin and more...
+                  </p>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-danger md-round"
+                  >
+                    <md-icon>format_align_left</md-icon> Explore Now
+                  </md-button>
+                </template>
+              </full-bg-card>
+            </div>
+            <div class="md-layout-item md-size-50 md-small-size-100">
+              <full-bg-card :card-image="cardProject.cardProject2">
+                <template slot="cardContent">
+                  <!-- <h6 class="card-category text-info">
+                    Business
+                  </h6> -->
+                  <a href="javascript:void(0)">
+                    <h3 class="card-title">
+                      The Underground Sistine Chapel
+                    </h3>
+                  </a>
+                  <p class="card-description">
+                    Collect the 400 characters of a major piece of art
+                  </p>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-primary md-round"
+                  >
+                    <md-icon>format_align_left</md-icon> Explore Now
+                  </md-button>
+                </template>
+              </full-bg-card>
+            </div>
+      </div>
+          <h2 class="section-title text-center">
+            Live Auctions
           </h2>
           <div class="md-layout">
             <div class="md-layout-item md-size-33 md-small-size-100">
@@ -142,6 +192,96 @@
               </product-card>
             </div>
           </div>
+
+      <div class="section pb-0">
+        <div class="container">
+          <h2 class="section-title text-center">
+            Explore The Marketplace
+          </h2>
+          <div class="md-layout">
+                  <div
+                    class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                  >
+                    <profile-card
+                      card-plain
+                      type="horizontal"
+                      :shadow-normal="false"
+                      :no-colored-shadow="false"
+                      :card-image="cardProfile3.cardProfile1"
+                    >
+                      <template slot="cardContent">
+                        <h4 class="card-title">
+                          Marc Jacobs
+                        </h4>
+                        <h6 class="card-category text-muted">
+                          Designer
+                        </h6>
+                      </template>
+                    </profile-card>
+                  </div>
+                  <div
+                    class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                  >
+                    <profile-card
+                      card-plain
+                      type="horizontal"
+                      :shadow-normal="false"
+                      :no-colored-shadow="false"
+                      :card-image="cardProfile3.cardProfile2"
+                    >
+                      <template slot="cardContent">
+                        <h4 class="card-title">
+                          Marc Jacobs
+                        </h4>
+                        <h6 class="card-category text-muted">
+                          Designer
+                        </h6>
+                      </template>
+                    </profile-card>
+                  </div>
+                  <div
+                    class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                  >
+                    <profile-card
+                      card-plain
+                      type="horizontal"
+                      :shadow-normal="false"
+                      :no-colored-shadow="false"
+                      :card-image="cardProfile3.cardProfile4"
+                    >
+                      <template slot="cardContent">
+                        <h4 class="card-title">
+                          Marc Jacobs
+                        </h4>
+                        <h6 class="card-category text-muted">
+                          Designer
+                        </h6>
+                      </template>
+                    </profile-card>
+                  </div>
+                  <div
+                    class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                  >
+                    <profile-card
+                      card-plain
+                      type="horizontal"
+                      :shadow-normal="false"
+                      :no-colored-shadow="false"
+                      :card-image="cardProfile3.cardProfile3"
+                    >
+                      <template slot="cardContent">
+                        <h4 class="card-title">
+                          Marc Jacobs
+                        </h4>
+                        <h6 class="card-category text-muted">
+                          Designer
+                        </h6>
+                      </template>
+                    </profile-card>
+                  </div>
+          </div>
+        </div>
+      </div>
         </div>
       </div>
 
@@ -151,8 +291,7 @@
     >
       <div class="container justify-content-center">
         <div class="md-layout">
-          <div class="md-layout-item md-size-100 mx-auto">
-            <div class="text-center">
+          <div class="md-layout-item md-size-100 mx-auto text-center">
               <h3 class="title">
                 Subscribe to our Newsletter
               </h3>
@@ -160,8 +299,14 @@
                 Join our newsletter and get news in your inbox every week! We
                 hate spam too, so no worries about this.
               </p>
-            </div>
-            <md-card class="md-card-form-horizontal">
+
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-danger md-round"
+                  >
+                    <md-icon>format_align_left</md-icon> Explore Now
+                  </md-button>
+            <!-- <md-card class="md-card-form-horizontal">
               <md-card-content>
                 <form
                   action=""
@@ -191,7 +336,7 @@
                   </div>
                 </form>
               </md-card-content>
-            </md-card>
+            </md-card> -->
           </div>
         </div>
       </div>
@@ -199,268 +344,14 @@
 
       <div class="section pb-0">
         <div class="container">
-          <h2 class="section-title">
-            Find what you need
+          <h2 class="section-title text-center">
+            Explore The Marketplace
           </h2>
           <div class="md-layout">
-            <div class="md-layout-item md-size-25 md-small-size-100">
-              <md-card class="md-card md-card-refine md-card-plain">
-                <md-card-content>
-                  <h4 class="card-title">
-                    Refine
-                    <md-button class="md-just-icon md-simple md-sm">
-                      <md-icon>cached</md-icon>
-                      <md-tooltip md-direction="top">
-                        Reset Filter
-                      </md-tooltip>
-                    </md-button>
-                  </h4>
-                  <collapse
-                    :active-tab="1"
-                    :collapse="[
-                      'Price Range',
-                      'Clothing',
-                      'Designer',
-                      'Colour'
-                    ]"
-                    icon="keyboard_arrow_down"
-                    color-collapse="rose"
-                  >
-                    <template slot="md-collapse-pane-1">
-                      <span class="price-content">
-                        <span
-                          class="price-left"
-                        >€{{ Math.floor(this.sliders.rangeSlider[0]) }}</span>
-                        <span
-                          class="price-right"
-                        >€{{ Math.floor(this.sliders.rangeSlider[1]) }}</span>
-                      </span>
-
-                      <slider
-                        v-model="sliders.rangeSlider"
-                        :range="{ min: 101, max: 700 }"
-                        type="rose"
-                        :connect="true"
-                        @input="newValue"
-                      />
-                    </template>
-                    <template slot="md-collapse-pane-2">
-                      <md-checkbox
-                        v-model="clothing.blazers"
-                        class="mb-0"
-                      >
-                        Blazers
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.casualShirts"
-                        class="mb-0"
-                      >
-                        Casual Shirts
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.formalShirts"
-                        class="mb-0"
-                      >
-                        Formal Shirts
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.jeans"
-                        class="mb-0"
-                      >
-                        Jeans
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.polos"
-                        class="mb-0"
-                      >
-                        Polos
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.pyjamas"
-                        class="mb-0"
-                      >
-                        Pyjamas
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.shorts"
-                        class="mb-0"
-                      >
-                        Shorts
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="clothing.trousers"
-                        class="mb-0"
-                      >
-                        Trousers
-                      </md-checkbox>
-                    </template>
-                    <template slot="md-collapse-pane-3">
-                      <md-checkbox
-                        v-model="designer.all"
-                        class="mb-0"
-                      >
-                        All
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.polo"
-                        class="mb-0"
-                      >
-                        Polo Ralph Lauren
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.wooyoungmi"
-                        class="mb-0"
-                      >
-                        Wooyoungmi
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.alexander"
-                        class="mb-0"
-                      >
-                        Alexander McQueen
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.tomFord"
-                        class="mb-0"
-                      >
-                        Tom Ford
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.ami"
-                        class="mb-0"
-                      >
-                        AMI
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.berena"
-                        class="mb-0"
-                      >
-                        Berena
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.sweeney"
-                        class="mb-0"
-                      >
-                        Thom Sweeney
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.burberry"
-                        class="mb-0"
-                      >
-                        Burberry Prorsum
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.calvin"
-                        class="mb-0"
-                      >
-                        Calvin Klein
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.kingsman"
-                        class="mb-0"
-                      >
-                        Kingsman
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.monaco"
-                        class="mb-0"
-                      >
-                        Club Monaco
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.dolce"
-                        class="mb-0"
-                      >
-                        Dolce & Gabanna
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.gucci"
-                        class="mb-0"
-                      >
-                        Gucci
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.biglioli"
-                        class="mb-0"
-                      >
-                        Biglioli
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.lanvin"
-                        class="mb-0"
-                      >
-                        Lanvin
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.piana"
-                        class="mb-0"
-                      >
-                        Loro Piana
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="designer.massimo"
-                        class="mb-0"
-                      >
-                        Massimo Alba
-                      </md-checkbox>
-                    </template>
-                    <template slot="md-collapse-pane-4">
-                      <md-checkbox
-                        v-model="colour.all"
-                        class="mb-0"
-                      >
-                        All
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.black"
-                        class="mb-0"
-                      >
-                        Black
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.blue"
-                        class="mb-0"
-                      >
-                        Blue
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.brown"
-                        class="mb-0"
-                      >
-                        Brown
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.gray"
-                        class="mb-0"
-                      >
-                        Gray
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.green"
-                        class="mb-0"
-                      >
-                        Green
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.neutrals"
-                        class="mb-0"
-                      >
-                        Neutrals
-                      </md-checkbox>
-                      <md-checkbox
-                        v-model="colour.purple"
-                        class="mb-0"
-                      >
-                        Purple
-                      </md-checkbox>
-                    </template>
-                  </collapse>
-                </md-card-content>
-              </md-card>
-            </div>
-            <div class="md-layout-item md-size-75 md-small-size-100">
+           
+            <div class="md-layout-item md-size-100 md-small-size-100">
               <div class="md-layout">
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -495,7 +386,7 @@
                     </template>
                   </product-card>
                 </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -530,7 +421,7 @@
                     </template>
                   </product-card>
                 </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -565,7 +456,7 @@
                     </template>
                   </product-card>
                 </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -600,7 +491,7 @@
                     </template>
                   </product-card>
                 </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -635,7 +526,7 @@
                     </template>
                   </product-card>
                 </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
+                <div class="md-layout-item md-size-25 md-small-size-100">
                   <product-card
                     text-center
                     class="mt-3"
@@ -670,11 +561,81 @@
                     </template>
                   </product-card>
                 </div>
+                <div class="md-layout-item md-size-25 md-small-size-100">
+                  <product-card
+                    text-center
+                    class="mt-3"
+                    card-plain
+                    :card-image="productCard.productCard4"
+                    :shadow-off="true"
+                  >
+                    <template slot="cardContent">
+                      <h4 class="card-title">
+                        Polo Ralph Lauren
+                      </h4>
+                      <p class="card-description">
+                        Impeccably tailored in Italy from lightweight navy wool.
+                      </p>
+                    </template>
+                    <template slot="cardAction">
+                      <div class="price-container">
+                        <span class="price"> €800</span>
+                      </div>
+                      <div class="stats ml-auto">
+                        <md-button
+                          class="md-just-icon md-rose md-round md-simple"
+                        >
+                          <md-icon>favorite</md-icon>
+                          <md-tooltip
+                            md-direction="left"
+                          >
+                            Remove from Wishlist
+                          </md-tooltip>
+                        </md-button>
+                      </div>
+                    </template>
+                  </product-card>
+                </div>
+                <div class="md-layout-item md-size-25 md-small-size-100">
+                  <product-card
+                    text-center
+                    class="mt-3"
+                    card-plain
+                    :card-image="productCard.productCard5"
+                    :shadow-off="true"
+                  >
+                    <template slot="cardContent">
+                      <h4 class="card-title">
+                        Wooyoungmi
+                      </h4>
+                      <p class="card-description">
+                        Dark-grey slub wool, pintucked notch lapels.
+                      </p>
+                    </template>
+                    <template slot="cardAction">
+                      <div class="price-container">
+                        <span class="price">€555</span>
+                      </div>
+                      <div class="stats ml-auto">
+                        <md-button
+                          class="md-just-icon md-rose md-round md-simple"
+                        >
+                          <md-icon>favorite_border</md-icon>
+                          <md-tooltip
+                            md-direction="left"
+                          >
+                            Save to Wishlist
+                          </md-tooltip>
+                        </md-button>
+                      </div>
+                    </template>
+                  </product-card>
+                </div>
                 <div
                   class="md-layout-item md-size-25 md-small-size-100 mx-auto"
                 >
                   <md-button class="md-rose md-round">
-                    Load more..
+                    View Collection
                   </md-button>
                 </div>
               </div>
@@ -683,11 +644,13 @@
         </div>
       </div>
       <br>
-    
-    </div>
+
     <!-- Features 1 -->
     <div class="section section-features-1">
       <div class="container">
+
+              
+          <div style="background: rgba(45, 129, 255, 0.05);">
         <div class="md-layout">
           <div
             class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
@@ -760,10 +723,11 @@
             </info-areas>
           </div>
         </div>
+              </div>
 
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
+            class="md-layout-item md-size-66 md-small-size-80 mx-auto text-center"
           >
             <h2 class="title">
               Join Our Community
@@ -772,11 +736,21 @@
               Every NFTs on LOGO is authentic and truly unique. Blockchain technology makes this new approach to digital ownership possible. Use our platform to showcase and sell your work to collectors who care about authenticity.
 Meet the LOGO team, artists and collectors for platform updates, announcements, and more...
             </h5>
+
+                <div
+                  class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                >
+                  <md-button class="md-rose md-round">
+                    Read More
+                  </md-button>
+                </div>
           </div>
         </div>
       </div>
     </div>
     <!-- end Features 1 -->
+    
+    </div>
 
   </div>
 </template>
@@ -784,10 +758,12 @@ Meet the LOGO team, artists and collectors for platform updates, announcements, 
 <script>
 import {
   ProductCard,
-  Collapse,
+  FullBgCard,
+  ProfileCard,
+  // Collapse,
   // FullBgCard,
   // BlogCard,
-  Slider
+  // Slider
 } from "@/components";
 import Mixins from "@/plugins/basicMixins";
 import { InfoAreas } from "@/components";
@@ -795,11 +771,13 @@ import { InfoAreas } from "@/components";
 export default {
   components: {
     InfoAreas,
+    ProfileCard,
     ProductCard,
-    Collapse,
+    FullBgCard
+    // Collapse,
     // FullBgCard,
     // BlogCard,
-    Slider
+    // Slider
   },
   mixins: [Mixins.HeaderImage],
   data() {
@@ -872,13 +850,26 @@ export default {
         cardBlog1: require("@/assets/img/dg6.jpg"),
         cardBlog2: require("@/assets/img/dg10.jpg"),
         cardBlog3: require("@/assets/img/dg9.jpg")
-      }
+      },
+
+      cardProject: {
+        cardProject1: require("@/assets/img/examples/office2.jpg"),
+        cardProject2: require("@/assets/img/examples/blog8.jpg"),
+        cardProject3: require("@/assets/img/examples/card-project6.jpg")
+      },
+
+      cardProfile3: {
+        cardProfile1: require("@/assets/img/faces/avatar.jpg"),
+        cardProfile2: require("@/assets/img/faces/marc.jpg"),
+        cardProfile3: require("@/assets/img/faces/kendall.jpg"),
+        cardProfile4: require("@/assets/img/faces/card-profile2-square.jpg")
+      },
     };
   },
   computed: {
     imageSubscribe() {
       return {
-        backgroundImage: `url(${this.image2})`
+        backgroundImage: `url(${this.cardProject.cardProject3})`
       };
     }
   },
