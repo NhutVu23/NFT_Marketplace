@@ -214,6 +214,25 @@
 
               <li class="md-list-item">
                 <a
+                  :href="'#/profile-page'"
+                            @click="
+                              () => {
+                                NavbarStore.showNavbar = false;
+                                toggledClass = false;
+                              }
+                            "
+                  class="md-list-item-router md-list-item-container md-button-clean"
+                >
+                  <div class="md-list-item-content">
+                    <md-button
+                      class="md-button md-button-link md-white md-simple"
+                    >
+                    <i class="material-icons">account_circle</i></md-button>
+                  </div>
+                </a>
+              </li>
+              <li class="md-list-item">
+                <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
