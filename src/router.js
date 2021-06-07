@@ -18,6 +18,7 @@ import Pricing from "./views/examples/Pricing.vue";
 import Shopping from "./views/examples/Shopping.vue";
 import Ecommerce from "./views/examples/Ecommerce.vue";
 import MarketPlace from "./views/examples/MarketPlace.vue";
+import Ranking from "./views/examples/Ranking.vue";
 import Product from "./views/examples/Product.vue";
 import Signup from "./views/examples/Signup.vue";
 import Error from "./views/examples/Error.vue";
@@ -42,6 +43,14 @@ export default new Router({
       path: "/marketPlace",
       name: "marketPlace",
       components: { default: MarketPlace, header: MainNavbar, footer: CustomFooter },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true }
+      }
+    },
+    {
+      path: "/ranking",
+      name: "ranking",
+      components: { default: Ranking, header: MainNavbar, footer: CustomFooter },
       props: {
         header: { colorOnScroll: 400, navbarTransparent: true }
       }

@@ -13,7 +13,7 @@
             <h1 class="title">
               Find Your Treasure
             </h1>
-            <h4>
+            <h4 class="title">
               Discover, collect and sell extraordinary NFTs
             </h4>
             <md-button class="md-button md-theme-default md-behance md-round">
@@ -295,7 +295,7 @@
               <h3 class="title">
                 Subscribe to our Newsletter
               </h3>
-              <p class="description">
+              <p class="title">
                 Join our newsletter and get news in your inbox every week! We
                 hate spam too, so no worries about this.
               </p>

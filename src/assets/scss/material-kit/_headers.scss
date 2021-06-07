@@ -18,12 +18,13 @@
     }
 
     .title{
-        color: $white-color !important;
+        // color: $white-color !important;
+        color: $gray-dark !important;
     }
 
     &.header-small{
-        height: 65vh;
-        min-height: 65vh;
+        height: 45vh;
+        min-height: 45vh;
     }
 
     .iframe-container{
@@ -78,7 +79,8 @@
     }
 
     &:before {
-      background: rgba(0,0,0,.5);
+    //   background: rgba(0,0,0,.5);
+      background: rgba(255, 255, 255, 0.8);
     }
 
     .container {

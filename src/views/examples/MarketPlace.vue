@@ -13,11 +13,12 @@
             <h1 class="title">
               NFT Marketplace
             </h1>
-            <h4>A market made for NFT, where everything is special
+            <h4 class="title">A market made for NFT, where everything is special
             </h4>
             <!-- <md-button class="md-button md-theme-default md-behance md-round">
               Explore The Marketplace
             </md-button> -->
+
           </div>
         </div>
       </div>
@@ -27,9 +28,52 @@
 
       <div class="section pb-0">
         <div class="container">
-          <!-- <h2 class="section-title text-center">
-            NFT Marketplace
-          </h2> -->
+              <div class="md-layout">
+                <div class="md-layout-item">
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fab fa-first-order" /> Art
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fab fa-facebook-f" /> Photography
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fa fa-gamepad" /> Games
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fab fa-google-plus-g" /> Domain Names
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fa fa-flag" /> Sports
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fab fa-dribbble" /> Utility
+                  </md-button>
+                  <md-button
+                    href="javascript:void(0)"
+                    class="md-white md-round"
+                  >
+                    <i class="fab fa-soundcloud" /> Virtual Worlds
+                  </md-button>
+                </div>
+              </div>
           <div class="md-layout">
             <div class="md-layout-item md-size-25 md-small-size-100">
               <md-card class="md-card md-card-refine md-card-plain">
@@ -632,5 +676,9 @@ export default {
 }
 .mb-0 {
   margin-bottom: 0;
+}
+.md-round{
+  border: 1px solid gray;
+  color: #3C4858 !important;
 }
 </style>

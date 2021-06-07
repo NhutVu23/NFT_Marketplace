@@ -75,163 +75,25 @@
                   </div>
                 </a>
               </li>
-              <li
-                v-if="showDownload"
-                class="md-list-item"
-              >
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">apps</i>
-                        <p>Components</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/Index">
-                            <i class="material-icons">layers</i>
-                            Index
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/presentation">
-                            <i class="material-icons">layers</i>
-                            Presentation
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/">
-                            <i class="material-icons">line_style</i>
-                            All Components
-                          </a>
-                        </li>
-                        <li>
-                          <a :href="docs_link">
-                            <i class="material-icons">content_paste</i>
-                            Documentation
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
-                  </div>
-                </a>
-              </li>
-              <li
-                v-if="!showDownload"
-                class="md-list-item"
-              >
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">apps</i>
-                        <p>Components</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/presentation">
-                            <i class="material-icons">layers</i>
-                            Presentation
-                          </a>
-                        </li>
-                        <li>
-                          <a :href="docs_link">
-                            <i class="material-icons">content_paste</i>
-                            Documentation
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
-                  </div>
-                </a>
-              </li>
-
               <li class="md-list-item">
                 <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">view_day</i>
-                        <p>Sections</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li
-                          v-for="li in linksSections"
-                          :key="li.name"
-                        >
-                          <a
-                            :href="'#/sections#' + li.name"
+                  :href="'#/ranking'"
                             @click="
                               () => {
                                 NavbarStore.showNavbar = false;
                                 toggledClass = false;
                               }
                             "
-                          >
-                            <i class="material-icons">{{ li.icon }}</i>
-                            {{
-                              li.name.charAt(0).toUpperCase() + li.name.slice(1)
-                            }}
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
-                  </div>
-                </a>
-              </li>
-
-              <li class="md-list-item">
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                  class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">view_carousel</i>
-                        <p>Examples</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li
-                          v-for="li in linksExamples"
-                          :key="li.name"
-                        >
-                          <a :href="'#/' + li.href">
-                            <i class="material-icons">{{ li.icon }}</i>
-                            {{ li.name }}
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
+                    <md-button
+                      class="md-button md-button-link md-white md-simple"
+                    >
+                    Ranking</md-button>
                   </div>
                 </a>
               </li>
-
               <li class="md-list-item">
                 <a
                   :href="'#/profile-page'"
