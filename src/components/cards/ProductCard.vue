@@ -2,8 +2,9 @@
   <md-card
     class="md-card-product"
     :class="{
-      'md-card-plain': cardPlain
+      'md-card-plain': cardPlain,
     }"
+    @click.native="goToProduct"
   >
     <md-card-header
       class="md-card-header-image"
@@ -12,10 +13,7 @@
       :no-colored-shadow="noColoredShadow"
     >
       <a href="javascript:void(0)">
-        <img
-          class="img"
-          :src="cardImage"
-        >
+        <img class="img" :src="cardImage" />
       </a>
       <div
         v-if="!noColoredShadow && !shadowNormal && !shadowOff"
@@ -48,16 +46,19 @@ export default {
     shadowNormal: Boolean,
     shadowOff: Boolean,
     cardPlain: Boolean,
-    noColoredShadow: Boolean
+    noColoredShadow: Boolean,
   },
   methods: {
     shadowImageBlog(image) {
       return {
         backgroundImage: `url(${image})`,
-        opacity: 1
+        opacity: 1,
       };
-    }
-  }
+    },
+    goToProduct(image) {
+      this.$router.push("product-page");
+    },
+  },
 };
 </script>
 

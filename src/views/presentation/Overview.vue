@@ -163,7 +163,7 @@
                 </h4>
                 <p class="card-description">
                   "Great kit! Used this for a client already and he is over the
-                  moon. Keep up the good work Creative Tim! 10/10 for design,
+                  moon. Keep up the good work Codelight! 10/10 for design,
                   colours, and the feel of the kit."
                 </p>
               </template>

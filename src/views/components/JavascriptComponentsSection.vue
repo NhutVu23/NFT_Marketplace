@@ -103,7 +103,7 @@
                             The first step is to create an account at
                             <a
                               href="https://www.creative-tim.com/"
-                            >Creative Tim</a>. You can choose a social network or go for the
+                            >Codelight</a>. You can choose a social network or go for the
                             classic version, whatever works best for you.
                           </p>
                         </div>
@@ -125,7 +125,7 @@
                             The first step is to create an account at
                             <a
                               href="https://www.creative-tim.com/"
-                            >Creative Tim</a>. You can choose a social network or go for the
+                            >Codelight</a>. You can choose a social network or go for the
                             classic version, whatever works best for you.
                           </p>
                         </div>

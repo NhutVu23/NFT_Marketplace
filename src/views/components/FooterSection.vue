@@ -11,7 +11,7 @@
           <ul>
             <li>
               <a href="javascript:void(0)">
-                Creative Tim
+                Codelight
               </a>
             </li>
             <li>
@@ -74,7 +74,7 @@
             <ul>
               <li>
                 <a href="http://www.creative-tim.com">
-                  Creative Tim
+                  Codelight
                 </a>
               </li>
               <li>
@@ -95,7 +95,7 @@
             </ul>
           </nav>
           <div class="copyright">
-            © {{ year }}, made with <md-icon>favorite</md-icon> by Creative Tim
+            © {{ year }}, made with <md-icon>favorite</md-icon> by Codelight
             for a better web.
           </div>
         </div>
@@ -184,7 +184,7 @@
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <h5>About Us</h5>
                 <p>
-                  Creative Tim is a startup that creates design tools that make
+                  Codelight is a startup that creates design tools that make
                   the web development process faster and easier.
                 </p>
                 <p>
@@ -301,7 +301,7 @@
               </ul>
             </nav>
             <div class="copyright float-right">
-              Copyright © {{ year }} Creative Tim All Rights Reserved.
+              Copyright © {{ year }} Codelight All Rights Reserved.
             </div>
           </div>
         </div>
@@ -466,7 +466,7 @@
           <hr>
 
           <div class="copyright">
-            Copyright © {{ year }} Creative Tim All Rights Reserved.
+            Copyright © {{ year }} Codelight All Rights Reserved.
           </div>
         </div>
       </footer>
@@ -657,7 +657,7 @@
           </ul>
 
           <div class="copyright">
-            Copyright © {{ year }} Creative Tim All Rights Reserved.
+            Copyright © {{ year }} Codelight All Rights Reserved.
           </div>
         </div>
       </footer>

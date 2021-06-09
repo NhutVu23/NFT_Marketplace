@@ -154,7 +154,7 @@
           <hr>
 
           <div class="copyright">
-            Copyright © {{ year }} Creative Tim All Rights Reserved.
+            Copyright © {{ year }} Codelight All Rights Reserved.
           </div>
         </div>
       </footer>

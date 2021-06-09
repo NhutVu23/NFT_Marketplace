@@ -10,7 +10,7 @@
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <h3 class="md-title">
-              Creative Tim
+              Codelight
             </h3>
           </div>
 
@@ -128,7 +128,7 @@
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <h3 class="md-title">
-              Creative Tim
+              Codelight
             </h3>
           </div>
 
@@ -281,7 +281,7 @@
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <h3 class="md-title">
-              Creative Tim
+              Codelight
             </h3>
           </div>
 

@@ -6,7 +6,6 @@
     :class="`md-${type}`"
     :color-on-scroll="colorOnScroll"
   >
-
     <!-- :class="{
       [`md-${type}`]: !navbarTransparent,
       [extraNavClasses]: navbarTransparent,
@@ -38,92 +37,150 @@
               <li class="md-list-item">
                 <a
                   :href="'#/'"
-                            @click="
-                              () => {
-                                NavbarStore.showNavbar = false;
-                                toggledClass = false;
-                              }
-                            "
+                  @click="
+                    () => {
+                      NavbarStore.showNavbar = false;
+                      toggledClass = false;
+                    }
+                  "
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
                     <md-button
                       class="md-button md-button-link md-white md-simple"
                     >
-                    <!-- <md-icon>shopping_cart</md-icon> -->
-                    Home</md-button>
+                      <!-- <md-icon>shopping_cart</md-icon> -->
+                      Home</md-button
+                    >
                   </div>
                 </a>
               </li>
               <li class="md-list-item">
                 <a
                   :href="'#/marketPlace'"
-                            @click="
-                              () => {
-                                NavbarStore.showNavbar = false;
-                                toggledClass = false;
-                              }
-                            "
+                  @click="
+                    () => {
+                      NavbarStore.showNavbar = false;
+                      toggledClass = false;
+                    }
+                  "
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
                     <md-button
                       class="md-button md-button-link md-white md-simple"
                     >
-                    <!-- <md-icon>shopping_cart</md-icon> -->
-                    MarketPlace</md-button>
+                      <!-- <md-icon>shopping_cart</md-icon> -->
+                      MarketPlace</md-button
+                    >
                   </div>
                 </a>
               </li>
               <li class="md-list-item">
                 <a
                   :href="'#/ranking'"
-                            @click="
-                              () => {
-                                NavbarStore.showNavbar = false;
-                                toggledClass = false;
-                              }
-                            "
+                  @click="
+                    () => {
+                      NavbarStore.showNavbar = false;
+                      toggledClass = false;
+                    }
+                  "
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
                     <md-button
                       class="md-button md-button-link md-white md-simple"
                     >
-                    Ranking</md-button>
-                  </div>
-                </a>
-              </li>
-              <li class="md-list-item">
-                <a
-                  :href="'#/profile-page'"
-                            @click="
-                              () => {
-                                NavbarStore.showNavbar = false;
-                                toggledClass = false;
-                              }
-                            "
-                  class="md-list-item-router md-list-item-container md-button-clean"
-                >
-                  <div class="md-list-item-content">
-                    <md-button
-                      class="md-button md-button-link md-white md-simple"
+                      Ranking</md-button
                     >
-                    <i class="material-icons">account_circle</i></md-button>
                   </div>
                 </a>
               </li>
-              <li class="md-list-item">
+              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
                 <a
                   href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        <i class="material-icons">account_circle</i>
+                      </md-button>
+
+                      <!-- Add profile img -->
+                      <!-- <div
+                        slot="title"
+                        class="profile-photo-small"
+                        data-toggle="dropdown"
+                      >
+                        <img :src="img" alt="Circle Image" />
+                      </div> -->
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a :href="'#/profile-page'">
+                            <!-- <i class="material-icons">layers</i> -->
+                            My Collectiable
+                          </a>
+                        </li>
+                        <li>
+                          <a :href="'#/profile-page'">
+                            <!-- <i class="material-icons">layers</i> -->
+                            My Profile
+                          </a>
+                        </li>
+                        <li>
+                          <a :href="'#/profile-page'">
+                            <!-- <i class="material-icons">layers</i> -->
+                            Settings
+                          </a>
+                        </li>
+                        <li class="logout">
+                          <a href="#" @click="logout">
+                            <!-- <i class="material-icons">layers</i> -->
+                            Logout
+                          </a>
+                          <!-- <md-button
+                            slot="title"
+                            class="md-button md-button-link md-white md-simple"
+                            @click="logout"
+                          >
+                            Logout
+                          </md-button> -->
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
+
+              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean"
+                >
+                  <div class="md-list-item-content">
+                    <md-button class="md-rose md-just-icon md-round"
+                      ><md-icon>email</md-icon></md-button
+                    >
+                  </div>
+                </a>
+              </li>
+
+              <li v-if="metaMaskAddress.length == 0" class="md-list-item">
+                <a
+                  :href="'#/connect-wallet'"
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
                     <md-button
                       class="md-theme-default md-twitter md-round md-button md-theme-default"
                     >
-                    <!-- <md-icon>shopping_cart</md-icon> -->
-                    Connect Wallet</md-button>
+                      Connect Wallet</md-button
+                    >
                   </div>
                 </a>
               </li>
@@ -152,7 +209,7 @@ function resizeThrottler(actualResizeHandler) {
 import MobileMenu from "@/layout/MobileMenu";
 export default {
   components: {
-    MobileMenu
+    MobileMenu,
   },
   props: {
     type: {
@@ -167,70 +224,56 @@ export default {
           "success",
           "warning",
           "info",
-          "dark"
+          "dark",
         ].includes(value);
-      }
+      },
     },
     colorOnScroll: {
       type: Number,
-      default: 0
+      default: 0,
     },
     navbarTransparent: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
+      msg: "This is demo net work",
       docs_link:
         "https://demos.creative-tim.com/vue-material-kit-pro/documentation/",
       extraNavClasses: "",
       toggledClass: false,
-      brand: "NFTMarketplace",
-      linksSections: [
-        { name: "headers", icon: "dns" },
-        { name: "features", icon: "build" },
-        { name: "blogs", icon: "list" },
-        { name: "teams", icon: "people" },
-        { name: "projects", icon: "assignment" },
-        { name: "pricing", icon: "monetization_on" },
-        { name: "testimonials", icon: "chat" },
-        { name: "contacts", icon: "call" }
-      ],
-      linksExamples: [
-        { name: "About Us", href: "about-us", icon: "account_balance" },
-        { name: "Blog Post", href: "blog-post", icon: "art_track" },
-        { name: "Blog Posts", href: "blog-posts", icon: "view_quilt" },
-        { name: "Contact Us", href: "contact-us", icon: "location_on" },
-        { name: "Landing Page", href: "landing-page", icon: "view_day" },
-        { name: "Login Page", href: "login-page", icon: "fingerprint" },
-        { name: "Pricing Page", href: "pricing-page", icon: "attach_money" },
-        {
-          name: "Shopping Cart",
-          href: "shopping-cart",
-          icon: "shopping_basket"
-        },
-        { name: "Ecommerce Page", href: "ecommerce-page", icon: "store" },
-        { name: "Product Page", href: "product-page", icon: "shopping_cart" },
-        { name: "Profile Page", href: "profile-page", icon: "account_circle" },
-        { name: "Signup Page", href: "signup-page", icon: "person_add" },
-        { name: "Error Page", href: "error-page", icon: "error" }
-      ]
+      brand: "NFTtify",
     };
   },
   computed: {
     showDownload() {
       const excludedRoutes = ["index"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
+      return excludedRoutes.every((r) => r !== this.$route.name);
+    },
+    metaMaskAddress() {
+      return this.$store.state.global.walletAddress;
+    },
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
+    var localAddress = localStorage.getItem("metaMaskAddress");
+    if (localAddress && localAddress.length > 0) {
+      this.$store.dispatch("global/setAddress", localAddress);
+    } else {
+      this.$store.dispatch("global/setAddress", "");
+    }
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
   },
   methods: {
+    logout() {
+      localStorage.removeItem("metaMaskAddress");
+      this.$store.dispatch("global/setAddress", "");
+      this.$router.push("/");
+    },
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 
@@ -268,7 +311,7 @@ export default {
     },
     scrollListener() {
       // resizeThrottler(this.handleScroll);
-    }
-  }
+    },
+  },
 };
 </script>

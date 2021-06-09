@@ -195,11 +195,11 @@
         pointer-events: none;
       }
 
-      &:not([shadow-off="true"]) {
-        img {
-          @include shadow-big-image();
-        }
-      }
+      // &:not([shadow-off="true"]) {
+      //   img {
+      //     @include shadow-big-image();
+      //   }
+      // }
 
       .card-title {
         position: absolute;
@@ -466,6 +466,7 @@
 .md-card-plain{
     background: transparent !important;
     box-shadow: none !important;
+    cursor: pointer;
 
     .md-card-header{
       background-color: transparent !important;
@@ -494,7 +495,10 @@
 
 .md-card-profile,
 .md-card-testimonial{
-    margin-top: 30px;
+    margin: 20px 0px;
+    padding: 20px;
+    border: 1px solid #D0D3D7;
+    border-radius: 10px;;
 
     &:not(.md-card-horizontal) {
       text-align: center;

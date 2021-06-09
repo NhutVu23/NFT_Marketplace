@@ -4,7 +4,7 @@
       <div class="md-layout">
         <div class="md-layout-item md-medium-size-66 md-small-size-100 mx-auto">
           <h4 class="description text-center">
-            NFTMarketplace is a VueMaterial UI Kit with a fresh, new
+            NFTtify is a VueMaterial UI Kit with a fresh, new
             design inspired by Google's Material Design. You asked for it, so we
             built it. It's a great pleasure to introduce to you the material
             concepts in an easy to use and beautiful set of components.
