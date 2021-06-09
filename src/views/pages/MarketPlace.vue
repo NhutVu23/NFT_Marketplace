@@ -24,7 +24,7 @@
     <div class="main main-raised">
       <div class="section pb-0">
         <div class="container">
-          <div class="md-layout  text-center">
+          <div class="md-layout text-center">
             <div class="md-layout-item">
               <md-button href="javascript:void(0)" class="md-white md-round">
                 <i class="fab fa-first-order" /> Art
@@ -408,8 +408,6 @@
 import {
   ProductCard,
   Collapse,
-  // FullBgCard,
-  // BlogCard,
   Slider,
 } from "@/components";
 import Mixins from "@/plugins/basicMixins";

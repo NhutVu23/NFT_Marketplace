@@ -76,23 +76,31 @@
                   </div>
                 </a>
               </li>
+
               <li class="md-list-item">
                 <a
-                  :href="'#/ranking'"
-                  @click="
-                    () => {
-                      NavbarStore.showNavbar = false;
-                      toggledClass = false;
-                    }
-                  "
-                  class="md-list-item-router md-list-item-container md-button-clean"
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
                 >
                   <div class="md-list-item-content">
-                    <md-button
-                      class="md-button md-button-link md-white md-simple"
-                    >
-                      Ranking</md-button
-                    >
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        Stats
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a :href="'#/ranking'"> Ranking </a>
+                        </li>
+                        <li>
+                          <a :href="'#/activity'"> Activity </a>
+                        </li>
+                        <li></li>
+                      </ul>
+                    </drop-down>
                   </div>
                 </a>
               </li>
@@ -110,46 +118,18 @@
                       >
                         <i class="material-icons">account_circle</i>
                       </md-button>
-
-                      <!-- Add profile img -->
-                      <!-- <div
-                        slot="title"
-                        class="profile-photo-small"
-                        data-toggle="dropdown"
-                      >
-                        <img :src="img" alt="Circle Image" />
-                      </div> -->
                       <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                          <a :href="'#/profile-page'">
-                            <!-- <i class="material-icons">layers</i> -->
-                            My Collectiable
-                          </a>
+                          <a :href="'#'"> My Collectiable </a>
                         </li>
                         <li>
-                          <a :href="'#/profile-page'">
-                            <!-- <i class="material-icons">layers</i> -->
-                            My Profile
-                          </a>
+                          <a :href="'#/profile-page'"> My Profile </a>
                         </li>
                         <li>
-                          <a :href="'#/profile-page'">
-                            <!-- <i class="material-icons">layers</i> -->
-                            Settings
-                          </a>
+                          <a :href="'#'"> Settings </a>
                         </li>
                         <li class="logout">
-                          <a href="#" @click="logout">
-                            <!-- <i class="material-icons">layers</i> -->
-                            Logout
-                          </a>
-                          <!-- <md-button
-                            slot="title"
-                            class="md-button md-button-link md-white md-simple"
-                            @click="logout"
-                          >
-                            Logout
-                          </md-button> -->
+                          <a href="#" @click="logout"> Logout </a>
                         </li>
                       </ul>
                     </drop-down>
