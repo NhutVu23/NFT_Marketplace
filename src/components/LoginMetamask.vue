@@ -71,7 +71,6 @@ export default {
     checkAccounts() {
       if (this.web3 === null) return;
       this.web3.eth.getAccounts((err, accounts) => {
-        console.log();
         if (err != null)
           return this.Log(this.MetamaskMsg.NETWORK_ERROR, "NETWORK_ERROR");
         if (accounts.length === 0) {
@@ -108,7 +107,6 @@ export default {
       if (letType === this.type) return;
       const message = this.userMessage === "null" ? msg : this.userMessage;
       this.type = type;
-      console.log(this.MetaMaskAddress);
       this.$emit("onComplete", {
         web3: this.web3,
         type,
