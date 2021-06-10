@@ -114,7 +114,6 @@ export default {
   },
   methods: {
     onComplete(data) {
-      console.log("data:", data);
       if (data && data.metaMaskAddress) {
         localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
         this.$store.dispatch("global/setAddress", data.metaMaskAddress);
