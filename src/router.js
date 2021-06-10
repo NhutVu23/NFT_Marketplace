@@ -3,7 +3,8 @@ import Router from "vue-router";
 
 //  Main Pages
 import Login from "./views/pages/Login.vue";
-import Profile from "./views/pages/Profile.vue";
+import Collections from "./views/pages/Collections.vue";
+import EditProfile from "./views/pages/EditProfile.vue";
 import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
 import Settings from "./views/pages/Settings.vue";
@@ -95,9 +96,17 @@ export default new Router({
       },
     },
     {
-      path: "/profile-page",
-      name: "profile",
-      components: { default: Profile, header: MainNavbar, footer: MainFooter },
+      path: "/collections",
+      name: "collections",
+      components: { default: Collections, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/edit-profile",
+      name: "edit-profile",
+      components: { default: EditProfile, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400, navbarTransparent: true },
       },

@@ -120,10 +120,10 @@
                       </md-button>
                       <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                          <a :href="'#'"> My Collectiable </a>
+                          <a :href="'#/collections'"> My Collectiable </a>
                         </li>
                         <li>
-                          <a :href="'#/profile-page'"> My Profile </a>
+                          <a :href="'#/edit-profile'"> Edit Profile </a>
                         </li>
                         <li>
                           <a :href="'#/settings'"> Settings </a>

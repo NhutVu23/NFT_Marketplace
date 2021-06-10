@@ -1,43 +1,27 @@
 <template>
   <span>
     <template v-if="type === 'image-regular' || type === 'image-circle'">
-      <div
-        class="file-input"
-        :class="type"
-      >
+      <div class="file-input" :class="type">
         <div class="image-container">
-          <img
-            v-if="type === 'image-regular'"
-            :src="imageRegular"
-            title=""
-          >
-          <img
-            v-else
-            :src="imageCircle"
-            title=""
-          >
+          <img v-if="type === 'image-regular'" :src="imageRegular" title="" />
+          <img v-else :src="imageCircle" title="" />
         </div>
         <div class="button-container">
           <md-button
             v-if="hasImage"
             class="md-danger md-round"
             @click="removeImage"
-          ><i class="fa fa-times" />Remove</md-button>
+            ><i class="fa fa-times" />Remove</md-button
+          >
           <md-button class="md-success md-round md-fileinput">
-            <template
-              v-if="type === 'image-regular' && !hasImage"
-            >Select image</template>
-            <template
-              v-else-if="type === 'image-circle' && !hasImage"
-            >Add photo</template>
-            <template
-              v-else
-            >Change</template>
-            <input
-              type="file"
-              :name="type"
-              @change="onFileChange"
+            <template v-if="type === 'image-regular' && !hasImage"
+              >Select image</template
             >
+            <template v-else-if="type === 'image-circle' && !hasImage"
+              >Add photo</template
+            >
+            <template v-else>Change</template>
+            <input type="file" :name="type" @change="onFileChange" />
           </md-button>
         </div>
       </div>
@@ -56,7 +40,7 @@
             :id="inputName + 'Hidden'"
             type="file"
             @change="newValue(inputName + 'Visible', inputName + 'Hidden')"
-          >
+          />
         </md-field>
       </template>
       <template v-if="withButton">
@@ -74,7 +58,7 @@
               :id="inputName + 'Hidden'"
               type="file"
               @change="newValue(inputName + 'Visible', inputName + 'Hidden')"
-            >
+            />
             <input
               v-else
               :id="inputName + 'Hidden'"
@@ -83,12 +67,13 @@
               @change="
                 newValueMultiple(inputName + 'Visible', inputName + 'Hidden')
               "
-            >
+            />
           </md-field>
           <md-button
             class="md-success md-round md-just-icon"
             @click="triggerInputFileHidden(inputName + 'Hidden')"
-          ><md-icon>{{ btnIcon }}</md-icon></md-button>
+            ><md-icon>{{ btnIcon }}</md-icon></md-button
+          >
         </div>
       </template>
     </template>
@@ -105,7 +90,7 @@ export default {
     placeholder: String,
     multiple: Boolean,
     btnIcon: String,
-    withButton: Boolean
+    withButton: Boolean,
   },
   data() {
     return {
@@ -113,7 +98,7 @@ export default {
       inputModel2: null,
       imageRegular: require("@/assets/img/image_placeholder.jpg"),
       imageCircle: require("@/assets/img/placeholder.jpg"),
-      hasImage: false
+      hasImage: false,
     };
   },
   methods: {
@@ -134,7 +119,7 @@ export default {
       reader.readAsDataURL(file);
       vm.hasImage = true;
     },
-    removeImage: function() {
+    removeImage: function () {
       if (this.type === "image-circle") {
         this.imageCircle = require("@/assets/img/placeholder.jpg");
       } else {
@@ -167,8 +152,8 @@ export default {
       }
 
       visibleElem.value = names;
-    }
-  }
+    },
+  },
 };
 </script>
 

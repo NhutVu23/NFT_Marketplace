@@ -1,9 +1,9 @@
-.md-fileinput{
-  .md-button-content{
+.md-fileinput {
+  .md-button-content {
     position: unset;
   }
 
-  [type="file"]{
+  [type="file"] {
     position: absolute;
     top: 0;
     right: 0;
@@ -16,32 +16,32 @@
   }
 }
 
-.button-container{
+.button-container {
   display: flex;
   justify-content: center;
 }
 
-.file-input{
+.file-input {
   display: inline-block;
-  &.image-circle{
+  &.image-circle {
     max-width: 150px;
 
-    .button-container{
+    .button-container {
       flex-direction: column;
     }
   }
 
-  .md-button + .md-button{
+  .md-button + .md-button {
     margin-left: 5px;
   }
 }
 
-.image-container{
+.image-container {
   @include shadow-big-image;
-  max-width: 250px;
+  // max-width: 250px;
   margin-bottom: 10px;
 
-  .image-circle &{
+  .image-circle & {
     border-radius: 50%;
     max-width: 100px;
     overflow: hidden;
@@ -50,7 +50,7 @@
   }
 
   &,
-  img{
+  img {
     border-radius: 4px;
   }
 }
@@ -64,7 +64,7 @@
 }
 
 .form-file-upload {
-  input[type=file] {
+  input[type="file"] {
     opacity: 0;
     position: absolute;
     top: 0;
