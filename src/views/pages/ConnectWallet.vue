@@ -59,33 +59,6 @@
           </div>
         </div>
       </div>
-      <footer class="footer">
-        <div class="container flex-direction-row">
-          <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com"> Codelight </a>
-              </li>
-              <li>
-                <a href="https:///presentation.creative-tim.com"> About Us </a>
-              </li>
-              <li>
-                <a href="https:///blog.creative-tim.com"> Blog </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license"> Licenses </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright">
-            &copy; {{ year }}, made with <md-icon>favorite</md-icon> by
-            <a href="https://www.creative-tim.com/" target="_blank"
-              >Codelight</a
-            >
-            for a better web.
-          </div>
-        </div>
-      </footer>
     </parallax>
   </div>
 </template>
@@ -141,6 +114,7 @@ export default {
   },
   methods: {
     onComplete(data) {
+      console.log("data:", data);
       if (data && data.metaMaskAddress) {
         localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
         this.$store.dispatch("global/setAddress", data.metaMaskAddress);

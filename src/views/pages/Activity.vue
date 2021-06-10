@@ -7,241 +7,63 @@
             class="md-layout-item md-size-100 md-small-size-100 mx-auto text-center"
           >
             <md-card class="md-card md-card-signup">
-              <h2 class="card-title">Activity</h2>
               <md-card-content>
-                <div class="container">
-                  <div class="md-layout">
-                    <div class="md-layout-item md-size-25 md-small-size-100">
-                      <md-card class="md-card md-card-refine md-card-plain">
-                        <md-card-content>
-                          <h4 class="card-title">
-                            Apply Filters
-                            <!-- <md-button class="md-just-icon md-simple md-sm">
-                              <md-icon>cached</md-icon>
-                              <md-tooltip md-direction="top">
-                                Reset Filter
-                              </md-tooltip>
-                            </md-button> -->
-                          </h4>
-                          <collapse
-                            :active-tab="1"
-                            :collapse="[
-                              'Price Range',
-                              'Clothing',
-                              'Designer',
-                              'Colour',
-                            ]"
-                            icon="keyboard_arrow_down"
-                            color-collapse="rose"
-                          >
-                            <template slot="md-collapse-pane-1">
-                              <span class="price-content">
-                                <span class="price-left"
-                                  >€{{
-                                    Math.floor(this.sliders.rangeSlider[0])
-                                  }}</span
-                                >
-                                <span class="price-right"
-                                  >€{{
-                                    Math.floor(this.sliders.rangeSlider[1])
-                                  }}</span
-                                >
-                              </span>
-
-                              <slider
-                                v-model="sliders.rangeSlider"
-                                :range="{ min: 101, max: 700 }"
-                                type="rose"
-                                :connect="true"
-                                @input="newValue"
-                              />
-                            </template>
-                            <template slot="md-collapse-pane-2">
-                              <md-checkbox
-                                v-model="clothing.blazers"
-                                class="mb-0"
-                              >
-                                Blazers
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.casualShirts"
-                                class="mb-0"
-                              >
-                                Casual Shirts
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.formalShirts"
-                                class="mb-0"
-                              >
-                                Formal Shirts
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.jeans"
-                                class="mb-0"
-                              >
-                                Jeans
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.polos"
-                                class="mb-0"
-                              >
-                                Polos
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.pyjamas"
-                                class="mb-0"
-                              >
-                                Pyjamas
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.shorts"
-                                class="mb-0"
-                              >
-                                Shorts
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="clothing.trousers"
-                                class="mb-0"
-                              >
-                                Trousers
-                              </md-checkbox>
-                            </template>
-                            <template slot="md-collapse-pane-3">
-                              <md-checkbox v-model="designer.all" class="mb-0">
-                                All
-                              </md-checkbox>
-                              <md-checkbox v-model="designer.polo" class="mb-0">
-                                Polo Ralph Lauren
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.wooyoungmi"
-                                class="mb-0"
-                              >
-                                Wooyoungmi
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.alexander"
-                                class="mb-0"
-                              >
-                                Alexander McQueen
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.tomFord"
-                                class="mb-0"
-                              >
-                                Tom Ford
-                              </md-checkbox>
-                              <md-checkbox v-model="designer.ami" class="mb-0">
-                                AMI
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.berena"
-                                class="mb-0"
-                              >
-                                Berena
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.sweeney"
-                                class="mb-0"
-                              >
-                                Thom Sweeney
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.burberry"
-                                class="mb-0"
-                              >
-                                Burberry Prorsum
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.calvin"
-                                class="mb-0"
-                              >
-                                Calvin Klein
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.kingsman"
-                                class="mb-0"
-                              >
-                                Kingsman
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.monaco"
-                                class="mb-0"
-                              >
-                                Club Monaco
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.dolce"
-                                class="mb-0"
-                              >
-                                Dolce & Gabanna
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.gucci"
-                                class="mb-0"
-                              >
-                                Gucci
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.biglioli"
-                                class="mb-0"
-                              >
-                                Biglioli
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.lanvin"
-                                class="mb-0"
-                              >
-                                Lanvin
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.piana"
-                                class="mb-0"
-                              >
-                                Loro Piana
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="designer.massimo"
-                                class="mb-0"
-                              >
-                                Massimo Alba
-                              </md-checkbox>
-                            </template>
-                            <template slot="md-collapse-pane-4">
-                              <md-checkbox v-model="colour.all" class="mb-0">
-                                All
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.black" class="mb-0">
-                                Black
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.blue" class="mb-0">
-                                Blue
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.brown" class="mb-0">
-                                Brown
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.gray" class="mb-0">
-                                Gray
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.green" class="mb-0">
-                                Green
-                              </md-checkbox>
-                              <md-checkbox
-                                v-model="colour.neutrals"
-                                class="mb-0"
-                              >
-                                Neutrals
-                              </md-checkbox>
-                              <md-checkbox v-model="colour.purple" class="mb-0">
-                                Purple
-                              </md-checkbox>
-                            </template>
-                          </collapse>
-                        </md-card-content>
-                      </md-card>
-                    </div>
-                    <div class="md-layout-item md-size-75 md-small-size-100">
-                      <div class="md-layout">
+                <div class="md-layout">
+                  <div class="md-layout-item md-size-25 md-small-size-100">
+                    <md-card class="md-card md-card-refine md-card-plain">
+                      <md-card-content>
+                        <h2 class="card-title">Apply Filters</h2>
+                        <collapse
+                          :active-tab="1"
+                          :collapse="['Status']"
+                          icon="keyboard_arrow_down"
+                          color-collapse="rose"
+                        >
+                          <template slot="md-collapse-pane-1">
+                            <md-checkbox
+                              v-model="filterStatus.Bids"
+                              class="mb-0"
+                            >
+                              Bids
+                            </md-checkbox>
+                            <md-checkbox
+                              v-model="filterStatus.Likes"
+                              class="mb-0"
+                            >
+                              Likes
+                            </md-checkbox>
+                            <md-checkbox
+                              v-model="filterStatus.Purchases"
+                              class="mb-0"
+                            >
+                              Purchases
+                            </md-checkbox>
+                            <md-checkbox
+                              v-model="filterStatus.Listing"
+                              class="mb-0"
+                            >
+                              Listing
+                            </md-checkbox>
+                            <md-checkbox
+                              v-model="filterStatus.Followings"
+                              class="mb-0"
+                            >
+                              Followings
+                            </md-checkbox>
+                          </template>
+                        </collapse>
+                      </md-card-content>
+                    </md-card>
+                  </div>
+                  <div class="md-layout-item md-size-75 md-small-size-100">
+                    <md-card class="md-card md-card-refine md-card-plain">
+                      <md-card-content>
+                        <h2
+                          style="place-content: center"
+                          class="text-center card-title"
+                        >
+                          Activity
+                        </h2>
                         <md-table
                           v-model="shoppingCartTable"
                           class="table-shopping"
@@ -278,8 +100,8 @@
                             </md-table-cell>
                           </md-table-row>
                         </md-table>
-                      </div>
-                    </div>
+                      </md-card-content>
+                    </md-card>
                   </div>
                 </div>
               </md-card-content>
@@ -293,12 +115,11 @@
 
 <script>
 import Mixins from "@/plugins/basicMixins";
-import { Collapse, Slider } from "@/components";
+import { Collapse } from "@/components";
 
 export default {
   components: {
     Collapse,
-    Slider,
   },
   mixins: [Mixins.HeaderImage],
   bodyClass: "signup-page",
@@ -329,15 +150,12 @@ export default {
         piana: false,
         massimo: false,
       },
-      colour: {
-        all: true,
-        black: false,
-        blue: false,
-        brown: false,
-        gray: false,
-        green: false,
-        neutrals: false,
-        purple: false,
+      filterStatus: {
+        Bids: false,
+        Likes: false,
+        Purchases: false,
+        Listing: false,
+        Followings: false,
       },
       image: require("@/assets/img/examples/clark-street-merc.jpg"),
       image2: require("@/assets/img/examples/ecommerce-header.jpg"),

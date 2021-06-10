@@ -6,6 +6,7 @@ import Login from "./views/pages/Login.vue";
 import Profile from "./views/pages/Profile.vue";
 import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
+import Settings from "./views/pages/Settings.vue";
 import Ecommerce from "./views/pages/Ecommerce.vue";
 import MarketPlace from "./views/pages/MarketPlace.vue";
 import Ranking from "./views/pages/Ranking.vue";
@@ -118,6 +119,18 @@ export default new Router({
       name: "activity",
       components: {
         default: Activity,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      components: {
+        default: Settings,
         header: MainNavbar,
         footer: CustomFooter,
       },

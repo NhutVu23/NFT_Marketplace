@@ -126,7 +126,7 @@
                           <a :href="'#/profile-page'"> My Profile </a>
                         </li>
                         <li>
-                          <a :href="'#'"> Settings </a>
+                          <a :href="'#/settings'"> Settings </a>
                         </li>
                         <li class="logout">
                           <a href="#" @click="logout"> Logout </a>
