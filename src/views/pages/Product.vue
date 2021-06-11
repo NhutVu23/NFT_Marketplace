@@ -112,7 +112,7 @@
                     >QmZuYTpoSMsH749Ln5GL43NQYbfJ2ehpMbkEsFVysis9gd...</span
                   >
                 </div>
-                <div class="row-detail">
+                <div class="row-detail">\
                   <span class="row-left">Created</span>
                   <span class="row-right">March 25, 2021 | 05:05:21</span>
                 </div>
@@ -141,7 +141,7 @@
               </md-table>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100">
-              <h3 class="title">Listing</h3>
+              <h3 class="title">Owners</h3>
               <md-table v-model="tableData" class="table-shopping">
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
                   <md-table-cell md-label="#">

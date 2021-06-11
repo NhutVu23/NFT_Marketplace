@@ -4,7 +4,7 @@
     :class="{
       'md-card-plain': cardPlain,
       'flex-direction-row': flexDirectionRow,
-      'md-card-horizontal': type === 'horizontal'
+      'md-card-horizontal': type === 'horizontal',
     }"
   >
     <template v-if="type !== 'horizontal'">
@@ -13,18 +13,12 @@
         :no-colored-shadow="noColoredShadow"
         :class="{
           'md-card-header-image': !cardAvatar,
-          'md-card-avatar': cardAvatar
+          'md-card-avatar': cardAvatar,
         }"
       >
         <a :href="cardLink()">
-          <img
-            class="img"
-            :src="cardImage"
-          >
-          <div
-            v-if="$slots.cardTitleHeader"
-            class="card-title"
-          >
+          <img :src="cardImage" />
+          <div v-if="$slots.cardTitleHeader" class="card-title">
             <slot name="cardTitleHeader" />
           </div>
         </a>
@@ -38,10 +32,7 @@
         <slot name="cardContent" />
       </md-card-content>
 
-      <md-card-actions
-        v-if="$slots.cardAction"
-        class="justify-content-center"
-      >
+      <md-card-actions v-if="$slots.cardAction" class="justify-content-center">
         <slot name="cardAction" />
       </md-card-actions>
     </template>
@@ -51,8 +42,8 @@
         <div
           class="md-layout-item"
           :class="{
-            'md-size-45 md-xsmall-size-100': !smallImg,
-            'md-size-33 md-small-size-100': smallImg
+            'md-size-20 md-xsmall-size-100': !smallImg,
+            'md-size-15 md-small-size-100': smallImg,
           }"
         >
           <md-card-header
@@ -61,10 +52,7 @@
             class="md-card-header-image"
           >
             <a :href="cardLink()">
-              <img
-                class="img"
-                :src="cardImage"
-              >
+              <img class="img" :src="cardImage" />
             </a>
             <div
               v-if="!noColoredShadow && !shadowNormal"
@@ -77,7 +65,7 @@
           class="md-layout-item"
           :class="{
             'md-size-55 md-xsmall-size-100': !smallImg,
-            'md-size-66 md-small-size-100': smallImg
+            'md-size-66 md-small-size-100': smallImg,
           }"
         >
           <md-card-content v-if="$slots.cardContent">
@@ -110,16 +98,16 @@ export default {
     cardPlain: Boolean,
     cardAvatar: {
       type: Boolean,
-      default: false
+      default: false,
     },
     shadowNormal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noColoredShadow: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     cardLink() {
@@ -132,10 +120,10 @@ export default {
     shadowImageProfile(image) {
       return {
         backgroundImage: `url(${image})`,
-        opacity: 1
+        opacity: 1,
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

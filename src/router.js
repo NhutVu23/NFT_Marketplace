@@ -4,6 +4,8 @@ import Router from "vue-router";
 //  Main Pages
 import Login from "./views/pages/Login.vue";
 import Collections from "./views/pages/Collections.vue";
+import CreateCollection from "./views/pages/CreateCollection.vue";
+import CreateItem from "./views/pages/CreateItem.vue";
 import EditProfile from "./views/pages/EditProfile.vue";
 import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
@@ -98,7 +100,35 @@ export default new Router({
     {
       path: "/collections",
       name: "collections",
-      components: { default: Collections, header: MainNavbar, footer: MainFooter },
+      components: {
+        default: Collections,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/create-item",
+      name: "create-item",
+      components: {
+        default: CreateItem,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/create-collection",
+      name: "create-collection",
+      components: {
+        default: CreateCollection,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
       props: {
         header: { colorOnScroll: 400, navbarTransparent: true },
       },
@@ -106,7 +136,11 @@ export default new Router({
     {
       path: "/edit-profile",
       name: "edit-profile",
-      components: { default: EditProfile, header: MainNavbar, footer: MainFooter },
+      components: {
+        default: EditProfile,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
       props: {
         header: { colorOnScroll: 400, navbarTransparent: true },
       },

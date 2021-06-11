@@ -172,7 +172,7 @@
 
           <div class="section pb-0">
             <div class="container">
-              <h2 class="section-title text-center">Explore The Marketplace</h2>
+              <h2 class="section-title text-center">Top Sellers</h2>
               <div class="md-layout">
                 <div
                   class="md-layout-item md-size-25 md-small-size-100 mx-auto"

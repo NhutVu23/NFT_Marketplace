@@ -113,6 +113,36 @@
                     <drop-down direction="down">
                       <md-button
                         slot="title"
+                        class="md-theme-default md-twitter md-round md-button dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        Create
+                      </md-button>
+
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                          <a :href="'#/create-collection'">
+                            Create Collection
+                          </a>
+                        </li>
+                        <li>
+                          <a :href="'#/create-item'"> Create Item </a>
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
+
+              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
                         class="md-button md-button-link md-white md-simple dropdown-toggle"
                         data-toggle="dropdown"
                       >

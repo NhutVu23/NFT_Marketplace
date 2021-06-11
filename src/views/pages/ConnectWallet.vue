@@ -9,7 +9,7 @@
             <md-card class="md-card md-card-signup">
               <md-card-content>
                 <h2 class="card-title text-center">Connect your Wallet</h2>
-                <h3 class="card-title text-center" style="padding:0 20%">
+                <h3 class="card-title text-center" style="padding: 0 20%">
                   By connecting your wallet, you agree to our Temr of Service
                   and our Privacy Policy
                 </h3>
@@ -24,7 +24,7 @@
                         type="horizontal"
                         :shadow-normal="false"
                         :no-colored-shadow="true"
-                        :card-image="cardProfile3.cardProfile1"
+                        :card-image="wallets.wallet1"
                       >
                         <template slot="cardContent">
                           <h4 class="card-title">Metamask</h4>
@@ -43,7 +43,7 @@
                       type="horizontal"
                       :shadow-normal="false"
                       :no-colored-shadow="true"
-                      :card-image="cardProfile3.wallet2"
+                      :card-image="wallets.wallet2"
                     >
                       <template slot="cardContent">
                         <h4 class="card-title">WalletConnect</h4>
@@ -80,34 +80,8 @@ export default {
       boolean: null,
       image: require("@/assets/img/bg7.jpg"),
       year: new Date().getFullYear(),
-      contentLeft: [
-        {
-          colorIcon: "success",
-          icon: "timeline",
-          title: "Marketing",
-          description:
-            "We've created the marketing campaign of the website. It was a very interesting collaboration.",
-        },
-
-        {
-          colorIcon: "danger",
-          icon: "code",
-          title: "Fully Coded in HTML5",
-          description:
-            "We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.",
-        },
-
-        {
-          colorIcon: "info",
-          icon: "group",
-          title: "Built Audience",
-          description:
-            "There is also a Fully Customizable CMS Admin Dashboard for this product.",
-        },
-      ],
-
-      cardProfile3: {
-        cardProfile1: require("@/assets/img/wallets/Metamask.svg"),
+      wallets: {
+        wallet1: require("@/assets/img/wallets/Metamask.svg"),
         wallet2: require("@/assets/img/wallets/WalletConnect.svg"),
       },
     };
