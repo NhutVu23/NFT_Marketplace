@@ -6,6 +6,13 @@
           <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
             <md-card class="md-card md-card-signup">
               <md-card-content style="padding: 0 15%">
+                <md-button
+                  class="md-simple md-github back-button"
+                  @click="goTo('')"
+                >
+                  <i class="fas fa-arrow-left"></i>
+                  <h4>Go Back</h4>
+                </md-button>
                 <h2 class="card-title">Create New Item</h2>
                 <h3>
                   Choose “Single” if you want your collectible to be one of a
@@ -24,6 +31,7 @@
                       :card-image="cardImgs.cardImg1"
                       :shadow-normal="false"
                       :no-colored-shadow="true"
+                      @click.native="goTo('create-single-item')"
                     >
                       <template slot="cardContent">
                         <h4 class="card-title">Single</h4>
@@ -40,6 +48,7 @@
                       :shadow-normal="false"
                       :no-colored-shadow="true"
                       :card-image="cardImgs.cardImg2"
+                      @click.native="goTo('create-multiple-item')"
                     >
                       <template slot="cardContent">
                         <h4 class="card-title">Multiple</h4>
@@ -109,16 +118,8 @@ export default {
     };
   },
   methods: {
-    onComplete(data) {
-      if (data && data.metaMaskAddress) {
-        localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
-        this.$store.dispatch("global/setAddress", data.metaMaskAddress);
-
-        this.$router.push("/");
-      } else {
-        localStorage.removeItem("metaMaskAddress");
-        this.$store.dispatch("global/setAddress", "");
-      }
+    goTo(url) {
+      this.$router.push("/" + url);
     },
   },
 };

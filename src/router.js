@@ -6,6 +6,8 @@ import Login from "./views/pages/Login.vue";
 import Collections from "./views/pages/Collections.vue";
 import CreateCollection from "./views/pages/CreateCollection.vue";
 import CreateItem from "./views/pages/CreateItem.vue";
+import CreateSingleItem from "./views/pages/CreateSingleItem.vue";
+import CreateMultipleItem from "./views/pages/CreateMultipleItem.vue";
 import EditProfile from "./views/pages/EditProfile.vue";
 import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
@@ -114,6 +116,30 @@ export default new Router({
       name: "create-item",
       components: {
         default: CreateItem,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/create-single-item",
+      name: "create-single-item",
+      components: {
+        default: CreateSingleItem,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/create-multiple-item",
+      name: "create-multiple-item",
+      components: {
+        default: CreateMultipleItem,
         header: MainNavbar,
         footer: CustomFooter,
       },

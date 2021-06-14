@@ -7,7 +7,6 @@
             <md-card class="md-card md-card-signup">
               <md-card-content style="padding: 0 15%">
                 <h2 class="card-title">Create New Collection</h2>
-                <br />
 
                 <div class="md-layout">
                   <div
@@ -29,7 +28,6 @@
                     </div>
                   </div>
                 </div>
-                <br />
                 <div class="md-layout">
                   <div
                     class="md-layout-item md-size-100 md-small-size-100 mx-auto"
@@ -44,7 +42,10 @@
                     </h4>
                   </div>
 
-                  <div class="md-layout-item md-size-100 md-xsmall-size-100">
+                  <div
+                    class="md-layout-item md-size-100 md-xsmall-size-100"
+                    style="padding: 0% 20%"
+                  >
                     <file-upload type="image-regular" />
                   </div>
                   <div
@@ -179,6 +180,7 @@
                     </md-field>
                   </div>
                 </div>
+                <br />
 
                 <md-button
                   class="md-theme-default md-twitter md-round md-button md-theme-default"
@@ -265,9 +267,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-title {
-  padding-top: 5vh;
-}
 .container {
   padding: 10vh !important;
 }
