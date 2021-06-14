@@ -7,6 +7,7 @@ import NavTabsCard from "./cards/NavTabsCard.vue";
 import LoginCard from "./cards/LoginCard.vue";
 import BlogCard from "./cards/BlogCard.vue";
 import ProfileCard from "./cards/ProfileCard.vue";
+import ActivityCard from "./cards/ActivityCard.vue";
 import FullBgCard from "./cards/FullBgCard.vue";
 import PricingCard from "./cards/PricingCard.vue";
 import RotatingCard from "./cards/RotatingCard.vue";
@@ -30,6 +31,7 @@ export {
   Modal,
   BlogCard,
   ProfileCard,
+  ActivityCard,
   FullBgCard,
   PricingCard,
   RotatingCard,

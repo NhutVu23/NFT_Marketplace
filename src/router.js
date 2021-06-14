@@ -11,6 +11,7 @@ import CreateMultipleItem from "./views/pages/CreateMultipleItem.vue";
 import EditProfile from "./views/pages/EditProfile.vue";
 import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
+import Notifications from "./views/pages/Notifications.vue";
 import Settings from "./views/pages/Settings.vue";
 import Ecommerce from "./views/pages/Ecommerce.vue";
 import MarketPlace from "./views/pages/MarketPlace.vue";
@@ -188,6 +189,18 @@ export default new Router({
       name: "activity",
       components: {
         default: Activity,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/notifications",
+      name: "notifications",
+      components: {
+        default: Notifications,
         header: MainNavbar,
         footer: CustomFooter,
       },

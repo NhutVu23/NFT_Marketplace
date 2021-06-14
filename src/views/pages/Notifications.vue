@@ -57,107 +57,46 @@
                     <md-card class="md-card md-card-refine md-card-plain">
                       <md-card-content>
                         <h3 class="card-title">
-                          Activity
+                          Notifications
                         </h3>
-
-                        <tabs
-                          :tab-active="1"
-                          :tab-name="['All', 'My Activity']"
-                          plain
-                          color-button="rose"
+                        <activity-card
+                          flex-direction-row
+                          card-avatar
+                          card-plain
+                          :shadow-normal="false"
+                          :no-colored-shadow="true"
+                          :card-image="productCard.productCard1"
                         >
-                          <!-- here you can add your content for tab-content -->
-                          <template slot="tab-pane-1">
-                            <activity-card
-                              flex-direction-row
-                              card-avatar
-                              card-plain
-                              :shadow-normal="false"
-                              :no-colored-shadow="true"
-                              :card-image="productCard.productCard1"
-                            >
-                              <template slot="cardContent">
-                                <h4 class="card-title">Alec Thompson</h4>
-                                <p class="card-title">
-                                  Started Following: The Art Of Ni no Kuni 2
-                                </p>
-                                <p class="description">Just now</p>
-                              </template>
-                              <template slot="cardAction">
-                                <md-button class="md-round"> Follow </md-button>
-                              </template>
-                            </activity-card>
-                            <activity-card
-                              flex-direction-row
-                              card-avatar
-                              card-plain
-                              :shadow-normal="false"
-                              :no-colored-shadow="true"
-                              :card-image="productCard.productCard2"
-                            >
-                              <template slot="cardContent">
-                                <h4 class="card-title">Tropic Sherbet</h4>
-                                <p class="card-title">
-                                  Liked: The Art Of Ni no Kuni 2
-                                </p>
-                                <p class="description">Just now</p>
-                              </template>
-                              <template slot="cardAction">
-                                <img
-                                  class="img"
-                                  :src="productCard.productCard3"
-                                />
-                              </template>
-                            </activity-card>
+                          <template slot="cardContent">
+                            <h4 class="card-title">Alec Thompson</h4>
+                            <p class="card-title">
+                              Started Following: The Art Of Ni no Kuni 2
+                            </p>
+                            <p class="description">Just now</p>
                           </template>
-                          <template slot="tab-pane-2">
-                            <md-table
-                              v-model="shoppingCartTable"
-                              class="table-shopping"
-                            >
-                              <md-table-row
-                                slot="md-table-row"
-                                slot-scope="{ item }"
-                              >
-                                <md-table-cell md-label="">
-                                  <div class="img-container">
-                                    <img :src="item.image" alt="products" />
-                                  </div>
-                                </md-table-cell>
-                                <md-table-cell
-                                  md-label="Product"
-                                  class="td-name"
-                                >
-                                  <a href="javascript:void(0)">{{
-                                    item.product
-                                  }}</a>
-                                  <br />
-                                  <small>{{ item.category }}</small>
-                                </md-table-cell>
-                                <md-table-cell md-label="Color">
-                                  {{ item.color }}
-                                </md-table-cell>
-                                <md-table-cell md-label="Size">
-                                  {{ item.size }}
-                                </md-table-cell>
-                                <md-table-cell
-                                  md-label="Price"
-                                  class="td-number"
-                                >
-                                  <small>€</small>
-                                  {{ item.price }}
-                                </md-table-cell>
-                                <md-table-cell
-                                  md-label="Amount"
-                                  class="td-number"
-                                >
-                                  <small>€</small>
-                                  {{ item.amount }}
-                                </md-table-cell>
-                              </md-table-row>
-                            </md-table>
+                          <template slot="cardAction">
+                            <md-button class="md-round"> Follow </md-button>
                           </template>
-                        </tabs>
+                        </activity-card>
+                        <activity-card
+                          flex-direction-row
+                          card-avatar
+                          card-plain
+                          :shadow-normal="false"
+                          :no-colored-shadow="true"
+                          :card-image="productCard.productCard2"
+                        >
+                          <template slot="cardContent">
+                            <h4 class="card-title">Tropic Sherbet</h4>
+                            <p class="card-title">
+                              Liked: The Art Of Ni no Kuni 2
+                            </p>
+                            <p class="description">Just now</p>
+                          </template>
+                          <template slot="cardAction">
+                            <img class="img" :src="productCard.productCard3" />
+                          </template>
+                        </activity-card>
                       </md-card-content>
                     </md-card>
                   </div>
@@ -173,12 +112,11 @@
 
 <script>
 import Mixins from "@/plugins/basicMixins";
-import { Collapse, Tabs, ActivityCard } from "@/components";
+import { Collapse, ActivityCard } from "@/components";
 
 export default {
   components: {
     Collapse,
-    Tabs,
     ActivityCard,
   },
   mixins: [Mixins.HeaderImage],

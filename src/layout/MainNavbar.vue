@@ -169,7 +169,7 @@
 
               <li v-if="metaMaskAddress.length > 0" class="md-list-item">
                 <a
-                  href="javascript:void(0)"
+                  :href="'#/notifications'"
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
