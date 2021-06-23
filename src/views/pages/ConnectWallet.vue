@@ -87,11 +87,15 @@ export default {
     };
   },
   methods: {
-    onComplete(data) {
+    async onComplete(data) {
       if (data && data.metaMaskAddress) {
         localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
-        this.$store.dispatch("global/setAddress", data.metaMaskAddress);
-
+        try {
+          this.$store.dispatch("global/setAddress", data.metaMaskAddress);
+          await this.$store.dispatch("user/loginUser", {
+            wallet_address: data.metaMaskAddress,
+          });
+        } catch (error) {}
         this.$router.push("/");
       } else {
         localStorage.removeItem("metaMaskAddress");
