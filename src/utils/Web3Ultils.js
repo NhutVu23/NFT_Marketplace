@@ -80,8 +80,6 @@ export const Web3Ultils = {
         `/test_${result.token_id}`
       )
       .send({ from: metaMaskAddress }); // return mint address
-    console.log("mint");
-    console.log(mint);
     item.id = item._id;
     item.mintTransactionHash = mint.transactionHash;
     item.wallet_address = metaMaskAddress;
@@ -93,13 +91,11 @@ export const Web3Ultils = {
       .isApprovedForAll(metaMaskAddress, process.env.VUE_APP_TRANSFER_PROXY)
       .call();
 
-    console.log(`isApprove: ${isApprove}`);
     if (!isApprove) {
       const approve = await myContractRaribleToken.methods
         .setApprovalForAll(process.env.VUE_APP_TRANSFER_PROXY, true)
         .send({ from: metaMaskAddress });
 
-      console.log(`approve: ${approve}`);
     }
   },
 
@@ -123,9 +119,6 @@ export const Web3Ultils = {
       buying: `${item.minBid * ONE_ETHER}`,
       sellerFee: 2500,
     };
-
-    console.log("sellOrder");
-    console.log(sellOrder);
 
     const hash = web3.utils.keccak256(
       web3.eth.abi.encodeParameters(
@@ -160,17 +153,12 @@ export const Web3Ultils = {
       metaMaskAddress
     );
 
-    console.log("signature");
-    console.log(signature);
-
     if (signature) {
       item.signature = signature;
       item.wallet_address = metaMaskAddress;
       item.id = item._id;
       item.isPutOnMarket = true;
       item.sellOrder = JSON.stringify(sellOrder);
-      console.log(" item.sellOrder");
-      console.log(item.sellOrder);
       store.dispatch("item/editItem", item);
     }
   },
@@ -217,7 +205,6 @@ export const Web3Ultils = {
           )
           .send({ from: metaMaskAddress });
 
-        console.log(exchangeResult);
 
         if (exchangeResult) {
           store.dispatch("item/updateOwner", {
@@ -258,17 +245,14 @@ export const Web3Ultils = {
     //   .allowance(metaMaskAddress, process.env.VUE_APP_ERC20_TRANSFER_PROXY)
     //   .call();
 
-    // console.log(`allowance: ${allowance}`);
     const totalSupply = await wethContract.methods.totalSupply().call();
 
-    console.log(`totalSupply: ${totalSupply}`);
     // if (allowance < ) {
       
     const approve = await wethContract.methods
       .approve(process.env.VUE_APP_ERC20_TRANSFER_PROXY, totalSupply)
       .send({ from: metaMaskAddress });
 
-    console.log(`approve: ${approve}`);
     // }
   },
 };
