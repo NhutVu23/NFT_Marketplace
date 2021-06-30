@@ -9,7 +9,8 @@ import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { getToken, logout } from "./CredentialUtils";
 import { API_URL } from "./Constants";
-// import { failAlert } from "./ComponentUtils";
+import { failAlert } from "./ComponentUtils";
+import store from "../store";
 
 const GRAPHQL_URL = API_URL + "/graphql";
 const cache = new InMemoryCache({
@@ -67,23 +68,25 @@ export const apolloClient = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        let exception = graphQLErrors[0]?.extensions?.exception;
-        if (exception?.status == 401) {
-          logout();
-        }
+        // let exception = graphQLErrors[0]?.extensions?.exception;
+        // if (exception?.status == 401) {
+        //   logout();
+        // }
         graphQLErrors.forEach(({ message, locations, path }) => {
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          );
-          // failAlert({
-          //   toast: true,
-          //   text: message,
-          // });
+          failAlert({
+            toast: true,
+            text: message,
+          });
         });
       }
 
       if (networkError) {
-        console.log(`[Network error]: ${networkError}`);
+
+        failAlert({
+          toast: true,
+          text: networkError,
+        });
+        store.dispatch("global/setLoading", false);
       }
     }),
     requestLink,

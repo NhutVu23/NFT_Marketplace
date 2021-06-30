@@ -1,5 +1,5 @@
 import Axios from "axios";
-// import { failAlert } from "./ComponentUtils";
+import { failAlert } from "./ComponentUtils";
 import { API_URL } from "./Constants";
 import { getToken, logout } from "./CredentialUtils";
 
@@ -11,10 +11,10 @@ export const handleError = (error) => {
   if (isUnauthorizedErr(error)) {
     logout();
   } else {
-    // failAlert({
-    //   text: extractError(error),
-    //   toast: true
-    // });
+    failAlert({
+      text: extractError(error),
+      toast: true,
+    });
   }
   throw error;
 };
@@ -23,9 +23,9 @@ export const extractError = (error) => {
   return error?.response?.data?.message || error?.message;
 };
 
-export const Request = () => {
+export const Request = (baseURL) => {
   return Axios.create({
-    baseURL: API_URL,
+    baseURL: baseURL || API_URL,
   });
 };
 

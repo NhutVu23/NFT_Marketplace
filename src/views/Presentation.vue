@@ -2,7 +2,7 @@
   <div class="wrapper">
     <parallax
       class="page-header header-filter clear-filter"
-      parallax-active="true"
+      parallax-active="false"
       :style="headerStyle"
     >
       <div class="md-layout">

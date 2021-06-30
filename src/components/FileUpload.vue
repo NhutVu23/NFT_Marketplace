@@ -1,9 +1,14 @@
 <template>
-  <span>
+  <div>
     <template v-if="type === 'image-regular' || type === 'image-circle'">
       <div class="file-input" :class="type">
         <div class="image-container">
-          <img v-if="type === 'image-regular'" :src="imageRegular" title="" />
+          <img v-if="inputValue && !hasImage" :src="inputValue" title="" />
+          <img
+            v-else-if="type === 'image-regular'"
+            :src="imageRegular"
+            title=""
+          />
           <img v-else :src="imageCircle" title="" />
         </div>
         <div class="button-container">
@@ -77,7 +82,7 @@
         </div>
       </template>
     </template>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -109,6 +114,8 @@ export default {
       let file = files[0];
       let reader = new FileReader();
       let vm = this;
+
+      this.$emit("updateImg", file);
       reader.onload = () => {
         if (this.type === "image-circle") {
           vm.imageCircle = reader.result;
@@ -126,6 +133,13 @@ export default {
         this.imageRegular = require("@/assets/img/image_placeholder.jpg");
       }
       this.hasImage = false;
+    },
+    changeImg(url) {
+      if (this.type === "image-circle") {
+        this.imageCircle = url;
+      } else {
+        this.imageRegular = url;
+      }
     },
     triggerInputFileHidden(hiddenID) {
       let element = document.getElementById(hiddenID);

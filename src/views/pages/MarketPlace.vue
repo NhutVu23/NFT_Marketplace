@@ -2,21 +2,31 @@
   <div class="wrapper">
     <parallax
       class="page-header header-filter header-small"
-      parallax-active="true"
+      parallax-active="false"
       :style="headerStyle"
     >
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
+            class="md-layout-item md-size-90 md-small-size-100 mx-auto text-center"
           >
             <h1 class="title">NFT Marketplace</h1>
             <h4 class="title">
               A market made for NFT, where everything is special
             </h4>
-            <!-- <md-button class="md-button md-theme-default md-behance md-round">
-              Explore The Marketplace
-            </md-button> -->
+
+            <div class="md-layout text-center mt-2">
+              <div class="md-layout-item">
+                <md-button
+                  v-for="(item, i) in listCategory"
+                  :key="i"
+                  href="javascript:void(0)"
+                  class="md-theme-default md-behance md-round"
+                >
+                  {{ item.name }}
+                </md-button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -24,31 +34,6 @@
     <div class="main main-raised">
       <div class="section pb-0">
         <div class="container">
-          <div class="md-layout text-center">
-            <div class="md-layout-item">
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fab fa-first-order" /> Art
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fab fa-facebook-f" /> Photography
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fa fa-gamepad" /> Games
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fab fa-google-plus-g" /> Domain Names
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fa fa-flag" /> Sports
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fab fa-dribbble" /> Utility
-              </md-button>
-              <md-button href="javascript:void(0)" class="md-white md-round">
-                <i class="fab fa-soundcloud" /> Virtual Worlds
-              </md-button>
-            </div>
-          </div>
           <div class="md-layout">
             <div class="md-layout-item md-size-25 md-small-size-100">
               <md-card class="md-card md-card-refine md-card-plain">
@@ -202,197 +187,40 @@
               </md-card>
             </div>
             <div class="md-layout-item md-size-75 md-small-size-100">
-              <div class="md-layout">
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
+              <div v-if="listItems && listItems.length > 0" class="md-layout">
+                <div
+                  v-for="(item, i) in listItems"
+                  :key="i"
+                  class="md-layout-item md-size-25 md-small-size-100"
+                >
+                  <aution-card
                     text-center
                     class="mt-3"
                     card-plain
-                    :card-image="productCard.productCard4"
-                    :shadow-off="true"
+                    :item-id="item._id"
+                    :card-image="item.image"
+                    :shadow-normal="false"
+                    :no-colored-shadow="false"
                   >
                     <template slot="cardContent">
-                      <h4 class="card-title">Polo Ralph Lauren</h4>
-                      <p class="card-description">
-                        Impeccably tailored in Italy from lightweight navy wool.
-                      </p>
+                      <h4 class="card-title">{{ item.name }}</h4>
                     </template>
                     <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price"> €800</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite</md-icon>
-                          <md-tooltip md-direction="left">
-                            Remove from Wishlist
-                          </md-tooltip>
+                      <div class="price-container">Price</div>
+                      <div class="ml-auto price-container">
+                        <md-button class="md-success">
+                          {{ item.minBid || 0 }} ETH
                         </md-button>
                       </div>
                     </template>
-                  </product-card>
-                </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
-                    text-center
-                    class="mt-3"
-                    card-plain
-                    :card-image="productCard.productCard5"
-                    :shadow-off="true"
-                  >
-                    <template slot="cardContent">
-                      <h4 class="card-title">Wooyoungmi</h4>
-                      <p class="card-description">
-                        Dark-grey slub wool, pintucked notch lapels.
-                      </p>
-                    </template>
-                    <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price">€555</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite_border</md-icon>
-                          <md-tooltip md-direction="left">
-                            Save to Wishlist
-                          </md-tooltip>
-                        </md-button>
-                      </div>
-                    </template>
-                  </product-card>
-                </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
-                    text-center
-                    class="mt-3"
-                    card-plain
-                    :card-image="productCard.productCard6"
-                    :shadow-off="true"
-                  >
-                    <template slot="cardContent">
-                      <h4 class="card-title">Tom Ford</h4>
-                      <p class="card-description">
-                        Immaculate tailoring is TOM FORD's forte.
-                      </p>
-                    </template>
-                    <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price">€879</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite_border</md-icon>
-                          <md-tooltip md-direction="left">
-                            Save to Wishlist
-                          </md-tooltip>
-                        </md-button>
-                      </div>
-                    </template>
-                  </product-card>
-                </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
-                    text-center
-                    class="mt-3"
-                    card-plain
-                    :card-image="productCard.productCard7"
-                    :shadow-off="true"
-                  >
-                    <template slot="cardContent">
-                      <h4 class="card-title">Thom Sweeney</h4>
-                      <p class="card-description">
-                        It's made from lightweight grey wool woven.
-                      </p>
-                    </template>
-                    <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price">€680</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite_border</md-icon>
-                          <md-tooltip md-direction="left">
-                            Save to Wishlist
-                          </md-tooltip>
-                        </md-button>
-                      </div>
-                    </template>
-                  </product-card>
-                </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
-                    text-center
-                    class="mt-3"
-                    card-plain
-                    :card-image="productCard.productCard8"
-                    :shadow-off="true"
-                  >
-                    <template slot="cardContent">
-                      <h4 class="card-title">Kingsman</h4>
-                      <p class="card-description">
-                        Crafted from khaki cotton and fully canvassed.
-                      </p>
-                    </template>
-                    <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price">€725</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite</md-icon>
-                          <md-tooltip md-direction="left">
-                            Remove from Wishlist
-                          </md-tooltip>
-                        </md-button>
-                      </div>
-                    </template>
-                  </product-card>
-                </div>
-                <div class="md-layout-item md-size-33 md-small-size-100">
-                  <product-card
-                    text-center
-                    class="mt-3"
-                    card-plain
-                    :card-image="productCard.productCard9"
-                    :shadow-off="true"
-                  >
-                    <template slot="cardContent">
-                      <h4 class="card-title">Boglioli</h4>
-                      <p class="card-description">
-                        Masterfully crafted in Northern Italy.
-                      </p>
-                    </template>
-                    <template slot="cardAction">
-                      <div class="price-container">
-                        <span class="price">€699</span>
-                      </div>
-                      <div class="stats ml-auto">
-                        <md-button
-                          class="md-just-icon md-rose md-round md-simple"
-                        >
-                          <md-icon>favorite_border</md-icon>
-                          <md-tooltip md-direction="left">
-                            Save to Wishlist
-                          </md-tooltip>
-                        </md-button>
-                      </div>
-                    </template>
-                  </product-card>
+                  </aution-card>
                 </div>
                 <div
-                  class="md-layout-item md-size-25 md-small-size-100 mx-auto"
+                  class="md-layout-item md-size-10 md-small-size-100 mx-auto"
                 >
-                  <md-button class="md-rose md-round"> Load more.. </md-button>
+                  <md-button @click="loadNextItems" class="md-rose md-round">
+                    Show More
+                  </md-button>
                 </div>
               </div>
             </div>
@@ -405,26 +233,39 @@
 </template>
 
 <script>
-import {
-  ProductCard,
-  Collapse,
-  Slider,
-} from "@/components";
+import { Collapse, Slider } from "@/components";
 import Mixins from "@/plugins/basicMixins";
-// import { InfoAreas } from "@/components";
+import AutionCard from "../../components/cards/AutionCard.vue";
 
 export default {
   components: {
-    // InfoAreas,
-    ProductCard,
     Collapse,
-    // FullBgCard,
-    // BlogCard,
+    AutionCard,
     Slider,
+  },
+  async mounted() {
+    this.$loading(true);
+    try {
+      this.filterData.skip = Math.floor(Math.random() * 100);
+      this.listItems = await this.$store.dispatch(
+        "item/getAllItems",
+        this.filterData
+      );
+    } catch (error) {
+      this.$failAlert({
+        text: error,
+      });
+    }
+    this.$loading(false);
   },
   mixins: [Mixins.HeaderImage],
   data() {
     return {
+      listItems: [],
+      filterData: {
+        skip: 0,
+        limit: 20,
+      },
       subscribe: null,
       sliders: {
         rangeSlider: [101, 700],
@@ -470,43 +311,34 @@ export default {
         purple: false,
       },
       image: require("@/assets/img/examples/clark-street-merc.jpg"),
-      image2: require("@/assets/img/examples/ecommerce-header.jpg"),
-      productCard: {
-        productCard1: require("@/assets/img/examples/gucci.jpg"),
-        productCard2: require("@/assets/img/examples/dolce.jpg"),
-        productCard3: require("@/assets/img/examples/tom-ford.jpg"),
-        productCard4: require("@/assets/img/examples/suit-1.jpg"),
-        productCard5: require("@/assets/img/examples/suit-2.jpg"),
-        productCard6: require("@/assets/img/examples/suit-3.jpg"),
-        productCard7: require("@/assets/img/examples/suit-4.jpg"),
-        productCard8: require("@/assets/img/examples/suit-5.jpg"),
-        productCard9: require("@/assets/img/examples/suit-6.jpg"),
-      },
-      cardBg: {
-        cardBg1: require("@/assets/img/examples/color1.jpg"),
-        cardBg2: require("@/assets/img/examples/color3.jpg"),
-        cardBg3: require("@/assets/img/examples/color2.jpg"),
-        cardBg4: require("@/assets/img/dg3.jpg"),
-        cardBg5: require("@/assets/img/dg1.jpg"),
-      },
-      cardBlog: {
-        cardBlog1: require("@/assets/img/dg6.jpg"),
-        cardBlog2: require("@/assets/img/dg10.jpg"),
-        cardBlog3: require("@/assets/img/dg9.jpg"),
-      },
     };
   },
   computed: {
-    imageSubscribe() {
-      return {
-        backgroundImage: `url(${this.image2})`,
-      };
+    listCategory() {
+      return this.$store.state.category.categories;
     },
   },
   methods: {
     newValue(e) {
       this.sliders.rangeSlider[0] = e[0];
       this.sliders.rangeSlider[1] = e[1];
+    },
+    async loadNextItems() {
+      try {
+        let newData = await this.$store.dispatch(
+          "item/getAllItems",
+          this.filterData
+        );
+        if (newData && newData.length > 0) {
+          this.listItems.push.apply(this.listItems, newData);
+
+          if (newData.length == this.filterData.limit) {
+            this.filterData.skip += newData.length;
+          } else {
+            this.skip = 0;
+          }
+        }
+      } catch (error) {}
     },
   },
 };
@@ -516,11 +348,13 @@ export default {
 .mt-3 {
   margin-top: 1.875rem * 2;
 }
+.mt-2 {
+  margin-top: 1.875rem;
+}
 .mb-0 {
   margin-bottom: 0;
 }
 .md-round {
-  border: 1px solid gray;
-  color: #3c4858 !important;
+  border: 1px solid transparent;
 }
 </style>

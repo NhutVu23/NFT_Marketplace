@@ -13,10 +13,11 @@ import ConnectWallet from "./views/pages/ConnectWallet.vue";
 import Activity from "./views/pages/Activity.vue";
 import Notifications from "./views/pages/Notifications.vue";
 import Settings from "./views/pages/Settings.vue";
-import Ecommerce from "./views/pages/Ecommerce.vue";
+import Home from "./views/pages/Home.vue";
 import MarketPlace from "./views/pages/MarketPlace.vue";
 import Ranking from "./views/pages/Ranking.vue";
 import Product from "./views/pages/Product.vue";
+import EditItem from "./views/pages/EditItem.vue";
 import Signup from "./views/pages/Signup.vue";
 import Error from "./views/pages/Error.vue";
 
@@ -32,7 +33,7 @@ export default new Router({
       path: "/",
       name: "home",
       components: {
-        default: Ecommerce,
+        default: Home,
         header: MainNavbar,
         footer: CustomFooter,
       },
@@ -65,23 +66,25 @@ export default new Router({
       },
     },
     {
-      path: "/ecommerce-page",
-      name: "ecommerce-page",
+      path: "/asset/:id",
+      name: "asset",
       components: {
-        default: Ecommerce,
+        default: Product,
         header: MainNavbar,
-        footer: MainFooter,
+        footer: CustomFooter,
       },
       props: {
-        header: { colorOnScroll: 400, navbarTransparent: true },
-        footer: { type: "black", size: "big" },
+        header: {
+          colorOnScroll: 400,
+          navbarTransparent: true,
+        },
       },
     },
     {
-      path: "/product-page",
-      name: "product-page",
+      path: "/editItem/:id",
+      name: "editItem",
       components: {
-        default: Product,
+        default: EditItem,
         header: MainNavbar,
         footer: CustomFooter,
       },
@@ -101,8 +104,8 @@ export default new Router({
       },
     },
     {
-      path: "/collections",
-      name: "collections",
+      path: "/my-collections",
+      name: "my-collections",
       components: {
         default: Collections,
         header: MainNavbar,

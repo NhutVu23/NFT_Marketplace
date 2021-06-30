@@ -2,7 +2,7 @@
   <div class="wrapper">
     <parallax
       class="section page-header header-filter"
-      parallax-active="true"
+      parallax-active="false"
       :style="headerStyle"
     />
     <div class="main main-raised">

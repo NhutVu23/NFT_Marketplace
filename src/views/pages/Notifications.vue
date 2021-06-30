@@ -1,109 +1,84 @@
 <template>
   <div class="wrapper">
     <parallax class="page-header header-filter" parallax-active="false">
-      <div class="container">
-        <div class="md-layout">
-          <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
-            <md-card class="md-card md-card-signup">
-              <md-card-content>
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 md-small-size-100">
-                    <md-card class="md-card md-card-refine md-card-plain">
-                      <md-card-content>
-                        <h3 class="card-title">Apply Filters</h3>
-                        <collapse
-                          :active-tab="1"
-                          :collapse="['Status']"
-                          icon="keyboard_arrow_down"
-                          color-collapse="rose"
-                        >
-                          <template slot="md-collapse-pane-1">
-                            <md-checkbox
-                              v-model="filterStatus.Bids"
-                              class="mb-0"
-                            >
-                              Bids
-                            </md-checkbox>
-                            <md-checkbox
-                              v-model="filterStatus.Likes"
-                              class="mb-0"
-                            >
-                              Likes
-                            </md-checkbox>
-                            <md-checkbox
-                              v-model="filterStatus.Purchases"
-                              class="mb-0"
-                            >
-                              Purchases
-                            </md-checkbox>
-                            <md-checkbox
-                              v-model="filterStatus.Listing"
-                              class="mb-0"
-                            >
-                              Listing
-                            </md-checkbox>
-                            <md-checkbox
-                              v-model="filterStatus.Followings"
-                              class="mb-0"
-                            >
-                              Followings
-                            </md-checkbox>
-                          </template>
-                        </collapse>
-                      </md-card-content>
-                    </md-card>
-                  </div>
-                  <div class="md-layout-item md-size-75 md-small-size-100">
-                    <md-card class="md-card md-card-refine md-card-plain">
-                      <md-card-content>
-                        <h3 class="card-title">
-                          Notifications
-                        </h3>
-                        <activity-card
-                          flex-direction-row
-                          card-avatar
-                          card-plain
-                          :shadow-normal="false"
-                          :no-colored-shadow="true"
-                          :card-image="productCard.productCard1"
-                        >
-                          <template slot="cardContent">
-                            <h4 class="card-title">Alec Thompson</h4>
-                            <p class="card-title">
-                              Started Following: The Art Of Ni no Kuni 2
-                            </p>
-                            <p class="description">Just now</p>
-                          </template>
-                          <template slot="cardAction">
-                            <md-button class="md-round"> Follow </md-button>
-                          </template>
-                        </activity-card>
-                        <activity-card
-                          flex-direction-row
-                          card-avatar
-                          card-plain
-                          :shadow-normal="false"
-                          :no-colored-shadow="true"
-                          :card-image="productCard.productCard2"
-                        >
-                          <template slot="cardContent">
-                            <h4 class="card-title">Tropic Sherbet</h4>
-                            <p class="card-title">
-                              Liked: The Art Of Ni no Kuni 2
-                            </p>
-                            <p class="description">Just now</p>
-                          </template>
-                          <template slot="cardAction">
-                            <img class="img" :src="productCard.productCard3" />
-                          </template>
-                        </activity-card>
-                      </md-card-content>
-                    </md-card>
-                  </div>
+      <div class="md-layout">
+        <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
+          <md-card class="md-card md-card-signup">
+            <md-card-content style="padding: 0 15%">
+              <div class="md-layout">
+                <div class="md-layout-item md-size-25 md-small-size-100">
+                  <md-card class="md-card md-card-refine md-card-plain">
+                    <md-card-content>
+                      <h3 class="card-title">Apply Filters</h3>
+                      <collapse
+                        :active-tab="1"
+                        :collapse="['Status']"
+                        icon="keyboard_arrow_down"
+                        color-collapse="rose"
+                      >
+                        <template slot="md-collapse-pane-1">
+                          <md-checkbox v-model="filterStatus.Bids" class="mb-0">
+                            Bids
+                          </md-checkbox>
+                          <md-checkbox
+                            v-model="filterStatus.Likes"
+                            class="mb-0"
+                          >
+                            Likes
+                          </md-checkbox>
+                          <md-checkbox
+                            v-model="filterStatus.Purchases"
+                            class="mb-0"
+                          >
+                            Purchases
+                          </md-checkbox>
+                          <md-checkbox
+                            v-model="filterStatus.Listing"
+                            class="mb-0"
+                          >
+                            Listing
+                          </md-checkbox>
+                          <md-checkbox
+                            v-model="filterStatus.Followings"
+                            class="mb-0"
+                          >
+                            Followings
+                          </md-checkbox>
+                        </template>
+                      </collapse>
+                    </md-card-content>
+                  </md-card>
                 </div>
-              </md-card-content>
-            </md-card>
-          </div>
+                <div class="md-layout-item md-size-75 md-small-size-100">
+                  <md-card class="md-card md-card-refine md-card-plain">
+                    <md-card-content>
+                      <h3 class="card-title">Notifications</h3>
+
+                      <activity-card
+                        v-for="(item, i) in listItems"
+                        :key="i"
+                        flex-direction-row
+                        card-avatar
+                        card-plain
+                        :shadow-normal="false"
+                        :no-colored-shadow="true"
+                        :card-image="item.image"
+                      >
+                        <template slot="cardContent">
+                          <h4 class="card-title">{{ item.name }}</h4>
+                          <p class="card-title">{{ item.description }}</p>
+                          <p class="description">{{ item.created_at }}</p>
+                        </template>
+                        <template slot="cardAction">
+                          <md-button class="md-round"> Follow </md-button>
+                        </template>
+                      </activity-card>
+                    </md-card-content>
+                  </md-card>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
         </div>
       </div>
     </parallax>
@@ -121,13 +96,28 @@ export default {
   },
   mixins: [Mixins.HeaderImage],
   bodyClass: "signup-page",
+  async mounted() {
+    this.$loading(true);
+    try {
+      this.listItems = await this.$store.dispatch("item/getAllItems", {
+        skip: Math.floor(Math.random() * 100),
+      });
+    } catch (error) {
+      this.$failAlert({
+        text: error,
+      });
+    }
+    this.$loading(false);
+  },
   data() {
     return {
+      loadimage: require("@/assets/img/loading.gif"),
       sliders: {
         rangeSlider: [101, 700],
       },
 
       subscribe: null,
+      listItems: [],
       designer: {
         all: true,
         polo: false,
@@ -168,18 +158,6 @@ export default {
         productCard8: require("@/assets/img/examples/suit-5.jpg"),
         productCard9: require("@/assets/img/examples/suit-6.jpg"),
       },
-      cardBg: {
-        cardBg1: require("@/assets/img/examples/color1.jpg"),
-        cardBg2: require("@/assets/img/examples/color3.jpg"),
-        cardBg3: require("@/assets/img/examples/color2.jpg"),
-        cardBg4: require("@/assets/img/dg3.jpg"),
-        cardBg5: require("@/assets/img/dg1.jpg"),
-      },
-      cardBlog: {
-        cardBlog1: require("@/assets/img/dg6.jpg"),
-        cardBlog2: require("@/assets/img/dg10.jpg"),
-        cardBlog3: require("@/assets/img/dg9.jpg"),
-      },
       clothing: {
         blazers: true,
         casualShirts: false,
@@ -190,39 +168,6 @@ export default {
         shorts: false,
         trousers: false,
       },
-
-      shoppingCartTable: [
-        {
-          image: require("@/assets/img/product1.jpg"),
-          product: "Spring Jacket",
-          category: "by Dolce&Gabbana",
-          color: "Red",
-          size: "M",
-          price: 549,
-          qty: 1,
-          amount: 549,
-        },
-        {
-          image: require("@/assets/img/product2.jpg"),
-          product: "Short Pants",
-          category: "by Gucci",
-          color: "Purple",
-          size: "M",
-          price: 499,
-          qty: 2,
-          amount: 998,
-        },
-        {
-          image: require("@/assets/img/product3.jpg"),
-          product: "Pencil Skirt",
-          category: "by Valentino",
-          color: "Red",
-          size: "M",
-          price: 799,
-          qty: 1,
-          amount: 799,
-        },
-      ],
     };
   },
   methods: {

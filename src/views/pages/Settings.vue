@@ -1,105 +1,108 @@
 <template>
   <div class="wrapper">
     <parallax class="page-header header-filter" parallax-active="false">
-      <div class="container">
-        <div class="md-layout">
-          <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
-            <md-card class="md-card md-card-signup">
-              <md-card-content style="padding: 0 10%">
-                <h2 class="card-title">Settings</h2>
-                <h3 class="card-title">Notification Settings</h3>
-                <p>Select which notifications you would like to receive</p>
+      <div class="md-layout">
+        <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
+          <md-card class="md-card md-card-signup">
+            <md-card-content style="padding: 0 25%">
+              <md-button
+                class="md-simple md-github back-button"
+                @click="goTo('')"
+              >
+                <i class="fas fa-arrow-left"></i>
+                <h4>Go Back</h4>
+              </md-button>
+              <h2 class="card-title">Settings</h2>
+              <h3 class="card-title">Notification Settings</h3>
+              <p>Select which notifications you would like to receive</p>
 
-                <div class="md-layout">
-                  <div
-                    class="md-layout-item md-size-100 md-small-size-100 mx-auto"
-                  >
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Item Sold</h4>
+              <div class="md-layout">
+                <div
+                  class="md-layout-item md-size-100 md-small-size-100 mx-auto"
+                >
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Item Sold</h4>
 
-                        <p>When someone purchased one of your items</p>
-                      </div>
+                      <p>When someone purchased one of your items</p>
                     </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Bid Activity</h4>
-
-                        <p>When someone bids on one of your items</p>
-                      </div>
-                    </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Price Change</h4>
-
-                        <p>
-                          When an item you made an offer on changes in price
-                        </p>
-                      </div>
-                    </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Auction Expiration</h4>
-
-                        <p>When a Dutch or English auction you created ends</p>
-                      </div>
-                    </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Outbid</h4>
-
-                        <p>
-                          When an offer you placed is exceeded by another user
-                        </p>
-                      </div>
-                    </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Successful Purchase</h4>
-
-                        <p>When you successfully buy an item</p>
-                      </div>
-                    </div>
-                    <div class="comment">
-                      <md-checkbox v-model="checkbox1"> </md-checkbox>
-                      <div class="comment-body">
-                        <h4 class="comment-heading">Newsletter</h4>
-
-                        <p>Occasional updates from our team</p>
-                      </div>
-                    </div>
-
-                    <h3 class="card-title">Security</h3>
-                    <div class="comment row-detail">
-                      <span class="row-left"> Google Authenticator</span>
-                      <span class="row-right">
-                        <md-switch v-model="switch1"> </md-switch
-                      ></span>
-                    </div>
-                    <div class="comment row-detail">
-                      <span class="row-left"> Email Authenticator</span>
-                      <span class="row-right">
-                        <md-switch v-model="switch1"> </md-switch
-                      ></span>
-                    </div>
-                    <br />
-
-                    <md-button
-                      class="md-theme-default md-twitter md-round md-button md-theme-default"
-                    >
-                      Submit Changes
-                    </md-button>
                   </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Bid Activity</h4>
+
+                      <p>When someone bids on one of your items</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Price Change</h4>
+
+                      <p>When an item you made an offer on changes in price</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Auction Expiration</h4>
+
+                      <p>When a Dutch or English auction you created ends</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Outbid</h4>
+
+                      <p>
+                        When an offer you placed is exceeded by another user
+                      </p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Successful Purchase</h4>
+
+                      <p>When you successfully buy an item</p>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <md-checkbox v-model="checkbox1"> </md-checkbox>
+                    <div class="comment-body">
+                      <h4 class="comment-heading">Newsletter</h4>
+
+                      <p>Occasional updates from our team</p>
+                    </div>
+                  </div>
+
+                  <h3 class="card-title">Security</h3>
+                  <div class="comment row-detail">
+                    <span class="row-left"> Google Authenticator</span>
+                    <span class="row-right">
+                      <md-switch v-model="switch1"> </md-switch
+                    ></span>
+                  </div>
+                  <div class="comment row-detail">
+                    <span class="row-left"> Email Authenticator</span>
+                    <span class="row-right">
+                      <md-switch v-model="switch1"> </md-switch
+                    ></span>
+                  </div>
+                  <br />
+
+                  <md-button
+                    class="md-theme-default md-twitter md-round md-button md-theme-default"
+                  >
+                    Submit Changes
+                  </md-button>
                 </div>
-              </md-card-content>
-            </md-card>
-          </div>
+              </div>
+            </md-card-content>
+          </md-card>
         </div>
       </div>
     </parallax>
@@ -152,16 +155,8 @@ export default {
     };
   },
   methods: {
-    onComplete(data) {
-      if (data && data.metaMaskAddress) {
-        localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
-        this.$store.dispatch("global/setAddress", data.metaMaskAddress);
-
-        this.$router.push("/");
-      } else {
-        localStorage.removeItem("metaMaskAddress");
-        this.$store.dispatch("global/setAddress", "");
-      }
+    goTo(url) {
+      this.$router.push("/" + url);
     },
   },
 };

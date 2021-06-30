@@ -52,7 +52,13 @@
             class="md-card-header-image"
           >
             <a :href="cardLink()">
-              <img class="img" :src="cardImage" />
+              <div v-lazy-container="{ selector: 'img' }">
+                <img
+                  class="img"
+                  :data-src="cardImage"
+                  :data-loading="loadimage"
+                />
+              </div>
             </a>
             <div
               v-if="!noColoredShadow && !shadowNormal"
@@ -108,6 +114,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      loadimage: require("@/assets/img/loading.gif"),
+    };
   },
   methods: {
     cardLink() {

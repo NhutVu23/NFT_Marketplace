@@ -2,124 +2,137 @@
   <div class="wrapper">
     <parallax
       class="page-header header-filter header-small"
-      parallax-active="true"
-      filter-color="rose"
-      :style="headerStyle"
+      parallax-active="false"
     >
-      <div class="container">
-        <div class="md-layout title-row">
-          <div
-            class="md-layout-item md-size-33 md-small-size-100 ml-auto text-right"
-          >
-            <md-button class="md-white">
-              <md-icon>shopping_cart</md-icon> 0 Items
-            </md-button>
-          </div>
-        </div>
-      </div>
     </parallax>
-    <div class="section">
-      <div class="container">
-        <div class="main main-raised">
-          <div class="md-layout">
+    <div class="main main-raised" style="padding: 0 12%">
+      <md-button
+        class="md-simple md-github back-button"
+        @click="$router.go(-1)"
+      >
+        <i class="fas fa-arrow-left"></i>
+        <h4>Go Back</h4>
+      </md-button>
+      <div v-if="item" class="md-layout">
+        <div
+          class="md-layout-item md-size-50 md-small-size-100 mx-auto text-center"
+        >
+          <div v-lazy-container="{ selector: 'img' }">
+            <img
+              class="product-img"
+              :data-src="item.image"
+              :data-loading="loadimage"
+            />
+          </div>
+          <div class="colored-shadow" :style="shadowImageBlog(item.image)" />
+        </div>
+        <div class="md-layout-item md-size-50 md-small-size-100">
+          <h2 class="title">{{ item.name }}</h2>
+          <h5>Not for sale - 1 of {{ item.total_quantity }}</h5>
+          <div class="md-layout" style="margin-left: 0px">
             <div class="md-layout-item md-size-50 md-small-size-100">
-              <!-- <ProductZoomer
-                :base-images="images"
-                :base-zoomer-options="zoomerOptions"
-              /> -->
-              <img
-                src="@/assets/img/examples/card-product1.jpg"
-                alt="Rounded Image"
-                class="rounded"
-              />
-              <div
-                class="colored-shadow"
-                :style="shadowImageBlog(productCard.productCard2)"
-              />
-            </div>
-            <div class="md-layout-item md-size-50 md-small-size-100">
-              <h2 class="title">Becky Silk Blazer</h2>
-              <h3 class="main-price">$335</h3>
-              <collapse
-                :active-tab="1"
-                :collapse="[
-                  'Description',
-                  'Designer Information',
-                  'Details and Care',
-                ]"
-                icon="keyboard_arrow_down"
-                color-collapse="rose"
-              >
-                <template slot="md-collapse-pane-1">
-                  <p>
-                    Eres' daring 'Grigri Fortune' swimsuit has the fit and
-                    coverage of a bikini in a one-piece silhouette. This fuchsia
-                    style is crafted from the label's sculpting peau douce
-                    fabric and has flattering cutouts through the torso and
-                    back. Wear yours with mirrored sunglasses on vacation.
-                  </p>
-                </template>
-                <template slot="md-collapse-pane-2">
-                  <p>
-                    An infusion of West Coast cool and New York attitude,
-                    Rebecca Minkoff is synonymous with It girl style. Minkoff
-                    burst on the fashion scene with her best-selling 'Morning
-                    After Bag' and later expanded her offering with the Rebecca
-                    Minkoff Collection - a range of luxe city staples with a
-                    "downtown romantic" theme.
-                  </p>
-                </template>
-                <template slot="md-collapse-pane-3">
-                  <ul>
-                    <li>Storm and midnight-blue stretch cotton-blend</li>
-                    <li>
-                      Notch lapels, functioning buttoned cuffs, two front flap
-                      pockets, single vent, internal pocket
-                    </li>
-                    <li>Two button fastening</li>
-                    <li>84% cotton, 14% nylon, 2% elastane</li>
-                    <li>Dry clean</li>
-                  </ul>
-                </template>
-              </collapse>
-              <div class="text-right">
-                <md-button class="md-rose md-round">
-                  Buy Now 
-                  <!-- <md-icon>shopping_cart</md-icon> -->
-                </md-button>
+              <p>Creator</p>
+              <div class="comment">
+                <a class="float-left" href="javascript:void(0)">
+                  <div class="small-avatar">
+                    <div v-lazy-container="{ selector: 'img' }">
+                      <img :data-src="item.image" :data-loading="loadimage" />
+                    </div>
+                  </div>
+                </a>
+                <div class="comment-body">
+                  <p class="show-name">{{ item.creator }}</p>
+                </div>
               </div>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100">
-              <h3 class="title">Details</h3>
-              <div class="table-shopping">
+              <p>Collection</p>
+              <div class="comment">
+                <a class="float-left" href="javascript:void(0)">
+                  <div class="small-avatar">
+                    <div v-lazy-container="{ selector: 'img' }">
+                      <img :data-src="item.image" :data-loading="loadimage" />
+                    </div>
+                  </div>
+                </a>
+                <div class="comment-body show-name">
+                  <p class="show-name">{{ item.collection_id }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box-price">
+            <h4>Price</h4>
+            <h3 class="main-price">
+              <!-- <md-icon>ETH</md-icon> -->
+              {{ item.minBid || 0 }} ETH
+              <small> - ($ {{ convertToUSD(item.minBid) }})</small>
+            </h3>
+            <md-button
+              v-if="item.owner == metaMaskAddress && !item.sellOrder"
+              class="md-behance md-round"
+              @click="sellItem"
+            >
+              <md-icon>unarchive</md-icon>
+              Sell
+            </md-button>
+            <md-button
+              v-else-if="item.owner == metaMaskAddress && item.sellOrder"
+              class="md-behance md-round"
+              @click="editItem"
+            >
+              <md-icon>unarchive</md-icon>
+              Edit Item
+            </md-button>
+            <md-button
+              v-else-if="item.isPutOnMarket"
+              class="md-behance md-round"
+              @click="buyItem"
+            >
+              <md-icon>shopping_cart</md-icon>
+              Buy Now
+            </md-button>
+            <!-- <md-button v-else class="md-behance md-round">
+              <md-icon>assignment</md-icon>
+              Place a bid
+            </md-button> -->
+          </div>
+          <collapse
+            :active-tab="1"
+            :collapse="['Description', 'Details', 'Owners']"
+            icon="keyboard_arrow_down"
+            color-collapse="rose"
+          >
+            <template slot="md-collapse-pane-1">
+              <p>
+                {{ item.description }}
+              </p>
+            </template>
+            <template slot="md-collapse-pane-2">
+              <div>
                 <div class="row-detail">
                   <span class="row-left">Contract Address</span>
-                  <span class="row-right">0x495f...7b5e</span>
+                  <span class="row-right">{{ item._id }}</span>
                 </div>
                 <div class="row-detail">
                   <span class="row-left">Token ID</span>
-                  <span class="row-right">9870243454359818...</span>
+                  <span class="row-right">{{ item.token_id }}</span>
                 </div>
                 <div class="row-detail">
                   <span class="row-left">Metadata</span>
-                  <span class="row-right"
-                    >QmdjprxfWFsJcgowFyaeyHefaQ2d9mkxm5CDPD1MJ4jQ25...</span
-                  >
+                  <span class="row-right">{{ item._id }}</span>
                 </div>
                 <div class="row-detail">
                   <span class="row-left">img_back</span>
-                  <span class="row-right"
-                    >QmZuYTpoSMsH749Ln5GL43NQYbfJ2ehpMbkEsFVysis9gd...</span
-                  >
+                  <span class="row-right">{{ item.image }}</span>
                 </div>
-                <div class="row-detail">\
+                <div class="row-detail">
                   <span class="row-left">Created</span>
-                  <span class="row-right">March 25, 2021 | 05:05:21</span>
+                  <span class="row-right">{{ item.created_at }}</span>
                 </div>
               </div>
-            </div>
-            <div class="md-layout-item md-size-50 md-small-size-100">
-              <h3 class="title">Trading History</h3>
+            </template>
+            <template slot="md-collapse-pane-3">
               <md-table v-model="tableData" class="table-shopping">
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
                   <md-table-cell md-label="#">
@@ -139,244 +152,195 @@
                   </md-table-cell>
                 </md-table-row>
               </md-table>
-            </div>
-            <div class="md-layout-item md-size-50 md-small-size-100">
-              <h3 class="title">Owners</h3>
-              <md-table v-model="tableData" class="table-shopping">
-                <md-table-row slot="md-table-row" slot-scope="{ item }">
-                  <md-table-cell md-label="#">
-                    {{ item.id }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Name">
-                    {{ item.name }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Country">
-                    {{ item.country }}
-                  </md-table-cell>
-                  <md-table-cell md-label="City">
-                    {{ item.city }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Salary">
-                    {{ item.salary }}
-                  </md-table-cell>
-                </md-table-row>
-              </md-table>
-            </div>
-            <div class="md-layout-item md-size-50 md-small-size-100">
-              <h3 class="title">Offers</h3>
-              <md-table v-model="tableData" class="table-shopping">
-                <md-table-row slot="md-table-row" slot-scope="{ item }">
-                  <md-table-cell md-label="#">
-                    {{ item.id }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Name">
-                    {{ item.name }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Country">
-                    {{ item.country }}
-                  </md-table-cell>
-                  <md-table-cell md-label="City">
-                    {{ item.city }}
-                  </md-table-cell>
-                  <md-table-cell md-label="Salary">
-                    {{ item.salary }}
-                  </md-table-cell>
-                </md-table-row>
-              </md-table>
-            </div>
-
-            <div class="md-layout-item md-size-100 md-small-size-100">
-              <h3 class="title">Price History</h3>
-              <div class="table-shopping">
-                <vue-frappe
-                  id="test"
-                  :labels="[
-                    '12am-3am',
-                    '3am-6am',
-                    '6am-9am',
-                    '9am-12pm',
-                    '12pm-3pm',
-                    '3pm-6pm',
-                    '6pm-9pm',
-                    '9pm-12am',
-                  ]"
-                  title=""
-                  type="axis-mixed"
-                  :height="400"
-                  :colors="['purple', '#ffa3ef', 'light-blue']"
-                  :dataSets="this.data"
-                >
-                </vue-frappe>
-              </div>
-            </div>
-          </div>
+            </template>
+          </collapse>
+        </div>
+        <div class="md-layout-item md-size-100 md-small-size-100">
+          <h3 class="title">Trading History</h3>
+          <md-table v-model="tableData" class="table-shopping">
+            <md-table-row slot="md-table-row" slot-scope="{ item }">
+              <md-table-cell md-label="#">
+                {{ item.id }}
+              </md-table-cell>
+              <md-table-cell md-label="Name">
+                {{ item.name }}
+              </md-table-cell>
+              <md-table-cell md-label="Country">
+                {{ item.country }}
+              </md-table-cell>
+              <md-table-cell md-label="City">
+                {{ item.city }}
+              </md-table-cell>
+              <md-table-cell md-label="Salary">
+                {{ item.salary }}
+              </md-table-cell>
+            </md-table-row>
+          </md-table>
+        </div>
+        <div class="md-layout-item md-size-100 md-small-size-100">
+          <h3 class="title">Offers</h3>
+          <md-table v-model="tableData" class="table-shopping">
+            <md-table-row slot="md-table-row" slot-scope="{ item }">
+              <md-table-cell md-label="#">
+                {{ item.id }}
+              </md-table-cell>
+              <md-table-cell md-label="Name">
+                {{ item.name }}
+              </md-table-cell>
+              <md-table-cell md-label="Country">
+                {{ item.country }}
+              </md-table-cell>
+              <md-table-cell md-label="City">
+                {{ item.city }}
+              </md-table-cell>
+              <md-table-cell md-label="Salary">
+                {{ item.salary }}
+              </md-table-cell>
+            </md-table-row>
+          </md-table>
         </div>
 
-        <div class="related-products">
-          <h3 class="title">More From This Collection</h3>
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-50 md-small-size-100 md-large-size-25 md-xlarge-size-25"
+        <div class="md-layout-item md-size-100 md-small-size-100">
+          <h3 class="title">Price History</h3>
+          <div class="table-shopping">
+            <vue-frappe
+              id="test"
+              :labels="[
+                '12am-3am',
+                '3am-6am',
+                '6am-9am',
+                '9am-12pm',
+                '12pm-3pm',
+                '3pm-6pm',
+                '6pm-9pm',
+                '9pm-12am',
+              ]"
+              title=""
+              type="axis-mixed"
+              :height="400"
+              :colors="['purple', '#ffa3ef', 'light-blue']"
+              :dataSets="this.data"
             >
-              <product-card
-                text-center
-                class="mt-3"
-                :card-image="productCard.productCard1"
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
-                <template slot="cardContent">
-                  <h6 class="card-category text-rose">Trending</h6>
-                  <h4 class="card-title">Dolce & Gabbana</h4>
-                  <p class="card-description">
-                    Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                    from hard-wearing red textured-leather.
-                  </p>
-                </template>
-                <template slot="cardAction">
-                  <div class="price-container">
-                    <span class="price"> €1,459</span>
-                  </div>
-                  <div class="stats ml-auto">
-                    <md-button class="md-just-icon md-rose md-round md-simple">
-                      <md-icon>favorite</md-icon>
-                      <md-tooltip md-direction="top">
-                        Save to Wishlist
-                      </md-tooltip>
-                    </md-button>
-                  </div>
-                </template>
-              </product-card>
-            </div>
-            <div
-              class="md-layout-item md-size-50 md-small-size-100 md-large-size-25 md-xlarge-size-25"
-            >
-              <product-card
-                text-center
-                class="mt-3"
-                :card-image="productCard.productCard2"
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
-                <template slot="cardContent">
-                  <h6 class="card-category text-muted">Popular</h6>
-                  <h4 class="card-title">Balmain</h4>
-                  <p class="card-description">
-                    Balmain's mid-rise skinny jeans are cut with stretch to
-                    ensure they retain their second-skin fit but move
-                    comfortably.
-                  </p>
-                </template>
-                <template slot="cardAction">
-                  <div class="price-container">
-                    <span class="price"> €459</span>
-                  </div>
-                  <div class="stats ml-auto">
-                    <md-button class="md-just-icon md-round md-simple">
-                      <md-icon>favorite</md-icon>
-                      <md-tooltip md-direction="top">
-                        Save to Wishlist
-                      </md-tooltip>
-                    </md-button>
-                  </div>
-                </template>
-              </product-card>
-            </div>
-            <div
-              class="md-layout-item md-size-50 md-small-size-100 md-large-size-25 md-xlarge-size-25"
-            >
-              <product-card
-                text-center
-                class="mt-3"
-                :card-image="productCard.productCard3"
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
-                <template slot="cardContent">
-                  <h6 class="card-category text-muted">Popular</h6>
-                  <h4 class="card-title">Balenciaga</h4>
-                  <p class="card-description">
-                    Balenciaga's black textured-leather wallet is finished with
-                    the label's iconic 'Giant' studs. This is where you can...
-                  </p>
-                </template>
-                <template slot="cardAction">
-                  <div class="price-container">
-                    <span class="price"> €590</span>
-                  </div>
-                  <div class="stats ml-auto">
-                    <md-button class="md-just-icon md-rose md-round md-simple">
-                      <md-icon>favorite</md-icon>
-                      <md-tooltip md-direction="top">
-                        Save to Wishlist
-                      </md-tooltip>
-                    </md-button>
-                  </div>
-                </template>
-              </product-card>
-            </div>
-            <div
-              class="md-layout-item md-size-50 md-small-size-100 md-large-size-25 md-xlarge-size-25"
-            >
-              <product-card
-                text-center
-                class="mt-3"
-                :card-image="productCard.productCard4"
-                :shadow-normal="false"
-                :no-colored-shadow="false"
-              >
-                <template slot="cardContent">
-                  <h6 class="card-category text-rose">Popular</h6>
-                  <h4 class="card-title">Dolce & Gabbana</h4>
-                  <p class="card-description">
-                    Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                    from hard-wearing red textured-leather.
-                  </p>
-                </template>
-                <template slot="cardAction">
-                  <div class="price-container">
-                    <span class="price"> €1,459</span>
-                  </div>
-                  <div class="stats ml-auto">
-                    <md-button class="md-just-icon md-round md-simple">
-                      <md-icon>favorite</md-icon>
-                      <md-tooltip md-direction="top">
-                        Save to Wishlist
-                      </md-tooltip>
-                    </md-button>
-                  </div>
-                </template>
-              </product-card>
-            </div>
+            </vue-frappe>
           </div>
         </div>
       </div>
+
+      <h3 class="title">More From This Collection</h3>
+      <el-carousel trigger="click" :interval="10000">
+        <el-carousel-item v-for="(group, i) in carouselItems" :key="i">
+          <div class="md-layout">
+            <div
+              v-for="(item, i) in group"
+              :key="i"
+              class="md-layout-item md-size-50 md-small-size-100 md-large-size-25 md-xlarge-size-25"
+            >
+              <aution-card
+                text-center
+                class="mt-3"
+                card-plain
+                :item-id="item._id"
+                :card-image="item.image"
+                :shadow-normal="false"
+                :no-colored-shadow="false"
+              >
+                <template slot="cardContent">
+                  <h4 class="card-title">{{ item.name }}</h4>
+                </template>
+                <template slot="cardAction">
+                  <div class="price-container">Price</div>
+                  <div class="ml-auto price-container">
+                    <md-button class="md-success">
+                      {{ item.minBid || 0 }} ETH
+                    </md-button>
+                  </div>
+                </template>
+              </aution-card>
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
 
 <script>
-import { Collapse, ProductCard } from "@/components";
+import { Collapse } from "@/components";
 import Mixins from "@/plugins/basicMixins";
+import AutionCard from "../../components/cards/AutionCard.vue";
+import Web3 from "web3";
+import ExchangeV1 from "../../assets/abis/ExchangeV1.json";
+import RaribleToken from "../../assets/abis/RaribleToken.json";
+import { Web3Ultils } from "../../utils/Web3Ultils";
 
 export default {
   components: {
     Collapse,
-    ProductCard,
+    AutionCard,
   },
   mixins: [Mixins.HeaderImage],
   bodyClass: "product-page",
+  async mounted() {
+    this.$loading(true);
+    try {
+      this.item = await this.getItem();
+    } catch (error) {
+      this.$loading(false);
+      this.$failAlert({
+        text: error,
+      });
+      this.$router.go(-1);
+    }
+
+    try {
+      this.listItems = await this.$store.dispatch("item/getAllItems", {
+        skip: Math.floor(Math.random() * 100),
+        limit: 12,
+      });
+      for (let index = 0; index < this.listItems.length; index++) {
+        let tmp = Math.floor(index / 4);
+        if (this.carouselItems.length == tmp) {
+          this.carouselItems.push([]);
+        }
+        this.carouselItems[tmp].push(this.listItems[index]);
+      }
+    } catch (error) {
+      this.$failAlert({
+        text: error,
+      });
+    }
+
+    this.$loading(false);
+  },
+  computed: {
+    itemId() {
+      return this.$route.params.id;
+    },
+    ETHRate() {
+      return this.$store.state.user.ETHRate;
+    },
+    userData() {
+      return this.$store.state.user?.information;
+    },
+    metaMaskAddress() {
+      return this.userData?.wallet_address;
+    },
+  },
+  watch: {
+    async itemId(newValue, oldValue) {
+      if (newValue && newValue.length > 0) {
+        this.item = await this.getItem();
+      }
+    },
+  },
   data() {
     return {
+      loadimage: require("@/assets/img/loading.gif"),
+      item: null,
+      carouselItems: [],
+      listItems: [],
       selectColor: "rose",
       selectSize: "small",
-      image: require("@/assets/img/examples/bg-product.jpg"),
-      productCard: {
-        productCard1: require("@/assets/img/examples/card-product1.jpg"),
-        productCard2: require("@/assets/img/examples/card-product3.jpg"),
-        productCard3: require("@/assets/img/examples/card-product4.jpg"),
-        productCard4: require("@/assets/img/examples/card-product2.jpg"),
-      },
       tableData: [
         {
           id: 1,
@@ -455,14 +419,83 @@ export default {
         opacity: 1,
       };
     },
+    getItem() {
+      return this.$store.dispatch("item/getDetailItem", { id: this.itemId });
+    },
+    async sellItem() {
+      this.$loadingModal(true);
+      try {
+        const result = await this.$store.dispatch(
+          "item/requestMintSignature",
+          this.item.token_id
+        );
+        console.log(`result:`);
+        console.log(result);
+
+        const isSellItem = await Web3Ultils.sellItem(
+          result,
+          this.item,
+          this.metaMaskAddress
+        );
+        if (isSellItem) {
+          this.$successAlert({
+            text: "Sell Item Successfull",
+          });
+          this.$router.push("/my-collections");
+        }
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      }
+
+      this.$loadingModal(false);
+    },
+    convertToUSD(value) {
+      let eth = value || 0;
+      return eth * this.ETHRate;
+    },
+
+    editItem() {
+      this.$router.push("/editItem/" + this.itemId);
+    },
+    async buyItem() {
+      this.$loadingModal(true);
+      try {
+        const result = await this.$store.dispatch(
+          "item/requestBuyAsset",
+          this.item.token_id
+        );
+        console.log(result);
+
+        const isBuyItem = await Web3Ultils.buyAsset(
+          result,
+          this.item,
+          this.metaMaskAddress
+        );
+
+        if (isBuyItem) {
+          this.$successAlert({
+            text: "Buy Item Successfull",
+          });
+          this.$router.push("/my-collections");
+        }
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      }
+
+      this.$loadingModal(false);
+    },
   },
 };
+
+const ONE_ETHER = 100000000000000000000;
 </script>
 <style scoped>
-.table-shopping {
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 10px;
+p {
+  margin: 0px;
 }
 .row-detail {
   width: 100%;
@@ -481,5 +514,16 @@ export default {
   color: gray;
   width: 300px;
   word-wrap: break-word;
+}
+.box-price {
+  background: rgba(45, 129, 255, 0.05);
+  border: 1px solid rgba(208, 211, 215, 0.3);
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding: 10px;
+}
+.product-img {
+  width: 85%;
+  padding: 10%;
 }
 </style>

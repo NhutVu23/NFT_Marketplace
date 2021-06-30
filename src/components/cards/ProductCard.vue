@@ -46,6 +46,7 @@ export default {
     shadowNormal: Boolean,
     shadowOff: Boolean,
     cardPlain: Boolean,
+    itemId: String,
     noColoredShadow: Boolean,
   },
   methods: {
@@ -55,8 +56,8 @@ export default {
         opacity: 1,
       };
     },
-    goToProduct(image) {
-      this.$router.push("product-page");
+    goToProduct() {
+      this.$router.push("/asset/" + this.itemId);
     },
   },
 };

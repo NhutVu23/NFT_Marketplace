@@ -2,7 +2,7 @@
   <div class="wrapper">
     <parallax
       class="section page-header header-filter"
-      parallax-active="true"
+      parallax-active="false"
       :style="headerStyle"
     />
     <div class="main main-raised">
@@ -17,12 +17,15 @@
                   card-plain
                   :shadow-normal="false"
                   :no-colored-shadow="true"
-                  :card-image="cardProfile3.cardProfile1"
+                  :card-image="userData ? userData.avatar : imageCircle"
+                  v-if="userData"
                 >
                   <template slot="cardContent">
-                    <h2 class="card-title">Tropic Sherbet</h2>
+                    <h2 class="card-title show-name">
+                      {{ userData.full_name || userData.wallet_address }}
+                    </h2>
                     <h4 class="card-category text-muted">
-                      I am new to art NTFs
+                      {{ userData.bio }}
                     </h4>
                     <h4 class="card-title">Wallet Address:</h4>
 
@@ -30,7 +33,7 @@
                       id="testing-code"
                       class="testing-code card-category text-muted"
                     >
-                      {{ profileName }}
+                      {{ userData.wallet_address }}
                     </h4>
                     <md-button @click="copyToClipboard" class="md-success">
                       Copy to clipboard
@@ -65,17 +68,13 @@
             </div>
           </div>
           <div class="profile-tabs">
-            <tabs
-              :tab-active="1"
-              :tab-name="[
-                'On Sale (16)',
-                'In Wallet (02)',
-                'Created (06)',
-                'Collections (06)',
-                'Likes (48)',
+            <!-- 'Likes (48)',
                 'Followers (12)',
-                'Following (34)',
-              ]"
+                'Following (34)', -->
+            <!-- TODO: count item on each tag -->
+            <tabs
+              :tab-active="tabActive"
+              :tab-name="['On Sale ', 'In Wallet ', 'Created ', 'Collections ']"
               :tab-icon="[]"
               plain
               color-button="success"
@@ -93,15 +92,15 @@
               <template slot="tab-pane-4">
                 <collections-tab />
               </template>
-              <template slot="tab-pane-5">
+              <!-- <template slot="tab-pane-5">
                 <likes-tab />
-              </template>
-              <template slot="tab-pane-6">
+              </template> -->
+              <!-- <template slot="tab-pane-6">
                 <followers-tab />
               </template>
               <template slot="tab-pane-7">
                 <following-tab />
-              </template>
+              </template> -->
             </tabs>
           </div>
         </div>
@@ -128,17 +127,29 @@ export default {
     OnSaleTab,
     InWalletTab,
     CollectionsTab,
-    LikesTab,
-    FollowersTab,
-    FollowingTab,
+    // LikesTab,
+    // FollowersTab,
+    // FollowingTab,
     CreatedItemTab,
   },
+  computed: {
+    listCategory() {
+      return this.$store.state.category.categories;
+    },
+    userData() {
+      return this.$store.state.user?.information;
+    },
+    image() {
+      return (
+        this.userData?.banner_img || require("@/assets/img/placeholder.jpg")
+      );
+    },
+  },
   mounted() {
-    const walletAddress = localStorage.getItem("metaMaskAddress");
-    if (walletAddress) {
-      this.profileName = walletAddress;
+    if (this.userData) {
+      this.profileName = this.userData.wallet_address;
     } else {
-      this.$router.push("/");
+      this.$router.push("/connect-wallet");
     }
   },
   mixins: [Mixins.HeaderImage],
@@ -146,40 +157,9 @@ export default {
   data() {
     return {
       profileName: "",
-      image: require("@/assets/img/city-profile.jpg"),
-      img: require("@/assets/img/faces/christian.jpg"),
-      cardFullBg: {
-        fullBg1: require("@/assets/img/examples/mariya-georgieva.jpg"),
-        fullBg2: require("@/assets/img/examples/clem-onojeghuo.jpg"),
-        fullBg3: require("@/assets/img/examples/olu-eletu.jpg"),
-        fullBg4: require("@/assets/img/examples/floralia.jpg"),
-      },
-      cardProfile3: {
-        cardProfile1: require("@/assets/img/faces/avatar.jpg"),
-        cardProfile2: require("@/assets/img/faces/marc.jpg"),
-        cardProfile3: require("@/assets/img/faces/kendall.jpg"),
-        cardProfile4: require("@/assets/img/faces/card-profile2-square.jpg"),
-      },
-      tabPane1: [
-        { image: require("@/assets/img/examples/studio-1.jpg") },
-        { image: require("@/assets/img/examples/studio-2.jpg") },
-        { image: require("@/assets/img/examples/studio-4.jpg") },
-        { image: require("@/assets/img/examples/studio-5.jpg") },
-      ],
-      tabPane2: [
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/cynthia-del-rio.jpg") },
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/clem-onojegaw.jpg") },
-      ],
-      tabPane3: [
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/studio-3.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/studio-1.jpg") },
-      ],
+      countInWallet: 0,
+      tabActive: 2,
+      imageCircle: require("@/assets/img/placeholder.jpg"),
     };
   },
   methods: {
@@ -190,7 +170,10 @@ export default {
       input.select();
       var result = document.execCommand("copy");
       document.body.removeChild(input);
-      alert("Copy to clipboard successfull");
+
+      this.$successAlert({
+        text: "Copy to clipboard successfull",
+      });
     },
   },
 };
@@ -199,6 +182,12 @@ export default {
 <style lang="scss" scoped>
 .section {
   padding: 0;
+}
+.show-name {
+  max-width: 70% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profile {

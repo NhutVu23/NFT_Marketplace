@@ -18,7 +18,7 @@ export default {
       web3: null,
       MetaMaskId: "1", // main net netID
       netID: "1", // user metamask id
-      MetaMaskAddress: "", // user Address
+      metaMaskAddress: "", // user Address
       Web3Interval: null,
       AccountInterval: null,
       NetworkInterval: null,
@@ -74,33 +74,27 @@ export default {
         if (err != null)
           return this.Log(this.MetamaskMsg.NETWORK_ERROR, "NETWORK_ERROR");
         if (accounts.length === 0) {
-          this.MetaMaskAddress = "";
+          this.metaMaskAddress = "";
           this.Log(this.MetamaskMsg.EMPTY_METAMASK_ACCOUNT, "NO_LOGIN");
           return;
         }
-        this.MetaMaskAddress = accounts[0]; // user Address
+        this.metaMaskAddress = accounts[0]; // user Address
       });
     },
     checkNetWork() {
-      this.web3.version.getNetwork((err, netID) => {
-        // Main Network: 1
-        // Ropsten Test Network: 3
-        // Kovan Test Network: 42
-        // Rinkeby Test Network: 4
-        if (err != null)
-          return this.Log(this.MetamaskMsg.NETWORK_ERROR, "NETWORK_ERROR");
-        this.netID = netID; //User MetaMask's current status
-        if (this.MetaMaskAddress !== "" && netID === "1")
-          return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "MAINNET");
-        if (this.MetaMaskAddress !== "" && netID === "3")
-          return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "ROPSTEN");
-        if (this.MetaMaskAddress !== "" && netID === "42")
-          return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "LOVAN");
-        if (this.MetaMaskAddress !== "" && netID === "4")
-          return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "RINKEBY");
-        if (this.MetaMaskAddress !== "")
-          this.Log(this.MetamaskMsg.METAMASK_MAIN_NET, "MAINNET");
-      });
+      const netID = this.web3.utils.hexToNumber(window.ethereum.chainId); //User MetaMask's current status
+      if (this.metaMaskAddress !== "" && netID === 1)
+        return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "MAINNET");
+      if (this.metaMaskAddress !== "" && netID === 3)
+        return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "ROPSTEN");
+      if (this.metaMaskAddress !== "" && netID === 42)
+        return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "LOVAN");
+      if (this.metaMaskAddress !== "" && netID === 4)
+        return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "RINKEBY");
+      if (this.metaMaskAddress !== "" && netID === 97)
+        return this.Log(this.MetamaskMsg.METAMASK_TEST_NET, "BSC");
+      if (this.metaMaskAddress !== "")
+        this.Log(this.MetamaskMsg.METAMASK_MAIN_NET, "MAINNET");
     },
     Log(msg, type = "") {
       const letType = type;
@@ -110,7 +104,7 @@ export default {
       this.$emit("onComplete", {
         web3: this.web3,
         type,
-        metaMaskAddress: this.MetaMaskAddress,
+        metaMaskAddress: this.metaMaskAddress,
         message,
         netID: this.netID,
       });
@@ -119,9 +113,9 @@ export default {
       this.web3 = web3;
       this.checkAccounts();
       this.checkNetWork();
-      this.Web3Interval = setInterval(() => this.checkWeb3(), 1000);
-      this.AccountInterval = setInterval(() => this.checkAccounts(), 1000);
-      this.NetworkInterval = setInterval(() => this.checkNetWork(), 1000);
+      // this.Web3Interval = setInterval(() => this.checkWeb3(), 1000);
+      // this.AccountInterval = setInterval(() => this.checkAccounts(), 1000);
+      // this.NetworkInterval = setInterval(() => this.checkNetWork(), 1000);
     },
   },
 };

@@ -3,6 +3,7 @@ import "vue-material/dist/vue-material.min.css";
 import "@/assets/scss/material-kit.scss";
 import "@/assets/demo.css";
 import globalDirectives from "./globalDirectives";
+import globalFunctions from "./globalFunctions";
 import globalMixins from "./globalMixins";
 import basicMixins from "./basicMixins";
 import globalComponents from "./globalComponents";
@@ -14,6 +15,7 @@ export default {
   install(Vue) {
     Vue.use(VueMaterial);
     Vue.use(globalDirectives);
+    Vue.use(globalFunctions);
     Vue.use(globalMixins);
     Vue.use(basicMixins);
     Vue.use(globalComponents);

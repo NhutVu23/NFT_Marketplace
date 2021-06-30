@@ -1,69 +1,66 @@
 <template>
   <div class="wrapper">
     <parallax class="page-header header-filter" parallax-active="false">
-      <div class="container">
-        <div class="md-layout">
-          <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
-            <md-card class="md-card md-card-signup">
-              <md-card-content style="padding: 0 15%">
-                <md-button
-                  class="md-simple md-github back-button"
-                  @click="goTo('')"
+      <div class="md-layout">
+        <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
+          <md-card class="md-card md-card-signup">
+            <md-card-content style="padding: 0 25%">
+              <md-button
+                class="md-simple md-github back-button"
+                @click="goTo('')"
+              >
+                <i class="fas fa-arrow-left"></i>
+                <h4>Go Back</h4>
+              </md-button>
+              <h2 class="card-title">Create New Item</h2>
+              <h3>
+                Choose “Single” if you want your collectible to be one of a kind
+                or “Multiple” if you want to sell one collectible multiple times
+              </h3>
+
+              <div class="md-layout">
+                <div
+                  class="md-layout-item md-size-40 md-small-size-100 mx-auto"
                 >
-                  <i class="fas fa-arrow-left"></i>
-                  <h4>Go Back</h4>
-                </md-button>
-                <h2 class="card-title">Create New Item</h2>
-                <h3>
-                  Choose “Single” if you want your collectible to be one of a
-                  kind or “Multiple” if you want to sell one collectible
-                  multiple times
-                </h3>
-
-                <div class="md-layout">
-                  <div
-                    class="md-layout-item md-size-40 md-small-size-100 mx-auto"
+                  <product-card
+                    text-center
+                    class="mt-3"
+                    card-plain
+                    :card-image="cardImgs.cardImg1"
+                    :shadow-normal="false"
+                    :no-colored-shadow="true"
+                    @click.native="goTo('create-single-item')"
                   >
-                    <product-card
-                      text-center
-                      class="mt-3"
-                      card-plain
-                      :card-image="cardImgs.cardImg1"
-                      :shadow-normal="false"
-                      :no-colored-shadow="true"
-                      @click.native="goTo('create-single-item')"
-                    >
-                      <template slot="cardContent">
-                        <h4 class="card-title">Single</h4>
-                      </template>
-                    </product-card>
-                  </div>
-                  <div
-                    class="md-layout-item md-size-40 md-small-size-100 mx-auto"
-                  >
-                    <product-card
-                      text-center
-                      class="mt-3"
-                      card-plain
-                      :shadow-normal="false"
-                      :no-colored-shadow="true"
-                      :card-image="cardImgs.cardImg2"
-                      @click.native="goTo('create-multiple-item')"
-                    >
-                      <template slot="cardContent">
-                        <h4 class="card-title">Multiple</h4>
-                      </template>
-                    </product-card>
-                  </div>
+                    <template slot="cardContent">
+                      <h4 class="card-title">Single</h4>
+                    </template>
+                  </product-card>
                 </div>
+                <div
+                  class="md-layout-item md-size-40 md-small-size-100 mx-auto"
+                >
+                  <product-card
+                    text-center
+                    class="mt-3"
+                    card-plain
+                    :shadow-normal="false"
+                    :no-colored-shadow="true"
+                    :card-image="cardImgs.cardImg2"
+                    @click.native="goTo('create-multiple-item')"
+                  >
+                    <template slot="cardContent">
+                      <h4 class="card-title">Multiple</h4>
+                    </template>
+                  </product-card>
+                </div>
+              </div>
 
-                <h3>
-                  We do not own your private keys and cannot access your funds
-                  without your confirmation
-                </h3>
-              </md-card-content>
-            </md-card>
-          </div>
+              <h3>
+                We do not own your private keys and cannot access your funds
+                without your confirmation
+              </h3>
+            </md-card-content>
+          </md-card>
         </div>
       </div>
     </parallax>

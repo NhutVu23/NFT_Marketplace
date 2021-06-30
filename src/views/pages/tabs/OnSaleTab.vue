@@ -1,46 +1,44 @@
 <template>
-  <div class="md-layout">
-    <div class="md-layout-item md-size-100 md-small-size-100 mx-auto">
-      <div class="md-layout collections">
-        <div class="md-layout-item md-size-25 md-small-size-100">
-          <full-bg-card :card-image="cardFullBg.fullBg1">
-            <template slot="cardContent">
-              <badge type="warning"> Spring 2016 </badge>
-              <a href="javascript:void(0)">
-                <h2 class="card-title">Espace</h2>
-              </a>
-            </template>
-          </full-bg-card>
-        </div>
-        <div class="md-layout-item md-size-25 md-small-size-100">
-          <full-bg-card :card-image="cardFullBg.fullBg2">
-            <template slot="cardContent">
-              <badge type="info"> Spring 2016 </badge>
-              <a href="javascript:void(0)">
-                <h2 class="card-title">Portland Rose</h2>
-              </a>
-            </template>
-          </full-bg-card>
-        </div>
-        <div class="md-layout-item md-size-25 md-small-size-100">
-          <full-bg-card :card-image="cardFullBg.fullBg3">
-            <template slot="cardContent">
-              <badge type="danger"> Summer 2016 </badge>
-              <a href="javascript:void(0)">
-                <h2 class="card-title">Canberra</h2>
-              </a>
-            </template>
-          </full-bg-card>
-        </div>
-        <div class="md-layout-item md-size-25 md-small-size-100">
-          <full-bg-card :card-image="cardFullBg.fullBg4">
-            <template slot="cardContent">
-              <badge type="success"> Winter 2015 </badge>
-              <a href="javascript:void(0)">
-                <h2 class="card-title">Floralia</h2>
-              </a>
-            </template>
-          </full-bg-card>
+  <div class="container">
+    <div class="md-layout">
+      <div class="md-layout-item md-size-100 md-small-size-100">
+        <div v-if="listItems && listItems.length > 0" class="md-layout">
+          <div
+            v-for="(item, i) in listItems"
+            :key="i"
+            class="md-layout-item md-size-25 md-small-size-100"
+          >
+            <aution-card
+              text-center
+              class="mt-3"
+              card-plain
+              :item-id="item._id"
+              :card-image="item.image"
+              :shadow-normal="false"
+              :no-colored-shadow="false"
+            >
+              <template slot="cardContent">
+                <h4 class="card-title">{{ item.name }}</h4>
+              </template>
+              <template slot="cardAction">
+                <div class="price-container">Price</div>
+                <div class="ml-auto price-container">
+                  <md-button class="md-success">
+                    {{ item.minBid || 0 }} ETH
+                  </md-button>
+                </div>
+              </template>
+            </aution-card>
+          </div>
+
+          <div
+            v-if="isShowMore"
+            class="md-layout-item md-size-10 md-small-size-100 mx-auto"
+          >
+            <md-button @click="loadNextItems" class="md-rose md-round">
+              Show More
+            </md-button>
+          </div>
         </div>
       </div>
     </div>
@@ -48,18 +46,32 @@
 </template>
 
 <script>
-import { FullBgCard, Badge } from "@/components";
 import Mixins from "@/plugins/basicMixins";
+import AutionCard from "../../../components/cards/AutionCard.vue";
 
 export default {
-  components: {
-    FullBgCard,
-    Badge,
+  components: { AutionCard },
+  props: {},
+
+  computed: {
+    userData() {
+      return this.$store.state.user?.information;
+    },
   },
-  mounted() {
-    const walletAddress = localStorage.getItem("metaMaskAddress");
-    if (walletAddress) {
-      this.profileName = walletAddress;
+  async mounted() {
+    if (this.userData && this.userData.wallet_address) {
+      const walletAddress = this.userData.wallet_address;
+      this.$loading(true);
+      try {
+        this.profileName = walletAddress;
+        this.filterData.wallet_address = walletAddress;
+        this.loadNextItems();
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      }
+      this.$loading(false);
     } else {
       this.$router.push("/");
     }
@@ -68,18 +80,39 @@ export default {
   bodyClass: "profile-page",
   data() {
     return {
+      listItems: [],
+      filterData: {
+        skip: 0,
+        limit: 20,
+      },
+      isShowMore: true,
       profileName: "",
       image: require("@/assets/img/city-profile.jpg"),
       img: require("@/assets/img/faces/christian.jpg"),
-      cardFullBg: {
-        fullBg1: require("@/assets/img/examples/mariya-georgieva.jpg"),
-        fullBg2: require("@/assets/img/examples/clem-onojeghuo.jpg"),
-        fullBg3: require("@/assets/img/examples/olu-eletu.jpg"),
-        fullBg4: require("@/assets/img/examples/floralia.jpg"),
-      },
     };
   },
-  methods: {},
+  methods: {
+    async loadNextItems() {
+      try {
+        let newData = await this.$store.dispatch(
+          "item/getItemForUser",
+          this.filterData
+        );
+        if (newData && newData.length > 0) {
+          this.listItems.push.apply(
+            this.listItems,
+            newData.filter((x) => x.isPutOnMarket)
+          );
+
+          if (newData.length == this.filterData.limit) {
+            this.filterData.skip += newData.length;
+          } else {
+            this.isShowMore = false;
+          }
+        }
+      } catch (error) {}
+    },
+  },
 };
 </script>
 

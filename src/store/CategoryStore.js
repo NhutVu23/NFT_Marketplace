@@ -7,14 +7,13 @@ export const CategoryStore = {
     categories: null,
   },
   actions: {
-    getCategories: ({}, data) => {
+    getCategories: ({ commit }, data) => {
       return apolloClient
         .mutate({
           mutation: GET_CATEGORY,
-          variables: data,
         })
         .then(({ data }) => {
-          let categories = data.getCategories;
+          let categories = data.getAllCategory;
           commit("SET_CATEGORY", categories);
         });
     },

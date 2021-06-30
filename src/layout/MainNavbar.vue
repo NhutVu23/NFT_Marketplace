@@ -13,9 +13,9 @@
     }" -->
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">
+        <a href="#/" class="md-title">
           {{ brand }}
-        </h3>
+        </a>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -104,7 +104,10 @@
                   </div>
                 </a>
               </li>
-              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
+              <li
+                v-if="metaMaskAddress && metaMaskAddress.length > 0"
+                class="md-list-item"
+              >
                 <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -113,7 +116,7 @@
                     <drop-down direction="down">
                       <md-button
                         slot="title"
-                        class="md-theme-default md-twitter md-round md-button dropdown-toggle"
+                        class="md-theme-default md-behance md-round md-button dropdown-toggle"
                         data-toggle="dropdown"
                       >
                         Create
@@ -134,7 +137,10 @@
                 </a>
               </li>
 
-              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
+              <li
+                v-if="metaMaskAddress && metaMaskAddress.length > 0"
+                class="md-list-item"
+              >
                 <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -150,7 +156,7 @@
                       </md-button>
                       <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                          <a :href="'#/collections'"> My Collectiable </a>
+                          <a :href="'#/my-collections'"> My Collectiable </a>
                         </li>
                         <li>
                           <a :href="'#/edit-profile'"> Edit Profile </a>
@@ -167,20 +173,26 @@
                 </a>
               </li>
 
-              <li v-if="metaMaskAddress.length > 0" class="md-list-item">
+              <li
+                v-if="metaMaskAddress && metaMaskAddress.length > 0"
+                class="md-list-item"
+              >
                 <a
                   :href="'#/notifications'"
                   class="md-list-item-router md-list-item-container md-button-clean"
                 >
                   <div class="md-list-item-content">
-                    <md-button class="md-rose md-just-icon md-round"
+                    <md-button class="md-behance md-just-icon md-round"
                       ><md-icon>email</md-icon></md-button
                     >
                   </div>
                 </a>
               </li>
 
-              <li v-if="metaMaskAddress.length == 0" class="md-list-item">
+              <li
+                v-if="!metaMaskAddress || metaMaskAddress.length == 0"
+                class="md-list-item"
+              >
                 <a
                   :href="'#/connect-wallet'"
                   class="md-list-item-router md-list-item-container md-button-clean"
@@ -263,16 +275,24 @@ export default {
       return excludedRoutes.every((r) => r !== this.$route.name);
     },
     metaMaskAddress() {
-      return this.$store.state.global.walletAddress;
+      return this.$store.state.user.information?.wallet_address;
     },
   },
-  mounted() {
+  async mounted() {
     document.addEventListener("scroll", this.scrollListener);
     var localAddress = localStorage.getItem("metaMaskAddress");
-    if (localAddress && localAddress.length > 0) {
-      this.$store.dispatch("global/setAddress", localAddress);
-    } else {
-      this.$store.dispatch("global/setAddress", "");
+    try {
+      if (localAddress && localAddress.length > 0) {
+        await this.$store.dispatch("user/loginUser", localAddress);
+      } else {
+        this.$store.dispatch("user/logoutUser");
+      }
+      await this.$store.dispatch("category/getCategories");
+    } catch (error) {
+      this.$failAlert({
+        text: error,
+      });
+      return;
     }
   },
   beforeDestroy() {
@@ -281,7 +301,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("metaMaskAddress");
-      this.$store.dispatch("global/setAddress", "");
+      this.$store.dispatch("user/logoutUser");
       this.$router.push("/");
     },
     bodyClick() {

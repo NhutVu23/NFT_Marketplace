@@ -18,22 +18,22 @@
                   <div
                     class="md-layout-item md-size-40 md-small-size-100 mx-auto"
                   >
-                    <login-metamask @onComplete="onComplete">
-                      <wallet-card
-                        card-plain
-                        type="horizontal"
-                        :shadow-normal="false"
-                        :no-colored-shadow="true"
-                        :card-image="wallets.wallet1"
-                      >
-                        <template slot="cardContent">
-                          <h4 class="card-title">Metamask</h4>
-                          <p class="card-description">
-                            A browser extension with great flexibility.
-                          </p>
-                        </template>
-                      </wallet-card></login-metamask
+                    <wallet-card
+                      card-plain
+                      type="horizontal"
+                      :shadow-normal="false"
+                      :no-colored-shadow="true"
+                      :card-image="wallets.wallet1"
+                      @click.native="loginMetamask"
                     >
+                      <template slot="cardContent">
+                        <h4 class="card-title">Metamask</h4>
+                        <p class="card-description">
+                          A browser extension with great flexibility.
+                        </p>
+                      </template>
+                    </wallet-card>
+                    <!-- </login-metamask> -->
                   </div>
                   <div
                     class="md-layout-item md-size-40 md-small-size-100 mx-auto"
@@ -66,15 +66,25 @@
 <script>
 import Mixins from "@/plugins/basicMixins";
 import WalletCard from "../../components/cards/WalletCard.vue";
-import LoginMetamask from "../../components/LoginMetamask.vue";
 
 export default {
   components: {
-    LoginMetamask,
     WalletCard,
   },
   mixins: [Mixins.HeaderImage],
   bodyClass: "signup-page",
+  watch: {
+    metaMaskAddress(newValue, oldValue) {
+      if (newValue && newValue.length > 0) {
+        this.$router.push("/");
+      }
+    },
+  },
+  computed: {
+    metaMaskAddress() {
+      return this.$store.state.user.information?.wallet_address;
+    },
+  },
   data() {
     return {
       boolean: null,
@@ -87,19 +97,16 @@ export default {
     };
   },
   methods: {
-    async onComplete(data) {
-      if (data && data.metaMaskAddress) {
-        localStorage.setItem("metaMaskAddress", data.metaMaskAddress);
-        try {
-          this.$store.dispatch("global/setAddress", data.metaMaskAddress);
-          await this.$store.dispatch("user/loginUser", {
-            wallet_address: data.metaMaskAddress,
-          });
-        } catch (error) {}
-        this.$router.push("/");
-      } else {
-        localStorage.removeItem("metaMaskAddress");
-        this.$store.dispatch("global/setAddress", "");
+    async loginMetamask() {
+      this.$loading(true);
+      try {
+        await this.$store.dispatch("user/loginMetamask");
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      } finally {
+        this.$loading(true);
       }
     },
   },

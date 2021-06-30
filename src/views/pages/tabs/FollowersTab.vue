@@ -210,17 +210,7 @@ export default {
       },
     };
   },
-  methods: {
-    copyToClipboard() {
-      var input = document.createElement("input");
-      input.setAttribute("value", this.profileName);
-      document.body.appendChild(input);
-      input.select();
-      var result = document.execCommand("copy");
-      document.body.removeChild(input);
-      alert("Copy to clipboard successfull");
-    },
-  },
+  methods: {},
 };
 </script>
 

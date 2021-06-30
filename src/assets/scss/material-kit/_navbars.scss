@@ -41,6 +41,7 @@
     left: 0;
     right: 0;
     border-radius: 0;
+    border-bottom: 1px solid rgb(226, 226, 226);
   }
 
   .md-list-item-content {
@@ -115,6 +116,7 @@
   &.md-white {
     @include toolbar-colors($white-color, $navbar-color);
 
+    box-shadow: none;
     .md-list-item .md-button.md-simple {
       &,
       &:hover,
