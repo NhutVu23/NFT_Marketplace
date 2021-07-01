@@ -87,8 +87,10 @@
                     :no-colored-shadow="false"
                   >
                     <template slot="cardContent">
-                      <h5 class="show-name">Owner: {{ item.owner }}</h5>
-                      <h5 class="show-name">1 of {{ item.total_quantity }}</h5>
+                      <p class="show-name">Owner: {{ item.owner }}</p>
+                      <p class="show-name">
+                        On Sale 1 of {{ item.total_quantity }}
+                      </p>
                     </template>
                     <template slot="cardAction">
                       <div class="price-container card-title">
@@ -318,12 +320,16 @@ export default {
         }
       );
 
-      for (let index = 0; index < this.listItemsOnSale.length; index++) {
+      const saleItemsSigned = this.listItemsOnSale.filter(
+        (x) => x.isPutOnMarket && x.sellOrder
+      );
+
+      for (let index = 0; index < saleItemsSigned.length; index++) {
         let tmp = Math.floor(index / 3);
         if (this.carouselItems.length == tmp) {
           this.carouselItems.push([]);
         }
-        this.carouselItems[tmp].push(this.listItemsOnSale[index]);
+        this.carouselItems[tmp].push(saleItemsSigned[index]);
       }
       this.listItems = await this.$store.dispatch("item/getAllItems", {
         skip: Math.floor(Math.random() * 100),

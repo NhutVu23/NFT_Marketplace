@@ -28,6 +28,8 @@ export const GET_ALL_ITEM = gql`
       preview
       total_quantity
       isPutOnMarket
+      signature
+      sellOrder
       minBid
       royalties
       creator
@@ -67,6 +69,8 @@ export const GET_ALL_ITEM_ON_SALE = gql`
       preview
       total_quantity
       isPutOnMarket
+      signature
+      sellOrder
       minBid
       royalties
       creator
@@ -109,6 +113,8 @@ export const GET_ITEM_OF_USER = gql`
       preview
       total_quantity
       isPutOnMarket
+      signature
+      sellOrder
       minBid
       royalties
       creator
@@ -150,6 +156,8 @@ export const GET_ITEM_CREATED = gql`
       preview
       total_quantity
       isPutOnMarket
+      sellOrder
+      signature
       minBid
       royalties
       creator

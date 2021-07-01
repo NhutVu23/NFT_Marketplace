@@ -36,6 +36,8 @@
                               <md-input
                                 v-model="item.name"
                                 placeholder="e.g: your products name"
+                                readonly
+                                disabled
                               />
                             </md-field>
                           </form>
@@ -54,6 +56,8 @@
                               <md-textarea
                                 v-model="item.description"
                                 placeholder="Provide a detailed description of your items."
+                                readonly
+                                disabled
                               />
                             </md-field>
 
@@ -201,6 +205,8 @@
                                 v-model="item.category_id"
                                 name="selectCategory"
                                 placeholder="Select Category"
+                                readonly
+                                disabled
                               >
                                 <md-option
                                   v-for="(item, i) in listCategory"
@@ -234,11 +240,15 @@
                                 v-model="item.collection_id"
                                 name="selectCategory"
                                 placeholder="Select Collection"
+                                readonly
+                                disabled
                               >
                                 <md-option
                                   v-for="item in listCollections"
                                   :key="item._id"
                                   :value="item._id"
+                                  readonly
+                                  disabled
                                 >
                                   {{ item.name }}
                                 </md-option>

@@ -101,7 +101,7 @@ export default {
         if (newData && newData.length > 0) {
           this.listItems.push.apply(
             this.listItems,
-            newData.filter((x) => x.isPutOnMarket)
+            newData.filter((x) => x.isPutOnMarket && x.signature)
           );
 
           if (newData.length == this.filterData.limit) {
