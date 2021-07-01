@@ -45,6 +45,7 @@ export const CREATE_ITEM = gql`
       isPutOnMarket: $isPutOnMarket
       contract: $contract
       creator: $wallet_address
+      owner: $wallet_address
       startBid: $startBid
       wallet_address: $wallet_address
     ) {
@@ -62,6 +63,7 @@ export const CREATE_ITEM = gql`
       minBid
       royalties
       creator
+      owner
       created_at
       updated_at
       collection
@@ -71,28 +73,8 @@ export const CREATE_ITEM = gql`
 `;
 
 export const UPDATE_OWNER_ITEM = gql`
-  mutation($token_id: String!, $wallet_address: String!) {
-    updateOwner(token_id: $token_id, wallet_address: $wallet_address) {
-      _id
-      token_id
-      category_id
-      collection_id
-      name
-      description
-      external_link
-      image
-      preview
-      total_quantity
-      contract
-      minBid
-      startBid
-      royalties
-      creator
-      created_at
-      updated_at
-      collection
-      category
-    }
+  mutation($token_id: Float!, $wallet_address: String!) {
+    updateOwner(token_id: $token_id, wallet_address: $wallet_address)
   }
 `;
 export const EDIT_ITEM = gql`

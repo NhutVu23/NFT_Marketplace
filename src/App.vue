@@ -10,7 +10,9 @@
     <div class="modal modal-bg show" v-show="loadingModal.isShow">
       <modal>
         <template slot="header">
-          <h4 class="modal-title">{{ loadingModal.title }}</h4>
+          <h4 class="modal-title">
+            Authorizing your account for {{ loadingModal.title }}
+          </h4>
         </template>
 
         <template slot="body">

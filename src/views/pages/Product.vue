@@ -99,7 +99,7 @@
           </div>
           <collapse
             :active-tab="1"
-            :collapse="['Description', 'Details', 'Owners']"
+            :collapse="['Description', 'Details', `Owners ( ${item.owner} )`]"
             icon="keyboard_arrow_down"
             color-collapse="rose"
           >
@@ -423,12 +423,16 @@ export default {
       return this.$store.dispatch("item/getDetailItem", { id: this.itemId });
     },
     async sellItem() {
+      await this.$store.dispatch("global/setLoadingTitle", "Sell Item");
       this.$loadingModal(true);
+
       try {
         const result = await this.$store.dispatch(
           "item/requestMintSignature",
           this.item.token_id
         );
+        console.log(`result:`);
+        console.log(result);
 
         const isSellItem = await Web3Ultils.sellItem(
           result,
@@ -458,12 +462,14 @@ export default {
       this.$router.push("/editItem/" + this.itemId);
     },
     async buyItem() {
+      await this.$store.dispatch("global/setLoadingTitle", "Buy Item");
       this.$loadingModal(true);
       try {
         const result = await this.$store.dispatch(
           "item/requestBuyAsset",
           this.item.token_id
         );
+        console.log(result);
 
         const isBuyItem = await Web3Ultils.buyAsset(
           result,
@@ -488,7 +494,6 @@ export default {
   },
 };
 
-const ONE_ETHER = 100000000000000000000;
 </script>
 <style scoped>
 p {

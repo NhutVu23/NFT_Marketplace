@@ -4,10 +4,11 @@
   font-size: 0.875rem;
   position: relative;
   width: 100%;
-  margin: 30px 0;
+  // margin: 30px 0;
+  margin-top: 30px;
   overflow: unset;
 
-  @include box-shadow($bmd-shadow-2dp);
+  // @include box-shadow($bmd-shadow-2dp);
   border-radius: $border-radius-base + 3;
   color: $mdb-card-body-text;
   background: $mdb-card-body-background;
@@ -921,6 +922,7 @@
 
 .md-card-product {
   font-size: 18px;
+  padding: 10px;
 
   .price-container {
     display: inline-flex;

@@ -18,3 +18,14 @@ export const LOCAL_STORE = {
   LANG: "lang",
   EDITOR_DRAFT: "editorDraft",
 };
+
+// Asset type field
+export const ASSET_TYPE = {
+  ETH: 0,
+  ERC20: 1,
+  ERC1155: 2,
+  ERC721: 3,
+  ERC721Deprecated: 4,
+};
+export const ONE_ETHER = 1000000000000000000;
+export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";

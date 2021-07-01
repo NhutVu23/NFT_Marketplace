@@ -12,33 +12,35 @@
 }
 
 .modal-bg {
-  transition: visibility .30s ease, background-color .30s ease;
+  transition: visibility 0.3s ease, background-color 0.3s ease;
   visibility: hidden;
 
   &.show {
     visibility: visible;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
-
-.picture{
+.picture {
   max-width: 150px;
 
-  img{
+  img {
     border-radius: 6px;
   }
 }
 
-.modal-title{
+.modal-title {
   margin: 0;
   line-height: 1.5;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
 }
 
-.modal-body{
+.modal-body {
   padding: 24px 24px 16px;
 
-  p{
+  p {
     margin-top: 0;
   }
 
@@ -52,8 +54,9 @@
   margin: 0px auto;
   position: relative;
   background-color: #fff;
-  transition: all .3s ease;
-  box-shadow: 0 27px 24px 0 rgba(0,0,0,.2), 0 40px 77px 0 rgba(0,0,0,.22);
+  transition: all 0.3s ease;
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2),
+    0 40px 77px 0 rgba(0, 0, 0, 0.22);
   border-radius: 6px;
   border: none;
 
@@ -67,20 +70,20 @@
   }
 }
 
-.modal-header{
+.modal-header {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px 24px 0;
-  border-top-left-radius: .3rem;
-  border-top-right-radius: .3rem;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
 
-  .md-close .md-button-content i{
+  .md-close .md-button-content i {
     font-size: 16px !important;
-    opacity: .5;
+    opacity: 0.5;
 
     &:hover,
-    &:focus{
+    &:focus {
       opacity: 1;
     }
   }
@@ -100,7 +103,7 @@
   }
 }
 
-.modal-footer{
+.modal-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -113,19 +116,19 @@
 }
 
 .notice-modal + .modal-mask .modal-footer,
-.small-alert-modal + .modal-mask .modal-footer{
+.small-alert-modal + .modal-mask .modal-footer {
   justify-content: center;
 }
 
-.instruction{
+.instruction {
   margin-bottom: 25px;
 }
 
-.small-alert-modal + .modal-mask .modal-container{
+.small-alert-modal + .modal-mask .modal-container {
   width: 300px;
   margin: 0 auto;
 
-  .modal-body{
+  .modal-body {
     margin-top: 20px;
   }
 }

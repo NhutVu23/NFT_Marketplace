@@ -68,9 +68,10 @@ export default {
 
 <style lang="scss" scoped>
 .img {
-  height: 200px !important;
-  width: auto !important;
+  width: 261px !important;
+  height: 230px !important;
   text-align: center;
+  border-radius: 12px;
 }
 .md-card-header {
   text-align-last: center;

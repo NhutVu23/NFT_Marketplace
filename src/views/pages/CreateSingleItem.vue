@@ -411,7 +411,7 @@ export default {
           this.$loading(false);
 
           await this.$successAlert({
-            text: "Create Collection Succesfully",
+            text: "Create Item Succesfully",
           });
 
           this.$router.push("/my-collections");

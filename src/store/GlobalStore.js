@@ -4,7 +4,7 @@ export const GlobalStore = {
     loading: false,
     loadingModal: {
       isShow: false,
-      title: "Authorizing your account for this order...",
+      title: "",
       description:
         "If a signature request pops up, just click 'Sign' to verify that you own your wallet",
       image: null,
@@ -19,6 +19,9 @@ export const GlobalStore = {
     setLoadingModal: ({ commit }, loading) => {
       commit("SET_LOADING_MODAL", loading);
     },
+    setLoadingTitle: ({ commit }, loading) => {
+      commit("SET_LOADING_TITLE", loading);
+    },
     setLang: ({ commit }, currentLang) => {
       commit("SET_LANG", currentLang);
     },
@@ -29,6 +32,9 @@ export const GlobalStore = {
     },
     SET_LOADING_MODAL(state, data) {
       state.loadingModal.isShow = data;
+    },
+    SET_LOADING_TITLE(state, data) {
+      state.loadingModal.title = data;
     },
     SET_LANG(state, data) {
       state.currentLang = data;

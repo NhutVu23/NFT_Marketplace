@@ -87,10 +87,13 @@
                     :no-colored-shadow="false"
                   >
                     <template slot="cardContent">
-                      <h4 class="card-title">{{ item.name }}</h4>
+                      <h5 class="show-name">Owner: {{ item.owner }}</h5>
+                      <h5 class="show-name">1 of {{ item.total_quantity }}</h5>
                     </template>
                     <template slot="cardAction">
-                      <div class="price-container">Price</div>
+                      <div class="price-container card-title">
+                        {{ item.name }} #{{ item.token_id }}
+                      </div>
                       <div class="ml-auto price-container">
                         <md-button class="md-success">
                           {{ item.minBid || 0 }} ETH
@@ -113,8 +116,8 @@
               >
                 <div class="comment">
                   <a class="float-left" href="javascript:void(0)">
-                    <div class="avatar">
-                      <img :src="item.avatar" />
+                    <div class="avatar" v-lazy-container="{ selector: 'img' }">
+                      <img :data-src="item.avatar" :data-loading="loadimage" />
                     </div>
                   </a>
                   <div class="comment-body">
@@ -207,7 +210,7 @@
       <!-- Features 1 -->
       <div class="section section-features-1">
         <div class="container">
-          <div style="background: rgba(45, 129, 255, 0.05)">
+          <div class="box-item">
             <div class="md-layout">
               <div
                 class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
@@ -349,6 +352,7 @@ export default {
   mixins: [Mixins.HeaderImage],
   data() {
     return {
+      loadimage: require("@/assets/img/loading.gif"),
       carouselItems: [],
       listItems: [],
       listItemsOnSale: [],
@@ -400,5 +404,10 @@ export default {
   background: -webkit-linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.box-item {
+  background: rgba(45, 129, 255, 0.05);
+  padding: 10px;
+  border-radius: 10px;
 }
 </style>

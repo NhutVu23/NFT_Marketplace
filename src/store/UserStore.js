@@ -64,13 +64,17 @@ export const UserStore = {
     },
     checkAccounts: async ({ dispatch, state }) => {
       if (state.web3 === null) return;
+
+      console.log("checkAccounts");
       await state.web3.eth.getAccounts(async (err, accounts) => {
         if (err != null || !accounts || accounts.length == 0) {
+          console.log("logoutUser");
           await dispatch("logoutUser");
         } else if (
           !state.information ||
           state.information.wallet_address != accounts[0]
         ) {
+          console.log("loginUser");
           await dispatch("loginUser", accounts[0]);
         }
         await dispatch("checkNetWork");
@@ -78,6 +82,8 @@ export const UserStore = {
     },
     checkNetWork: ({ commit, state }) => {
       const netID = state.web3.utils.hexToNumber(window.ethereum.chainId); //User MetaMask's current status
+      console.log("netID");
+      console.log(netID);
       // if (state.information && state.information.wallet_address !== "") {
       //   if (netID === 1) return "MAINNET";
       //   if (state.information.wallet_address !== "" && netID === 3)
@@ -92,6 +98,7 @@ export const UserStore = {
       // }
     },
     loginMetamask: async ({ dispatch, state }) => {
+      console.log("loginMetamask");
       if (window.ethereum) {
         state.web3 = new Web3(ethereum);
         await ethereum.enable();
