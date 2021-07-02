@@ -186,11 +186,11 @@ export const Web3Ultils = {
 
         //Approve exchange token
 
-        await store.dispatch(
-          "global/setLoadingTitle",
-          "Approve Exchange Token"
-        );
-        await this.approveToken(item.minBid, metaMaskAddress);
+        // await store.dispatch(
+        //   "global/setLoadingTitle",
+        //   "Approve Exchange Token"
+        // );
+        // await this.approveToken(item.minBid, metaMaskAddress);
 
         const exchangeV1 = new window.web3.eth.Contract(
           ExchangeV1,
