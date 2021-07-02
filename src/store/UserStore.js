@@ -3,7 +3,7 @@ import { EDIT_USER, LOGIN_USER } from "./graphql/user/mutation";
 import { GET_ALL_USER } from "./graphql/user/query";
 import { Request } from "../utils/Request";
 import Web3 from "web3";
-import { failAlert } from "../utils/ComponentUtils";
+import { failAlert, successAlert } from "../utils/ComponentUtils";
 
 export const UserStore = {
   namespaced: true,
@@ -11,6 +11,7 @@ export const UserStore = {
     information: null,
     web3: null,
     ETHRate: 0,
+    AccountInterval: null,
   },
 
   actions: {
@@ -43,7 +44,7 @@ export const UserStore = {
         });
     },
     loginUser: ({ commit, dispatch }, data) => {
-      const result = apolloClient
+      apolloClient
         .mutate({
           mutation: LOGIN_USER,
           variables: {
@@ -56,52 +57,76 @@ export const UserStore = {
             commit("SET_USER", currentUser);
             localStorage.setItem("metaMaskAddress", currentUser.wallet_address);
             dispatch("getETHRate");
-            dispatch("loginMetamask");
+            successAlert({
+              text: `Login success with address \n ${currentUser.wallet_address}`,
+            });
           }
         });
     },
-    logoutUser: ({ commit }) => {
+    logoutUser: ({ commit, state }) => {
+      localStorage.removeItem("metaMaskAddress");
+
+      clearInterval(state.AccountInterval);
       commit("SET_USER", null);
     },
-    checkAccounts: async ({ dispatch, state }) => {
+    web3TimerCheck: ({ dispatch, state }) => {
       if (state.web3 === null) return;
-
-      await state.web3.eth.getAccounts(async (err, accounts) => {
+      state.AccountInterval = setInterval(async () => {
+        await dispatch("checkAccounts");
+      }, 2000);
+    },
+    checkAccounts: ({ dispatch, state }) => {
+      state.web3.eth.getAccounts(async (err, accounts) => {
         const netID = state.web3.utils.hexToNumber(window.ethereum.chainId); //User MetaMask's current status
         if (netID != 3) {
           await dispatch("logoutUser");
-
           failAlert({
-            text: "CURRENT WEB WORKING WITH TESTNET ROPSTEN",
+            text: "Current web working with testnet Ropsten",
           });
           return;
         }
-        
+
         if (err != null || !accounts || accounts.length == 0) {
-          // console.log("logoutUser");
           await dispatch("logoutUser");
+          failAlert({
+            text: "Please log in to your metamask to continue with this app.",
+          });
         } else if (
           !state.information ||
           state.information.wallet_address != accounts[0]
         ) {
-          // console.log("loginUser");
+          clearInterval(state.AccountInterval);
           await dispatch("loginUser", accounts[0]);
+          await dispatch("web3TimerCheck");
         }
       });
     },
     loginMetamask: async ({ dispatch, state }) => {
       if (window.ethereum) {
-        state.web3 = new Web3(ethereum);
-        await ethereum.enable();
-        await dispatch("checkAccounts");
+        try {
+          state.web3 = new Web3(ethereum);
+          await ethereum.enable();
+          await dispatch("checkAccounts");
+        } catch (error) {
+          failAlert({
+            text: error,
+          });
+        }
       } else if (window.web3) {
-        state.web3 = new Web3(web3.currentProvider);
-        await dispatch("checkAccounts");
+        try {
+          state.web3 = new Web3(web3.currentProvider);
+          await dispatch("checkAccounts");
+        } catch (error) {
+          failAlert({
+            text: error,
+          });
+        }
       } else {
         state.web3 = null;
+        failAlert({
+          text: "Please install metamask for this application",
+        });
       }
-
-      return state.wallet_address;
     },
   },
   mutations: {

@@ -145,6 +145,15 @@ export default {
       );
     },
   },
+  watch: {
+    async userData(newValue, oldValue) {
+      if (newValue && newValue.length > 0) {
+        this.profileName = newValue.wallet_address;
+      } else {
+        this.$router.push("/");
+      }
+    },
+  },
   mounted() {
     if (this.userData) {
       this.profileName = this.userData.wallet_address;

@@ -283,7 +283,7 @@ export default {
     var localAddress = localStorage.getItem("metaMaskAddress");
     try {
       if (localAddress && localAddress.length > 0) {
-        await this.$store.dispatch("user/loginUser", localAddress);
+        await this.$store.dispatch("user/loginMetamask", localAddress);
       } else {
         this.$store.dispatch("user/logoutUser");
       }
@@ -300,7 +300,6 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem("metaMaskAddress");
       this.$store.dispatch("user/logoutUser");
       this.$router.push("/");
     },
