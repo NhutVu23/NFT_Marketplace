@@ -8,7 +8,7 @@
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-80 md-medium-size-100 ml-auto mr-auto text-center"
+            class="md-layout-item md-size-100 md-medium-size-100 ml-auto mr-auto text-center"
           >
             <h1 class="title">Top NFTs</h1>
             <h4 class="title">
@@ -19,11 +19,26 @@
             <div class="md-layout text-center mt-2">
               <div class="md-layout-item">
                 <md-button
+                  href="javascript:void(0)"
+                  class="md-round"
+                  :class="
+                    'All' == filterName ? ' md-behance' : 'md-button-filter'
+                  "
+                  @click="filterName = 'All'"
+                >
+                  All
+                </md-button>
+                <md-button
                   v-for="(item, i) in listCategory"
                   :key="i"
                   href="javascript:void(0)"
-                  class="md-theme-default md-behance md-round"
+                  class="md-round"
+                  :class="
+                    item.name == filterName ? ' md-behance' : 'md-button-filter'
+                  "
+                  @click="filterName = item.name"
                 >
+                  <md-icon>{{ item.short_url }}</md-icon>
                   {{ item.name }}
                 </md-button>
               </div>
@@ -147,6 +162,7 @@ export default {
     return {
       image: require("@/assets/img/examples/bg2.jpg"),
       listItems: [],
+      filterName: "All",
     };
   },
   methods: {

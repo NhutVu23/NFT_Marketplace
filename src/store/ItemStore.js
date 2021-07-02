@@ -8,6 +8,7 @@ import {
 } from "./graphql/item/mutation";
 import {
   GET_ALL_ITEM,
+  GET_ITEM_CATEGORY,
   GET_ALL_ITEM_ON_SALE,
   GET_ITEM_DETAIL,
   GET_ITEM_OF_USER,
@@ -49,6 +50,14 @@ export const ItemStore = {
           variables: data,
         })
         .then(({ data }) => data.getAllItems);
+    },
+    getItemsByCategory: ({ commit }, data) => {
+      return apolloClient
+        .mutate({
+          mutation: GET_ITEM_CATEGORY,
+          variables: data,
+        })
+        .then(({ data }) => data.getItemsByCategory);
     },
     getAllItemsOnSale: ({ commit }, data) => {
       return apolloClient

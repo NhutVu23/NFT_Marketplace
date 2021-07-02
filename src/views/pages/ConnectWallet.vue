@@ -106,7 +106,7 @@ export default {
           text: error,
         });
       } finally {
-        this.$loading(true);
+        this.$loading(false);
       }
     },
   },

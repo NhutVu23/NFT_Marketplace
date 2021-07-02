@@ -1,8 +1,9 @@
 import { apolloClient } from "../utils/ApolloClient";
 import { EDIT_USER, LOGIN_USER } from "./graphql/user/mutation";
 import { GET_ALL_USER } from "./graphql/user/query";
-import { handleError, Request } from "../utils/Request";
+import { Request } from "../utils/Request";
 import Web3 from "web3";
+import { failAlert } from "../utils/ComponentUtils";
 
 export const UserStore = {
   namespaced: true,
@@ -66,31 +67,27 @@ export const UserStore = {
       if (state.web3 === null) return;
 
       await state.web3.eth.getAccounts(async (err, accounts) => {
+        const netID = state.web3.utils.hexToNumber(window.ethereum.chainId); //User MetaMask's current status
+        if (netID != 3) {
+          await dispatch("logoutUser");
+
+          failAlert({
+            text: "CURRENT WEB WORKING WITH TESTNET ROPSTEN",
+          });
+          return;
+        }
+        
         if (err != null || !accounts || accounts.length == 0) {
+          // console.log("logoutUser");
           await dispatch("logoutUser");
         } else if (
           !state.information ||
           state.information.wallet_address != accounts[0]
         ) {
+          // console.log("loginUser");
           await dispatch("loginUser", accounts[0]);
         }
-        await dispatch("checkNetWork");
       });
-    },
-    checkNetWork: ({ commit, state }) => {
-      const netID = state.web3.utils.hexToNumber(window.ethereum.chainId); //User MetaMask's current status
-      // if (state.information && state.information.wallet_address !== "") {
-      //   if (netID === 1) return "MAINNET";
-      //   if (state.information.wallet_address !== "" && netID === 3)
-      //     return "ROPSTEN";
-      //   if (state.information.wallet_address !== "" && netID === 42)
-      //     return "LOVAN";
-      //   if (state.information.wallet_address !== "" && netID === 4)
-      //     return "RINKEBY";
-      //   if (state.information.wallet_address !== "" && netID === 97)
-      //     return "BSC";
-      //   if (state.information.wallet_address !== "") return "MAINNET";
-      // }
     },
     loginMetamask: async ({ dispatch, state }) => {
       if (window.ethereum) {

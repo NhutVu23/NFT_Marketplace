@@ -8,7 +8,7 @@
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-90 md-small-size-100 mx-auto text-center"
+            class="md-layout-item md-size-100 md-small-size-100 mx-auto text-center"
           >
             <h1 class="title">NFT Marketplace</h1>
             <h4 class="title">
@@ -18,12 +18,40 @@
             <div class="md-layout text-center mt-2">
               <div class="md-layout-item">
                 <md-button
-                  v-for="(item, i) in listCategory"
+                  href="javascript:void(0)"
+                  class="md-round"
+                  :class="
+                    'All' == filterName ? ' md-behance' : 'md-button-filter'
+                  "
+                  @click="
+                    () => {
+                      filterName = 'All';
+                      getItems();
+                    }
+                  "
+                >
+                  All
+                </md-button>
+                <md-button
+                  v-for="(category, i) in listCategory"
                   :key="i"
                   href="javascript:void(0)"
-                  class="md-theme-default md-behance md-round"
+                  class="md-round"
+                  :class="
+                    category.name == filterName
+                      ? ' md-behance'
+                      : 'md-button-filter'
+                  "
+                  @click="
+                    () => {
+                      filterName = category.name;
+                      categoryID = category._id;
+                      getItems();
+                    }
+                  "
                 >
-                  {{ item.name }}
+                  <md-icon>{{ category.short_url }}</md-icon>
+                  {{ category.name }}
                 </md-button>
               </div>
             </div>
@@ -215,13 +243,24 @@
                     </template>
                   </aution-card>
                 </div>
-                <div
-                  class="md-layout-item md-size-10 md-small-size-100 mx-auto"
+              </div>
+              <div
+                class="md-layout-item md-size-60 md-small-size-100 mx-auto text-center"
+                style="padding: 10%"
+                v-else
+              >
+                <h2 class="description">No Data Information</h2>
+              </div>
+              <div
+                v-if="listItems && listItems.length > 15"
+                class="md-layout-item md-size-10 md-small-size-100 mx-auto"
+              >
+                <md-button
+                  @click="loadNextItems"
+                  class="md-button-filter md-round"
                 >
-                  <md-button @click="loadNextItems" class="md-rose md-round">
-                    Show More
-                  </md-button>
-                </div>
+                  Show More
+                </md-button>
               </div>
             </div>
           </div>
@@ -246,11 +285,7 @@ export default {
   async mounted() {
     this.$loading(true);
     try {
-      this.filterData.skip = Math.floor(Math.random() * 100);
-      this.listItems = await this.$store.dispatch(
-        "item/getAllItems",
-        this.filterData
-      );
+      await this.getItems();
     } catch (error) {
       this.$failAlert({
         text: error,
@@ -262,11 +297,13 @@ export default {
   data() {
     return {
       listItems: [],
+      filterName: "All",
       filterData: {
         skip: 0,
-        limit: 20,
+        limit: 16,
+        keySearch: null,
       },
-      subscribe: null,
+      categoryID: null,
       sliders: {
         rangeSlider: [101, 700],
       },
@@ -325,8 +362,11 @@ export default {
     },
     async loadNextItems() {
       try {
+        this.filterData.keySearch = this.categoryID;
         let newData = await this.$store.dispatch(
-          "item/getAllItems",
+          this.filterName == "All"
+            ? "item/getAllItems"
+            : "item/getItemsByCategory",
           this.filterData
         );
         if (newData && newData.length > 0) {
@@ -340,6 +380,38 @@ export default {
         }
       } catch (error) {}
     },
+
+    async getItems() {
+      this.listItems = await this.$store.dispatch(
+        this.filterName == "All"
+          ? "item/getAllItems"
+          : "item/getItemsByCategory",
+        {
+          skip: 0,
+          limit: 16,
+          keySearch: this.categoryID,
+        }
+      );
+
+      if (this.listItems.length == this.filterData.limit) {
+        this.filterData.skip += this.listItems.length;
+      } else {
+        this.skip = 0;
+      }
+    },
+    // async getItemsByCategory() {
+    //   this.listItems = await this.$store.dispatch("item/getItemsByCategory", {
+    //     skip: 0,
+    //     limit: 16,
+    //     keySearch: this.categoryID,
+    //   });
+
+    //   if (this.listItems.length == this.filterData.limit) {
+    //     this.filterData.skip += this.listItems.length;
+    //   } else {
+    //     this.skip = 0;
+    //   }
+    // },
   },
 };
 </script>

@@ -73,9 +73,9 @@
             <el-carousel-item v-for="(group, i) in carouselItems" :key="i">
               <div class="md-layout">
                 <div
-                  v-for="(item, i) in group"
-                  :key="i"
-                  class="md-layout-item md-size-33 md-small-size-100"
+                  v-for="(item, k) in group"
+                  :key="k"
+                  class="md-layout-item md-size-25 md-small-size-100"
                 >
                   <aution-card
                     text-center
@@ -118,13 +118,16 @@
               >
                 <div class="comment">
                   <a class="float-left" href="javascript:void(0)">
+                    {{ i + 1 }}
+                  </a>
+                  <a class="float-left" href="javascript:void(0)">
                     <div class="avatar" v-lazy-container="{ selector: 'img' }">
                       <img :data-src="item.avatar" :data-loading="loadimage" />
                     </div>
                   </a>
                   <div class="comment-body">
                     <h4 class="comment-heading">
-                      {{ i + 1 }}. {{ item.full_name }}
+                      {{ item.full_name }}
                     </h4>
 
                     <p>{{ item.bio }}</p>
@@ -136,7 +139,10 @@
         </div>
       </div>
 
-      <div class="subscribe-line subscribe-line-image" :style="imageSubscribe">
+      <div
+        class="subscribe-line subscribe-line-image mt-3"
+        :style="imageSubscribe"
+      >
         <div class="container justify-content-center">
           <div class="md-layout">
             <div class="md-layout-item md-size-100 mx-auto text-center">
@@ -154,23 +160,50 @@
         </div>
       </div>
 
-      <div v-if="listItems && listItems.length > 0" class="section pb-0">
-        <div class="container">
-          <h2 class="title text-center">Explore The Marketplace</h2>
+      <div class="section pb-0">
+        <div class="container mt-3">
+          <h2 class="title text-center mt-3">Explore The Marketplace</h2>
 
-          <div class="md-layout text-center mt-2">
+          <div class="md-layout text-center">
             <div class="md-layout-item">
               <md-button
-                v-for="(item, i) in listCategory"
+                href="javascript:void(0)"
+                class="md-round"
+                :class="
+                  'All' == filterName ? ' md-behance' : 'md-button-filter'
+                "
+                @click="
+                  () => {
+                    getAllItems();
+                    filterName = 'All';
+                  }
+                "
+              >
+                All
+              </md-button>
+              <md-button
+                v-for="(category, i) in listCategory"
                 :key="i"
                 href="javascript:void(0)"
-                class="md-theme-default md-behance md-round"
+                class="md-round"
+                :class="
+                  category.name == filterName
+                    ? ' md-behance'
+                    : 'md-button-filter'
+                "
+                @click="
+                  () => {
+                    filterName = category.name;
+                    getItemsByCategory(category._id);
+                  }
+                "
               >
-                {{ item.name }}
+                <md-icon>{{ category.short_url }}</md-icon>
+                {{ category.name }}
               </md-button>
             </div>
           </div>
-          <div class="md-layout">
+          <div class="md-layout" v-if="listItems && listItems.length > 0">
             <div
               v-for="(item, i) in listItems"
               :key="i"
@@ -199,9 +232,22 @@
               </aution-card>
             </div>
           </div>
+          <div
+            class="md-layout-item md-size-50 md-small-size-100 mx-auto text-center"
+            style="padding: 10%"
+            v-else
+          >
+            <h2 class="description">No Data Information</h2>
+          </div>
 
-          <div class="md-layout-item md-size-10 md-small-size-100 mx-auto">
-            <md-button @click="goTo('marketPlace')" class="md-rose md-round">
+          <div
+            class="md-layout-item md-size-10 md-small-size-100 mx-auto text-center"
+          >
+            <md-button
+              v-if="listItems && listItems.length > 15"
+              @click="goTo('marketPlace')"
+              class="md-button-filter md-round"
+            >
               Show More
             </md-button>
           </div>
@@ -211,84 +257,77 @@
 
       <!-- Features 1 -->
       <div class="section section-features-1">
-        <div class="container">
-          <div class="box-item">
-            <div class="md-layout">
-              <div
-                class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
-              >
-                <h2 class="title">Create and Sell Your NFTs</h2>
-              </div>
-            </div>
-            <div class="md-layout">
-              <div class="md-layout-item md-size-25 md-small-size-100">
-                <info-areas icon-color="info" icon="chat" text-center>
-                  <h4 slot="title" class="info-title">Set up your wallet</h4>
-                  <p slot="content">
-                    Once you’ve set up your wallet of choice, connect it to LOGO
-                    by clicking the wallet icon in the top right corner.
-                  </p>
-                </info-areas>
-              </div>
-              <div class="md-layout-item md-size-25 md-small-size-100">
-                <info-areas
-                  icon-color="success"
-                  icon="verified_user"
-                  text-center
-                >
-                  <h4 slot="title" class="info-title">
-                    Create your collection
-                  </h4>
-                  <p slot="content">
-                    Add social links, a description, profile & banner images,
-                    and set a secondary sales fee.
-                  </p>
-                </info-areas>
-              </div>
-              <div class="md-layout-item md-size-25 md-small-size-100">
-                <info-areas icon-color="danger" icon="fingerprint" text-center>
-                  <h4 slot="title" class="info-title">Add your NFTs</h4>
-                  <p slot="content">
-                    Upload your work, add a title and description, and customize
-                    your NFTs with properties, stats, and unlockable content.
-                  </p>
-                </info-areas>
-              </div>
-              <div class="md-layout-item md-size-25 md-small-size-100">
-                <info-areas
-                  icon-color="danger"
-                  icon="add_shopping_cart"
-                  text-center
-                >
-                  <h4 slot="title" class="info-title">List them for sale</h4>
-                  <p slot="content">
-                    Choose between auctions, fixed-price listings, and
-                    declining-price listings, and we help you sell them!
-                  </p>
-                </info-areas>
-              </div>
-            </div>
-          </div>
-
+        <div class="box-item">
           <div class="md-layout">
             <div
-              class="md-layout-item md-size-66 md-small-size-80 mx-auto text-center"
+              class="md-layout-item md-size-66 md-small-size-100 mx-auto text-center"
             >
-              <h2 class="title">Join Our Community</h2>
-              <h5 class="description">
-                Every NFTs on LOGO is authentic and truly unique. Blockchain
-                technology makes this new approach to digital ownership
-                possible. Use our platform to showcase and sell your work to
-                collectors who care about authenticity. Meet the LOGO team,
-                artists and collectors for platform updates, announcements, and
-                more...
-              </h5>
-
-              <div class="md-layout-item md-size-25 md-small-size-100 mx-auto">
-                <md-button class="md-rose md-round"> Read More </md-button>
-              </div>
-              <br />
+              <h2 class="title">Create and Sell Your NFTs</h2>
             </div>
+          </div>
+          <div class="md-layout" style="padding: 0 15%">
+            <div class="md-layout-item md-size-25 md-small-size-100">
+              <info-areas icon-color="info" icon="chat" text-center>
+                <h4 slot="title" class="info-title">Set up your wallet</h4>
+                <p slot="content">
+                  Once you’ve set up your wallet of choice, connect it to LOGO
+                  by clicking the wallet icon in the top right corner.
+                </p>
+              </info-areas>
+            </div>
+            <div class="md-layout-item md-size-25 md-small-size-100">
+              <info-areas icon-color="success" icon="verified_user" text-center>
+                <h4 slot="title" class="info-title">Create your collection</h4>
+                <p slot="content">
+                  Add social links, a description, profile & banner images, and
+                  set a secondary sales fee.
+                </p>
+              </info-areas>
+            </div>
+            <div class="md-layout-item md-size-25 md-small-size-100">
+              <info-areas icon-color="danger" icon="fingerprint" text-center>
+                <h4 slot="title" class="info-title">Add your NFTs</h4>
+                <p slot="content">
+                  Upload your work, add a title and description, and customize
+                  your NFTs with properties, stats, and unlockable content.
+                </p>
+              </info-areas>
+            </div>
+            <div class="md-layout-item md-size-25 md-small-size-100">
+              <info-areas
+                icon-color="danger"
+                icon="add_shopping_cart"
+                text-center
+              >
+                <h4 slot="title" class="info-title">List them for sale</h4>
+                <p slot="content">
+                  Choose between auctions, fixed-price listings, and
+                  declining-price listings, and we help you sell them!
+                </p>
+              </info-areas>
+            </div>
+          </div>
+        </div>
+
+        <div class="md-layout">
+          <div
+            class="md-layout-item md-size-60 md-small-size-80 mx-auto text-center"
+          >
+            <h2 class="title">Join Our Community</h2>
+            <h5 class="description">
+              Every NFTs on LOGO is authentic and truly unique. Blockchain
+              technology makes this new approach to digital ownership possible.
+              Use our platform to showcase and sell your work to collectors who
+              care about authenticity. Meet the LOGO team, artists and
+              collectors for platform updates, announcements, and more...
+            </h5>
+
+            <div class="md-layout-item md-size-25 md-small-size-100 mx-auto">
+              <md-button class="md-button-filter md-round">
+                Read More
+              </md-button>
+            </div>
+            <br />
           </div>
         </div>
       </div>
@@ -312,41 +351,10 @@ export default {
   async mounted() {
     this.$loading(true);
     try {
-      this.listItemsOnSale = await this.$store.dispatch(
-        "item/getAllItemsOnSale",
-        {
-          skip: 0,
-          limit: 12,
-        }
-      );
-
-      const saleItemsSigned = this.listItemsOnSale.filter(
-        (x) => x.isPutOnMarket && x.sellOrder
-      );
-
-      for (let index = 0; index < saleItemsSigned.length; index++) {
-        let tmp = Math.floor(index / 3);
-        if (this.carouselItems.length == tmp) {
-          this.carouselItems.push([]);
-        }
-        this.carouselItems[tmp].push(saleItemsSigned[index]);
-      }
-      this.listItems = await this.$store.dispatch("item/getAllItems", {
-        skip: Math.floor(Math.random() * 100),
-        limit: 20,
-      });
-      this.listColllections = await this.$store.dispatch(
-        "collection/getAllCollections"
-      );
-
-      for (let index = 0; index < this.listColllections.length; index++) {
-        let tmp = Math.floor(index / 2);
-        if (this.carousel.length == tmp) {
-          this.carousel.push([]);
-        }
-        this.carousel[tmp].push(this.listColllections[index]);
-      }
-
+      await this.getItemsOnSale();
+      this.$loading(false);
+      await this.getAllItems();
+      await this.getListCollections();
       this.listUsers = await this.$store.dispatch("user/getAllUsers");
     } catch (error) {
       this.$failAlert({
@@ -365,21 +373,16 @@ export default {
       listColllections: [],
       listUsers: [],
       subscribe: null,
+      filterName: "All",
       image: require("@/assets/img/examples/homeBanner.png"),
       image2: require("@/assets/img/examples/ecommerce-header.jpg"),
-
-      cardProject: {
-        cardProject1: require("@/assets/img/examples/office2.jpg"),
-        cardProject2: require("@/assets/img/examples/blog8.jpg"),
-        cardProject3: require("@/assets/img/examples/card-project6.jpg"),
-      },
       carousel: [],
     };
   },
   computed: {
     imageSubscribe() {
       return {
-        backgroundImage: `url(${this.cardProject.cardProject3})`,
+        backgroundImage: `url(${this.image2})`,
       };
     },
     listCategory() {
@@ -390,13 +393,63 @@ export default {
     goTo(url) {
       this.$router.push("/" + url);
     },
+    async getAllItems() {
+      this.listItems = await this.$store.dispatch("item/getAllItems", {
+        skip: Math.floor(Math.random() * 100),
+        limit: 16,
+      });
+    },
+    async getItemsByCategory(categoryID) {
+      this.listItems = await this.$store.dispatch("item/getItemsByCategory", {
+        skip: 0,
+        limit: 16,
+        keySearch: categoryID,
+      });
+    },
+    async getItemsOnSale() {
+      this.listItemsOnSale = await this.$store.dispatch(
+        "item/getAllItemsOnSale",
+        {
+          skip: 0,
+          limit: 12,
+        }
+      );
+
+      const saleItemsSigned = this.listItemsOnSale.filter(
+        (x) => x.isPutOnMarket && x.sellOrder
+      );
+
+      for (let index = 0; index < saleItemsSigned.length; index++) {
+        let tmp = Math.floor(index / 4);
+        if (this.carouselItems.length == tmp) {
+          this.carouselItems.push([]);
+        }
+        this.carouselItems[tmp].push(saleItemsSigned[index]);
+      }
+    },
+    async getListCollections() {
+      this.listColllections = await this.$store.dispatch(
+        "collection/getAllCollections"
+      );
+
+      for (let index = 0; index < this.listColllections.length; index++) {
+        let tmp = Math.floor(index / 2);
+        if (this.carousel.length == tmp) {
+          this.carousel.push([]);
+        }
+        this.carousel[tmp].push(this.listColllections[index]);
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.section {
+  padding: 0%;
+}
 .mt-3 {
-  margin-top: 1.875rem * 2;
+  margin-top: 2.5rem;
 }
 .mb-0 {
   margin-bottom: 0;
@@ -410,6 +463,7 @@ export default {
   background: -webkit-linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
 .box-item {
   background: rgba(45, 129, 255, 0.05);

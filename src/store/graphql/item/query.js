@@ -41,6 +41,45 @@ export const GET_ALL_ITEM = gql`
     }
   }
 `;
+export const GET_ITEM_CATEGORY = gql`
+  query(
+    $skip: Int
+    $limit: Int
+    $keySearch: String
+    $keyName: String
+    $order: String
+    $sortBy: String
+  ) {
+    getItemsByCategory(
+      skip: $skip
+      limit: $limit
+      keySearch: $keySearch
+      keyName: $keyName
+      order: $order
+      sortBy: $sortBy
+    ) {
+      _id
+      token_id
+      category_id
+      collection_id
+      name
+      description
+      external_link
+      image
+      preview
+      total_quantity
+      isPutOnMarket
+      signature
+      sellOrder
+      minBid
+      royalties
+      creator
+      owner
+      created_at
+      updated_at
+    }
+  }
+`;
 export const GET_ALL_ITEM_ON_SALE = gql`
   query(
     $skip: Int
