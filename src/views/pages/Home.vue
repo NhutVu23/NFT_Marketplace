@@ -122,12 +122,17 @@
                   </a>
                   <a class="float-left" href="javascript:void(0)">
                     <div class="avatar" v-lazy-container="{ selector: 'img' }">
-                      <img :data-src="item.avatar" :data-loading="loadimage" />
+                      <img
+                        :data-src="item.avatar || loadimage"
+                        :data-loading="loadimage"
+                      />
                     </div>
                   </a>
                   <div class="comment-body">
-                    <h4 class="comment-heading">
-                      {{ item.full_name }}
+                    <h4 class="comment-heading show-name">
+                      {{
+                        item.full_name || showWalletSeller(item.wallet_address)
+                      }}
                     </h4>
 
                     <p>{{ item.bio }}</p>
@@ -392,6 +397,13 @@ export default {
   methods: {
     goTo(url) {
       this.$router.push("/" + url);
+    },
+    showWalletSeller(wallet) {
+      return (
+        wallet.substring(0, 5) +
+        "..." +
+        wallet.substring(wallet.length - 5, wallet.length)
+      );
     },
     async getAllItems() {
       this.listItems = await this.$store.dispatch("item/getAllItems", {
