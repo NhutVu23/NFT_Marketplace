@@ -53,8 +53,6 @@ export default {
   },
   watch: {
     async walletAddress(newValue, oldValue) {
-      console.log("walletAddress");
-      console.log(newValue);
       if (newValue) {
         this.loadFirst(newValue);
       } else {

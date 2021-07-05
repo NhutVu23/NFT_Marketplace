@@ -56,9 +56,6 @@ export default {
       } else {
         this.web3 = null;
         this.Log(this.MetamaskMsg.METAMASK_NOT_INSTALL, "NO_INSTALL_METAMASK");
-        // console.error(
-        //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
-        // );
       }
     },
     checkWeb3() {

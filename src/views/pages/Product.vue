@@ -440,8 +440,6 @@ export default {
           "item/requestMintSignature",
           this.item.token_id
         );
-        // console.log(`result:`);
-        // console.log(result);
 
         const isSellItem = await Web3Ultils.sellItem(
           result,
@@ -478,7 +476,6 @@ export default {
           "item/requestBuyAsset",
           this.item.token_id
         );
-        // console.log(result);
 
         const isBuyItem = await Web3Ultils.buyAsset(
           result,

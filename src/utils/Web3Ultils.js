@@ -166,8 +166,6 @@ export const Web3Ultils = {
       item.id = item._id;
       item.isPutOnMarket = true;
       item.sellOrder = JSON.stringify(sellOrder);
-      // console.log(" item.sellOrder");
-      // console.log(item.sellOrder);
       store.dispatch("item/editItem", item);
     }
   },
@@ -277,16 +275,13 @@ export const Web3Ultils = {
       .allowance(metaMaskAddress, process.env.VUE_APP_ERC20_TRANSFER_PROXY)
       .call();
 
-    // console.log(`allowance: ${allowance}`);
     const totalSupply = await wethContract.methods.totalSupply().call();
 
-    // console.log(`totalSupply: ${totalSupply}`);
     if (allowance < price * ONE_ETHER) {
       const approve = await wethContract.methods
         .approve(process.env.VUE_APP_ERC20_TRANSFER_PROXY, totalSupply)
         .send({ from: metaMaskAddress });
 
-      // console.log(`approve: ${approve}`);
     }
   },
 };

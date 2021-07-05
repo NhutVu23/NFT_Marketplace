@@ -287,8 +287,6 @@ export default {
       this.listItems = this.collection.items;
     }
 
-    console.log(this.listItems);
-
     this.$loading(false);
   },
   data() {
