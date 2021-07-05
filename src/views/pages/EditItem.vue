@@ -412,7 +412,7 @@ export default {
             text: "Create Collection Succesfully",
           });
 
-          this.$router.push("/my-collections");
+          this.$router.push("/user-profile");
         } catch (error) {
           this.$loading(false);
           this.$failAlert({

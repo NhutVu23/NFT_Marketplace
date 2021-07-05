@@ -6,6 +6,7 @@ import {
 import {
   GET_COLLECTION_FOR_USER,
   GET_ALL_COLLECTION,
+  GET_DETAIL_COLLECTION,
 } from "./graphql/collection/query";
 
 export const CollectionStore = {
@@ -27,6 +28,14 @@ export const CollectionStore = {
           variables: data,
         })
         .then(({ data }) => data.getCollectionForUser);
+    },
+    getDetailCollection: ({ commit }, data) => {
+      return apolloClient
+        .mutate({
+          mutation: GET_DETAIL_COLLECTION,
+          variables: data,
+        })
+        .then(({ data }) => data.getDetailCollection);
     },
     createCollection: ({ commit }, data) => {
       return apolloClient

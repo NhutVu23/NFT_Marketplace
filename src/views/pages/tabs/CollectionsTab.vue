@@ -8,7 +8,10 @@
             :key="i"
             class="md-layout-item md-size-25 md-small-size-100"
           >
-            <full-bg-card :card-image="item.image">
+            <full-bg-card
+              :card-image="item.image"
+              @click.native="viewCollection(item._id)"
+            >
               <template slot="cardContent">
                 <!-- <h6 class="card-category text-info">
                     Worlds
@@ -22,16 +25,15 @@
               </template>
             </full-bg-card>
           </div>
-
-          <div
-            v-if="isShowMore"
-            class="md-layout-item md-size-10 md-small-size-100 mx-auto"
-          >
-            <md-button @click="loadNextItems" class="md-rose md-round">
-              Show More
-            </md-button>
-          </div>
         </div>
+      </div>
+      <div
+        v-if="isShowMore"
+        class="md-layout-item md-size-10 md-small-size-100 mx-auto"
+      >
+        <md-button @click="loadNextItems" class="md-rose md-round">
+          Show More
+        </md-button>
       </div>
     </div>
   </div>
@@ -43,23 +45,28 @@ import FullBgCard from "../../../components/cards/FullBgCard.vue";
 
 export default {
   components: { FullBgCard },
-  props: {},
-  async mounted() {
-    const walletAddress = localStorage.getItem("metaMaskAddress");
-    if (walletAddress) {
-      this.$loading(true);
-      try {
-        this.profileName = walletAddress;
-        this.filterData.wallet_address = walletAddress;
-        this.loadNextItems();
-      } catch (error) {
-        this.$failAlert({
-          text: error,
-        });
+  props: { walletAddress: String },
+  computed: {
+    userData() {
+      return this.$store.state.user?.information;
+    },
+  },
+  watch: {
+    async walletAddress(newValue, oldValue) {
+      console.log("walletAddress");
+      console.log(newValue);
+      if (newValue) {
+        this.loadFirst(newValue);
+      } else {
+        this.profileName = null;
+        this.filterData.wallet_address = null;
+        this.listItems = [];
       }
-      this.$loading(false);
-    } else {
-      this.$router.push("/");
+    },
+  },
+  async mounted() {
+    if (this.walletAddress) {
+      this.loadFirst(this.walletAddress);
     }
   },
   mixins: [Mixins.HeaderImage],
@@ -84,16 +91,41 @@ export default {
           "collection/getCollectionForUser",
           this.filterData
         );
-        if (newData && newData.length > 0) {
-          this.listItems.push.apply(this.listItems, newData);
 
+        if (newData && newData.length > 0) {
           if (newData.length == this.filterData.limit) {
             this.filterData.skip += newData.length;
           } else {
             this.isShowMore = false;
           }
+          this.listItems.push.apply(this.listItems, newData);
         }
       } catch (error) {}
+    },
+    viewCollection(collectionId) {
+      this.$router.push(`/collection/${collectionId}`);
+    },
+    async loadFirst(newValue) {
+      this.$loading(true);
+      try {
+        this.profileName = newValue;
+        this.filterData.skip = 0;
+        this.filterData.limit = 20;
+        this.filterData.wallet_address = newValue;
+        this.listItems = await this.$store.dispatch(
+          "collection/getCollectionForUser",
+          this.filterData
+        );
+
+        if (this.listItems.length != this.filterData.limit) {
+          this.isShowMore = false;
+        }
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      }
+      this.$loading(false);
     },
   },
 };

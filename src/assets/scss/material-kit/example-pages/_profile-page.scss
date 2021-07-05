@@ -26,6 +26,25 @@
       margin-top: -80px;
     }
   }
+  .collection {
+    position: relative;
+    text-align: center;
+    border-radius: 16px;
+    // @include transform-translate-y(-50%);
+    background: transparent;
+    border: none;
+    // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+    img {
+      max-width: 160px;
+      width: 100%;
+      margin: 0 auto;
+      @include transform-translate-y(-50%);
+    }
+    .name {
+      margin-top: -80px;
+    }
+  }
   .follow {
     position: absolute;
     top: 0px;

@@ -37,9 +37,6 @@
                 >
                   <full-bg-card :card-image="item.image">
                     <template slot="cardContent">
-                      <!-- <h6 class="card-category text-info">
-                    Worlds
-                  </h6> -->
                       <a href="javascript:void(0)">
                         <h3 class="card-title">{{ item.name }}</h3>
                       </a>
@@ -87,10 +84,10 @@
                     :no-colored-shadow="false"
                   >
                     <template slot="cardContent">
-                      <p class="show-name">Owner: {{ item.owner }}</p>
-                      <p class="show-name">
+                      <h5 class="show-name">Owner: {{ item.owner }}</h5>
+                      <h5 class="show-name">
                         On Sale 1 of {{ item.total_quantity }}
-                      </p>
+                      </h5>
                     </template>
                     <template slot="cardAction">
                       <div class="price-container card-title">
@@ -117,10 +114,16 @@
                 :key="i"
               >
                 <div class="comment">
-                  <a class="float-left" href="javascript:void(0)">
+                  <a
+                    class="float-left"
+                    :href="`#/user-profile/${item.wallet_address}`"
+                  >
                     {{ i + 1 }}
                   </a>
-                  <a class="float-left" href="javascript:void(0)">
+                  <a
+                    class="float-left"
+                    :href="`#/user-profile/${item.wallet_address}`"
+                  >
                     <div class="avatar" v-lazy-container="{ selector: 'img' }">
                       <img
                         :data-src="item.avatar || loadimage"
@@ -129,11 +132,17 @@
                     </div>
                   </a>
                   <div class="comment-body">
-                    <h4 class="comment-heading show-name">
-                      {{
-                        item.full_name || showWalletSeller(item.wallet_address)
-                      }}
-                    </h4>
+                    <a
+                      class="float-left"
+                      :href="`#/user-profile/${item.wallet_address}`"
+                    >
+                      <h4 class="comment-heading show-name">
+                        {{
+                          item.full_name ||
+                          showWalletSeller(item.wallet_address)
+                        }}
+                      </h4>
+                    </a>
 
                     <p>{{ item.bio }}</p>
                   </div>
@@ -481,5 +490,11 @@ export default {
   background: rgba(45, 129, 255, 0.05);
   padding: 10px;
   border-radius: 10px;
+}
+.md-card-content {
+  padding: 0px !important;
+  h5 {
+    margin: 0px !important;
+  }
 }
 </style>

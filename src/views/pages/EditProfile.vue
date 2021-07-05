@@ -244,7 +244,7 @@ export default {
         await this.$successAlert({
           text: "Update Profile Succesfully",
         });
-        this.$router.push("/my-collections");
+        this.$router.push("/user-profile");
       } catch (error) {
         this.$loading(false);
         this.$failAlert({

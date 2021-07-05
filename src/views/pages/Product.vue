@@ -33,7 +33,7 @@
             <div class="md-layout-item md-size-50 md-small-size-100">
               <p>Creator</p>
               <div class="comment">
-                <a class="float-left" href="javascript:void(0)">
+                <a class="float-left" :href="`/user-profile/${item.creator}`">
                   <div class="small-avatar">
                     <div v-lazy-container="{ selector: 'img' }">
                       <img :data-src="item.image" :data-loading="loadimage" />
@@ -41,14 +41,16 @@
                   </div>
                 </a>
                 <div class="comment-body">
-                  <p class="show-name">{{ item.creator }}</p>
+                  <a :href="`#/user-profile/${item.creator}`">
+                    <p class="show-name">{{ showShortName(item.creator) }}</p>
+                  </a>
                 </div>
               </div>
             </div>
             <div class="md-layout-item md-size-50 md-small-size-100">
               <p>Collection</p>
               <div class="comment">
-                <a class="float-left" href="javascript:void(0)">
+                <a class="float-left" href="'javascript:void(0)'">
                   <div class="small-avatar">
                     <div v-lazy-container="{ selector: 'img' }">
                       <img :data-src="item.image" :data-loading="loadimage" />
@@ -413,6 +415,13 @@ export default {
     };
   },
   methods: {
+    showShortName(name) {
+      return (
+        name.substring(0, 5) +
+        "..." +
+        name.substring(name.length - 5, name.length)
+      );
+    },
     shadowImageBlog(image) {
       return {
         backgroundImage: `url(${image})`,
@@ -443,7 +452,7 @@ export default {
           this.$successAlert({
             text: "Sell Item Successfull",
           });
-          this.$router.push("/my-collections");
+          this.$router.push("/user-profile");
         }
       } catch (error) {
         this.$failAlert({
@@ -481,7 +490,7 @@ export default {
           this.$successAlert({
             text: "Buy Item Successfull",
           });
-          this.$router.push("/my-collections");
+          this.$router.push("/user-profile");
         }
       } catch (error) {
         this.$failAlert({

@@ -22,6 +22,16 @@ export const UserStore = {
         })
         .then(({ data }) => data.getAllUsers);
     },
+    getUserProfile: ({ commit }, data) => {
+      return apolloClient
+        .mutate({
+          mutation: LOGIN_USER,
+          variables: {
+            wallet_address: data,
+          },
+        })
+        .then(({ data }) => data.checkExistUser);
+    },
     editProfile: ({ commit }, data) => {
       return apolloClient
         .mutate({

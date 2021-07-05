@@ -36,8 +36,6 @@ export const GET_ALL_ITEM = gql`
       owner
       created_at
       updated_at
-      collection
-      category
     }
   }
 `;
@@ -116,8 +114,6 @@ export const GET_ALL_ITEM_ON_SALE = gql`
       owner
       created_at
       updated_at
-      collection
-      category
     }
   }
 `;
@@ -160,8 +156,6 @@ export const GET_ITEM_OF_USER = gql`
       owner
       created_at
       updated_at
-      collection
-      category
     }
   }
 `;
@@ -203,8 +197,6 @@ export const GET_ITEM_CREATED = gql`
       owner
       created_at
       updated_at
-      collection
-      category
     }
   }
 `;

@@ -156,7 +156,7 @@
                       </md-button>
                       <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                          <a :href="'#/my-collections'"> My Collectiable </a>
+                          <a :href="'#/user-profile'"> My Collectiable </a>
                         </li>
                         <li>
                           <a :href="'#/edit-profile'"> Edit Profile </a>

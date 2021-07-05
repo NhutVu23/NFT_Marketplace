@@ -30,16 +30,16 @@
               </template>
             </aution-card>
           </div>
-
-          <div
-            v-if="isShowMore"
-            class="md-layout-item md-size-10 md-small-size-100 mx-auto"
-          >
-            <md-button @click="loadNextItems" class="md-rose md-round">
-              Show More
-            </md-button>
-          </div>
         </div>
+      </div>
+
+      <div
+        v-if="isShowMore"
+        class="md-layout-item md-size-10 md-small-size-100 mx-auto"
+      >
+        <md-button @click="loadNextItems" class="md-rose md-round">
+          Show More
+        </md-button>
       </div>
     </div>
   </div>
@@ -51,29 +51,28 @@ import AutionCard from "../../../components/cards/AutionCard.vue";
 
 export default {
   components: { AutionCard },
-  props: {},
-
+  props: { walletAddress: String },
   computed: {
     userData() {
       return this.$store.state.user?.information;
     },
   },
-  async mounted() {
-    if (this.userData && this.userData.wallet_address) {
-      const walletAddress = this.userData.wallet_address;
-      this.$loading(true);
-      try {
-        this.profileName = walletAddress;
-        this.filterData.wallet_address = walletAddress;
-        this.loadNextItems();
-      } catch (error) {
-        this.$failAlert({
-          text: error,
-        });
+  watch: {
+    async walletAddress(newValue, oldValue) {
+      console.log("walletAddress");
+      console.log(newValue);
+      if (newValue) {
+        this.loadFirst(newValue);
+      } else {
+        this.profileName = null;
+        this.filterData.wallet_address = null;
+        this.listItems = [];
       }
-      this.$loading(false);
-    } else {
-      this.$router.push("/");
+    },
+  },
+  async mounted() {
+    if (this.walletAddress) {
+      this.loadFirst(this.walletAddress);
     }
   },
   mixins: [Mixins.HeaderImage],
@@ -98,19 +97,45 @@ export default {
           "item/getItemForUser",
           this.filterData
         );
-        if (newData && newData.length > 0) {
-          this.listItems.push.apply(
-            this.listItems,
-            newData.filter((x) => x.isPutOnMarket && x.sellOrder)
-          );
 
+        if (newData && newData.length > 0) {
           if (newData.length == this.filterData.limit) {
             this.filterData.skip += newData.length;
           } else {
             this.isShowMore = false;
           }
+          this.listItems.push.apply(
+            this.listItems,
+            newData.filter((x) => x.isPutOnMarket && x.sellOrder)
+          );
         }
       } catch (error) {}
+    },
+    async loadFirst(newValue) {
+      this.$loading(true);
+      try {
+        this.profileName = newValue;
+        this.filterData.skip = 0;
+        this.filterData.limit = 20;
+        this.filterData.wallet_address = newValue;
+        this.listItems = await this.$store.dispatch(
+          "item/getItemForUser",
+          this.filterData
+        );
+
+        if (this.listItems.length != this.filterData.limit) {
+          this.isShowMore = false;
+        }
+
+        this.listItems = this.listItems.filter(
+          (x) => x.isPutOnMarket && x.sellOrder
+        );
+      } catch (error) {
+        this.$failAlert({
+          text: error,
+        });
+      }
+      this.$loading(false);
     },
   },
 };

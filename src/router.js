@@ -3,7 +3,8 @@ import Router from "vue-router";
 
 //  Main Pages
 import Login from "./views/pages/Login.vue";
-import Collections from "./views/pages/Collections.vue";
+import UserProfile from "./views/pages/UserProfile.vue";
+import Collection from "./views/pages/Collection.vue";
 import CreateCollection from "./views/pages/CreateCollection.vue";
 import CreateItem from "./views/pages/CreateItem.vue";
 import CreateSingleItem from "./views/pages/CreateSingleItem.vue";
@@ -104,10 +105,34 @@ export default new Router({
       },
     },
     {
-      path: "/my-collections",
-      name: "my-collections",
+      path: "/user-profile",
+      name: "user-profile",
       components: {
-        default: Collections,
+        default: UserProfile,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/user-profile/:wallet",
+      name: "user-profile",
+      components: {
+        default: UserProfile,
+        header: MainNavbar,
+        footer: CustomFooter,
+      },
+      props: {
+        header: { colorOnScroll: 400, navbarTransparent: true },
+      },
+    },
+    {
+      path: "/collection/:id",
+      name: "collection",
+      components: {
+        default: Collection,
         header: MainNavbar,
         footer: CustomFooter,
       },

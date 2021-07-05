@@ -257,7 +257,7 @@ export default {
               text: "Create Collection Succesfully",
             });
 
-            this.$router.push("/my-collections");
+            this.$router.push("/user-profile");
           } else {
             this.$failAlert({
               text: "Create Collection Fail",
