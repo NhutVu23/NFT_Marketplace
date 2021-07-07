@@ -12,17 +12,20 @@
             <div class="md-layout-item md-size-80 md-small-size-100 mx-auto">
               <div class="profile">
                 <profile-card
+                  v-if="viewUser"
                   flex-direction-row
                   card-avatar
                   card-plain
                   :shadow-normal="false"
                   :no-colored-shadow="true"
                   :card-image="viewUser ? viewUser.avatar : imageCircle"
-                  v-if="viewUser"
                 >
                   <template slot="cardContent">
                     <h2 class="card-title show-name">
-                      {{ viewUser.full_name || viewUser.wallet_address }}
+                      {{
+                        viewUser.full_name ||
+                        showShortName(viewUser.wallet_address)
+                      }}
                     </h2>
                     <h4 class="card-category text-muted">
                       {{ viewUser.bio }}
@@ -73,6 +76,7 @@
                 'Following (34)', -->
             <!-- TODO: count item on each tag -->
             <tabs
+              v-if="viewUser"
               :tab-active="tabActive"
               :tab-name="['On Sale ', 'In Wallet ', 'Created ', 'Collections ']"
               :tab-icon="[]"
@@ -81,16 +85,15 @@
             >
               <!-- here you can add your content for tab-content -->
               <template slot="tab-pane-1">
-                <on-sale-tab 
-                  :walletAddress="viewUser.wallet_address || ''"/>
+                <on-sale-tab :walletAddress="viewUser.wallet_address || ''" />
               </template>
               <template slot="tab-pane-2">
-                <in-wallet-tab 
-                  :walletAddress="viewUser.wallet_address || ''"/>
+                <in-wallet-tab :walletAddress="viewUser.wallet_address || ''" />
               </template>
               <template slot="tab-pane-3">
-                <created-item-tab 
-                  :walletAddress="viewUser.wallet_address || ''"/>
+                <created-item-tab
+                  :walletAddress="viewUser.wallet_address || ''"
+                />
               </template>
               <template slot="tab-pane-4">
                 <collections-tab
@@ -148,13 +151,14 @@ export default {
       return this.$store.state.user?.information;
     },
     image() {
-      return (
-        this.viewUser?.banner_img || require("@/assets/img/placeholder.jpg")
-      );
+      return this.viewUser?.banner_img || require("@/assets/img/loading.gif");
     },
   },
   watch: {
-    async userWallet(newValue, oldValue) {
+    userWallet(newValue, oldValue) {
+      this.reloadData();
+    },
+    userData(newValue, oldValue) {
       this.reloadData();
     },
   },
@@ -203,6 +207,16 @@ export default {
         });
       }
       this.$loading(false);
+    },
+    showShortName(name) {
+      if (name) {
+        return (
+          name.substring(0, 6) +
+          "..." +
+          name.substring(name.length - 8, name.length)
+        );
+      }
+      return "";
     },
   },
 };

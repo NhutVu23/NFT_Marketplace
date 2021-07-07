@@ -16,7 +16,7 @@
                 <!-- <h6 class="card-category text-info">
                     Worlds
                   </h6> -->
-                <a href="javascript:void(0)">
+                <a>
                   <h3 class="card-title">{{ item.name }}</h3>
                 </a>
                 <p class="card-description">

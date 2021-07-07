@@ -50,15 +50,25 @@
             <div class="md-layout-item md-size-50 md-small-size-100">
               <p>Collection</p>
               <div class="comment">
-                <a class="float-left" href="'javascript:void(0)'">
+                <a
+                  class="float-left"
+                  :href="`#/collection/${item.collection_id}`"
+                >
                   <div class="small-avatar">
                     <div v-lazy-container="{ selector: 'img' }">
-                      <img :data-src="item.image" :data-loading="loadimage" />
+                      <img
+                        :data-src="item.collection[0].image || item.image"
+                        :data-loading="loadimage"
+                      />
                     </div>
                   </div>
                 </a>
                 <div class="comment-body show-name">
-                  <p class="show-name">{{ item.collection_id }}</p>
+                  <a
+                    class="show-name"
+                    :href="`#/collection/${item.collection_id}`"
+                    >{{ item.collection[0].name || item.collection_id }}</a
+                  >
                 </div>
               </div>
             </div>
@@ -66,7 +76,6 @@
           <div class="box-price">
             <h4>Price</h4>
             <h3 class="main-price">
-              <!-- <md-icon>ETH</md-icon> -->
               {{ item.minBid || 0 }} ETH
               <small> - ($ {{ convertToUSD(item.minBid) }})</small>
             </h3>
@@ -417,9 +426,9 @@ export default {
   methods: {
     showShortName(name) {
       return (
-        name.substring(0, 5) +
+        name.substring(0, 6) +
         "..." +
-        name.substring(name.length - 5, name.length)
+        name.substring(name.length - 8, name.length)
       );
     },
     shadowImageBlog(image) {
